@@ -102,52 +102,65 @@
       color: var(--muted);
       max-width: 400px;
       line-height: 1.6;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
     }
 
-    .input-row {
-      display: flex;
+    /* ── Form ── */
+    .form-stack {
       width: 100%;
       max-width: 420px;
-      border: 1.5px solid var(--black);
-      border-radius: 6px;
-      overflow: hidden;
-      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
     }
-    .input-row input[type="text"] {
-      flex: 1;
-      border: none;
-      outline: none;
-      padding: 14px 16px;
+
+    .form-stack input,
+    .form-stack textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 13px 16px;
       font-size: 15px;
       font-family: inherit;
-      background: transparent;
+      background: #fff;
       color: var(--black);
+      outline: none;
+      transition: border-color 0.15s;
     }
-    .input-row input[type="text"]::placeholder { color: #BBBBBB; }
-    .input-row button {
+    .form-stack input:focus,
+    .form-stack textarea:focus { border-color: var(--black); }
+    .form-stack input::placeholder,
+    .form-stack textarea::placeholder { color: #BBBBBB; }
+
+    .form-stack textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .form-stack button {
+      width: 100%;
       border: none;
       background: var(--black);
       color: #fff;
-      padding: 14px 20px;
-      font-size: 14px;
+      padding: 14px;
+      font-size: 15px;
       font-weight: 600;
       font-family: inherit;
+      border-radius: 6px;
       cursor: pointer;
-      white-space: nowrap;
       transition: background 0.15s;
+      margin-top: 4px;
     }
-    .input-row button:hover:not(:disabled) { background: var(--red); }
-    .input-row button:disabled { opacity: 0.5; cursor: default; }
+    .form-stack button:hover:not(:disabled) { background: var(--red); }
+    .form-stack button:disabled { opacity: 0.4; cursor: default; }
 
     .form-error {
       font-size: 13px;
       color: var(--red);
-      margin-top: 8px;
     }
 
-    /* success block shown by formspree ajax */
-    [data-fs-success] {
+    .success-msg {
       font-size: 15px;
       font-weight: 500;
       color: var(--black);
@@ -181,17 +194,16 @@
 
     <p class="sub" id="t-construction"></p>
 
-    <!-- success message (shown by @formspree/ajax after submission) -->
-    <p data-fs-success class="hidden"></p>
+    <div id="form-wrap" class="form-stack">
+      <input type="text"  id="f-name"    />
+      <input type="email" id="f-email"   />
+      <input type="tel"   id="f-phone"   />
+      <textarea           id="f-message" rows="3"></textarea>
+      <button type="button" id="t-btn" onclick="handleSubmit()"></button>
+      <p class="form-error hidden" id="form-error"></p>
+    </div>
 
-    <form id="contact-form" class="input-row">
-      <!-- dummy email required by Formspree schema -->
-      <input type="hidden" name="email" value="lead@simpleauto.com" />
-      <input type="text" name="message" id="contact-input" required data-fs-field />
-      <button type="submit" id="t-btn" data-fs-submit-btn></button>
-    </form>
-
-    <p class="form-error hidden" data-fs-error></p>
+    <p class="success-msg hidden" id="success-msg"></p>
   </main>
 
   <footer>© 2026 Simple Auto</footer>
@@ -204,19 +216,27 @@
         badge:        'En construcción',
         headline:     'Encárgate de tu negocio.',
         sub:          'Nosotros te hacemos la parte digital.',
-        construction: 'Esta página está en construcción. Si quieres saber más, déjanos tu correo o teléfono y te contactamos.',
-        placeholder:  'Correo o teléfono',
-        btn:          '→',
-        success:      'Listo. Te contactamos pronto.'
+        construction: 'Esta página está en construcción. Si quieres saber más, déjanos tus datos y te contactamos.',
+        ph_name:      'Nombre',
+        ph_email:     'Correo electrónico',
+        ph_phone:     'Teléfono',
+        ph_message:   'Mensaje (opcional)',
+        btn:          'Enviar',
+        success:      'Listo. Te contactamos pronto.',
+        error:        'Algo salió mal. Intenta de nuevo.'
       },
       en: {
         badge:        'Under construction',
         headline:     'Run your business.',
         sub:          'We handle the digital side.',
-        construction: 'This page is under construction. If you\'d like to know more, leave your email or phone and we\'ll reach out.',
-        placeholder:  'Email or phone',
-        btn:          '→',
-        success:      'Got it. We\'ll be in touch soon.'
+        construction: 'This page is under construction. Leave your details and we\'ll reach out.',
+        ph_name:      'Name',
+        ph_email:     'Email address',
+        ph_phone:     'Phone',
+        ph_message:   'Message (optional)',
+        btn:          'Send',
+        success:      'Got it. We\'ll be in touch soon.',
+        error:        'Something went wrong. Please try again.'
       }
     };
 
@@ -227,9 +247,11 @@
       document.getElementById('t-headline').textContent     = c.headline;
       document.getElementById('t-sub').textContent          = c.sub;
       document.getElementById('t-construction').textContent = c.construction;
-      document.getElementById('contact-input').placeholder  = c.placeholder;
+      document.getElementById('f-name').placeholder         = c.ph_name;
+      document.getElementById('f-email').placeholder        = c.ph_email;
+      document.getElementById('f-phone').placeholder        = c.ph_phone;
+      document.getElementById('f-message').placeholder      = c.ph_message;
       document.getElementById('t-btn').textContent          = c.btn;
-      document.querySelector('[data-fs-success]').textContent = c.success;
       document.getElementById('flag').textContent           = l === 'es' ? '🇬🇧' : '🇪🇸';
       document.getElementById('lang-label').textContent     = l === 'es' ? 'EN' : 'ES';
       document.documentElement.lang = l;
@@ -239,21 +261,54 @@
       setLang(lang === 'es' ? 'en' : 'es');
     }
 
-    // Formspree Ajax SDK
-    window.formspree = window.formspree || function() {
-      (formspree.q = formspree.q || []).push(arguments);
-    };
-    formspree('initForm', { formElement: '#contact-form', formId: 'xnjweazd' });
+    function handleSubmit() {
+      var name    = document.getElementById('f-name').value.trim();
+      var email   = document.getElementById('f-email').value.trim();
+      var phone   = document.getElementById('f-phone').value.trim();
+      var message = document.getElementById('f-message').value.trim();
 
-    // After successful submission, hide the form and construction text
-    document.getElementById('contact-form').addEventListener('formspree:success', function() {
-      document.getElementById('contact-form').classList.add('hidden');
-      document.getElementById('t-construction').classList.add('hidden');
-      document.querySelector('[data-fs-success]').classList.remove('hidden');
-    });
+      if (!email) { document.getElementById('f-email').focus(); return; }
+
+      var btn = document.getElementById('t-btn');
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      var parts = [];
+      if (name)    parts.push('Nombre: '   + name);
+      if (phone)   parts.push('Teléfono: ' + phone);
+      if (message) parts.push('Mensaje: '  + message);
+
+      var data = new FormData();
+      data.append('email',   email);
+      data.append('message', parts.join('\n'));
+
+      fetch('https://formspree.io/f/mkoydwkl', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(res) { return res.json().then(function(json) { return { ok: res.ok, json: json }; }); })
+      .then(function(result) {
+        if (result.ok) {
+          document.getElementById('form-wrap').classList.add('hidden');
+          document.getElementById('t-construction').classList.add('hidden');
+          var msg = document.getElementById('success-msg');
+          msg.textContent = copy[lang].success;
+          msg.classList.remove('hidden');
+        } else {
+          throw new Error('error');
+        }
+      })
+      .catch(function() {
+        var err = document.getElementById('form-error');
+        err.textContent = copy[lang].error;
+        err.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = copy[lang].btn;
+      });
+    }
 
     setLang('es');
   </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
