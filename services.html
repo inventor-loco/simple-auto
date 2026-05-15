@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios — Simple Auto</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #111111;
+      --red:    #D0021B;
+      --bg:     #F7F7F7;
+      --white:  #FFFFFF;
+      --muted:  #888888;
+      --border: #DDDDDD;
+      --light:  #F0F0F0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(247,247,247,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .nav-logo .auto { color: var(--red); }
+    .nav-center { display: flex; gap: 32px; }
+    .nav-center a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-center a:hover, .nav-center a.active { color: var(--black); }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      user-select: none;
+      transition: color 0.15s;
+    }
+    .lang-toggle:hover { color: var(--black); }
+
+    /* ── Layout ── */
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── Page hero ── */
+    .page-hero {
+      padding: 140px 0 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+    .page-h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+    .page-lead {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── Service block ── */
+    .svc-block {
+      border-bottom: 1px solid var(--border);
+      padding: 80px 0;
+    }
+
+    .svc-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .svc-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .svc-h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+    .svc-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 4px;
+    }
+    .svc-badge.on   { background: var(--black); color: #fff; }
+    .svc-badge.soon { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+
+    .svc-tagline {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 640px;
+      margin-bottom: 52px;
+    }
+
+    /* ── Service detail grid ── */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 700px) {
+      .detail-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .detail-col h3 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Include list ── */
+    .include-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .include-list li {
+      font-size: 15px;
+      line-height: 1.5;
+      display: flex;
+      gap: 12px;
+    }
+    .include-list li::before {
+      content: '✓';
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── You bring list ── */
+    .bring-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bring-list li {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      display: flex;
+      gap: 10px;
+    }
+    .bring-list li::before {
+      content: '→';
+      font-size: 12px;
+      color: var(--border);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Process steps ── */
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 28px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-body {
+      padding-bottom: 28px;
+    }
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .timeline-note {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    /* ── Empowerment callout ── */
+    .empower-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--black);
+      border-radius: 6px;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .empower-box strong {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .empower-box p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Philosophy ── */
+    .philosophy {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .phil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .phil-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .phil-h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .phil-lead {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .phil-items {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .phil-item {}
+    .phil-item-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .phil-item-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .cta-h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 14px;
+    }
+    .cta-lead {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--black);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--red); }
+
+    /* ── Footer ── */
+    .footer-wrap { max-width: 1080px; margin: 0 auto; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-center { display: none; }
+      .wrap, footer { padding-left: 20px; padding-right: 20px; }
+      footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="index.html"><span>simple</span><span class="auto">auto</span></a>
+    <div class="nav-center">
+      <a href="services.html" class="active" id="nav-services"></a>
+      <a href="index.html#portfolio" id="nav-portfolio"></a>
+      <a href="index.html#contact"   id="nav-contact"></a>
+    </div>
+    <div class="lang-toggle" onclick="toggleLang()">
+      <span id="flag">🇬🇧</span>
+      <span id="lang-label">EN</span>
+    </div>
+  </nav>
+
+  <!-- Page hero -->
+  <div class="page-hero">
+    <div class="wrap">
+      <p class="page-eyebrow" id="t-page-ey"></p>
+      <h1 class="page-h1"    id="t-page-h1"></h1>
+      <p class="page-lead"   id="t-page-lead"></p>
+    </div>
+  </div>
+
+  <!-- ── Service 1: Web ── -->
+  <div class="svc-block" id="web">
+    <div class="wrap">
+      <div class="svc-header">
+        <span class="svc-num">01</span>
+        <h2 class="svc-h2" id="t-s1-name"></h2>
+        <span class="svc-badge on" id="t-s1-badge"></span>
+      </div>
+      <p class="svc-tagline" id="t-s1-tagline"></p>
+
+      <div class="detail-grid">
+        <div class="detail-col">
+          <h3 id="t-includes-label"></h3>
+          <ul class="include-list" id="s1-includes"></ul>
+
+          <h3 id="t-you-bring-label"></h3>
+          <ul class="bring-list" id="s1-brings"></ul>
+        </div>
+        <div class="detail-col">
+          <h3 id="t-process-label"></h3>
+          <div class="process-steps" id="s1-steps"></div>
+          <span class="timeline-note" id="t-s1-timeline"></span>
+        </div>
+      </div>
+
+      <div class="empower-box">
+        <strong id="t-s1-emp-title"></strong>
+        <p id="t-s1-emp-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Service 2: SEO ── -->
+  <div class="svc-block" id="seo">
+    <div class="wrap">
+      <div class="svc-header">
+        <span class="svc-num">02</span>
+        <h2 class="svc-h2" id="t-s2-name"></h2>
+        <span class="svc-badge on" id="t-s2-badge"></span>
+      </div>
+      <p class="svc-tagline" id="t-s2-tagline"></p>
+
+      <div class="detail-grid">
+        <div class="detail-col">
+          <h3 id="t-includes-label-2"></h3>
+          <ul class="include-list" id="s2-includes"></ul>
+
+          <h3 id="t-you-bring-label-2"></h3>
+          <ul class="bring-list" id="s2-brings"></ul>
+        </div>
+        <div class="detail-col">
+          <h3 id="t-process-label-2"></h3>
+          <div class="process-steps" id="s2-steps"></div>
+          <span class="timeline-note" id="t-s2-timeline"></span>
+        </div>
+      </div>
+
+      <div class="empower-box">
+        <strong id="t-s2-emp-title"></strong>
+        <p id="t-s2-emp-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Service 3: Automation ── -->
+  <div class="svc-block" id="automation">
+    <div class="wrap">
+      <div class="svc-header">
+        <span class="svc-num">03</span>
+        <h2 class="svc-h2" id="t-s3-name"></h2>
+        <span class="svc-badge soon" id="t-s3-badge"></span>
+      </div>
+      <p class="svc-tagline" id="t-s3-tagline"></p>
+
+      <div class="detail-grid">
+        <div class="detail-col">
+          <h3 id="t-includes-label-3"></h3>
+          <ul class="include-list" id="s3-includes"></ul>
+        </div>
+        <div class="detail-col">
+          <h3 id="t-whymatters-label"></h3>
+          <ul class="include-list" id="s3-why"></ul>
+        </div>
+      </div>
+
+      <div class="empower-box">
+        <strong id="t-s3-emp-title"></strong>
+        <p id="t-s3-emp-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Philosophy ── -->
+  <div class="philosophy">
+    <div class="wrap">
+      <div class="phil-grid">
+        <div>
+          <p class="page-eyebrow" id="t-phil-ey"></p>
+          <h2 class="phil-h2"    id="t-phil-h2"></h2>
+          <p class="phil-lead"   id="t-phil-lead"></p>
+        </div>
+        <div class="phil-items" id="phil-items"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-section">
+    <div class="wrap">
+      <h2 class="cta-h2"  id="t-cta-h2"></h2>
+      <p class="cta-lead" id="t-cta-lead"></p>
+      <a href="index.html#contact" class="btn-primary" id="t-cta-btn"></a>
+    </div>
+  </div>
+
+  <div class="footer-wrap">
+    <footer>
+      <span>© 2026 Simple Auto</span>
+      <span id="t-footer"></span>
+    </footer>
+  </div>
+
+  <script>
+    var lang = 'es';
+
+    var copy = {
+      es: {
+        'nav-services':  'Servicios',
+        'nav-portfolio': 'Proyectos',
+        'nav-contact':   'Contacto',
+
+        'page-ey':   'Servicios',
+        'page-h1':   'Lo que hacemos,\nen detalle.',
+        'page-lead': 'Sin paquetes misteriosos. Sin letra pequeña. Aquí tienes exactamente lo que incluye cada servicio, cómo funciona el proceso y qué necesitamos de ti.',
+
+        'includes-label':   'Qué incluye',
+        'you-bring-label':  'Qué traes tú',
+        'process-label':    'Cómo funciona',
+        'whymatters-label': 'Por qué importa',
+
+        's1-name':    'Diseño Web',
+        's1-badge':   'Disponible',
+        's1-tagline': 'Tu web es la primera impresión que muchos clientes tendrán de tu negocio. La hacemos bien, desde cero, sin plantillas genéricas.',
+        's1-includes': [
+          'Diseño a medida — adaptado a tu marca e identidad',
+          'Optimizado para móvil desde el primer día',
+          'Velocidad de carga optimizada (afecta al SEO y a la experiencia del usuario)',
+          'Formulario de contacto o botón de WhatsApp integrado',
+          'SEO básico en página: títulos, metadescripciones y estructura correcta',
+          'Configuración de dominio y alojamiento web',
+          'Google Analytics conectado (si lo deseas)',
+          'Sesión de entrega: te explicamos cómo funciona todo'
+        ],
+        's1-brings': [
+          'Tus textos — o un borrador en bruto; te ayudamos a estructurarlos',
+          'Tus fotos e imágenes de marca',
+          'Tu logo — si no tienes, lo hablamos'
+        ],
+        's1-steps': [
+          ['Diagnóstico', 'Hablamos de tu negocio, tus clientes y qué quieres conseguir con el sitio.'],
+          ['Propuesta', 'Te presentamos una propuesta de estructura y estilo antes de construir nada. Sin sorpresas.'],
+          ['Desarrollo', 'Construimos el sitio. Te actualizamos en cada fase y puedes dar feedback en tiempo real.'],
+          ['Revisión', 'Dos rondas de ajustes incluidas. Hasta que esté bien.'],
+          ['Entrega', 'El sitio en vivo. Tú con todos los accesos. Sesión de formación incluida.']
+        ],
+        's1-timeline': 'Plazo habitual: 2 – 4 semanas',
+        's1-emp-title': 'Tu web, bajo tu control.',
+        's1-emp-desc':  'Al terminar sabrás cómo actualizar un texto, añadir una foto nueva o leer tus métricas básicas. No vas a necesitar llamarnos para cambiar el horario de tu negocio.',
+
+        's2-name':    'SEO Local',
+        's2-badge':   'Disponible',
+        's2-tagline': 'Aparecer en Google cuando alguien busca lo que tú ofreces, en tu zona. Eso no es magia ni suerte — es trabajo metódico.',
+        's2-includes': [
+          'Auditoría inicial: analizamos tu situación de partida y la de tu competencia',
+          'Optimización de Google Business Profile (ficha de empresa)',
+          'SEO en página: optimización de textos, títulos, estructura y velocidad',
+          'Investigación de palabras clave locales relevantes para tu negocio',
+          'Corrección de errores técnicos básicos que penalizan tu posicionamiento',
+          'Informe mensual claro: qué mejoró, qué falta, qué viene',
+          'Sin permanencia — trabajamos mes a mes'
+        ],
+        's2-brings': [
+          'Acceso a tu web (te explicamos cómo darlo)',
+          'Información actualizada de tu negocio: horarios, servicios, fotos recientes'
+        ],
+        's2-steps': [
+          ['Auditoría', 'Analizamos dónde estás ahora, qué busca tu cliente ideal y cómo está tu competencia.'],
+          ['Optimización inicial', 'Aplicamos los cambios de mayor impacto primero: ficha de Google, página web, errores técnicos.'],
+          ['Seguimiento mensual', 'El SEO es acumulativo. Cada mes mejoramos, medimos y ajustamos.'],
+          ['Sesión de revisión', 'Te explicamos el informe en persona o por videollamada. Sin tecnicismos innecesarios.']
+        ],
+        's2-timeline': 'Primeros resultados visibles: 6 – 12 semanas',
+        's2-emp-title': 'Entenderás por qué funciona.',
+        's2-emp-desc':  'Cada mes te explicamos qué hicimos, por qué y qué impacto tuvo. No recibirás un PDF lleno de números incomprensibles. Entenderás el SEO lo suficiente para tomar decisiones informadas sobre tu negocio.',
+
+        's3-name':    'Automatización',
+        's3-badge':   'Próximamente',
+        's3-tagline': 'Formularios inteligentes, reservas online, respuestas automáticas. Tareas repetitivas que hace tu negocio cada día, delegadas a la tecnología.',
+        's3-includes': [
+          'Sistemas de reserva y cita online',
+          'Formularios de captación conectados a tu correo o CRM',
+          'Respuestas automáticas y seguimiento de leads',
+          'Integración con WhatsApp Business',
+          'Flujos de trabajo automáticos entre herramientas'
+        ],
+        's3-why': [
+          'Cada hora que pasas respondiendo mensajes repetitivos es una hora que no estás en tu negocio',
+          'Los clientes esperan respuesta inmediata — la automatización la da sin que estés delante',
+          'Un sistema bien montado trabaja aunque estés de vacaciones'
+        ],
+        's3-emp-title': 'Tú decides qué automatizar.',
+        's3-emp-desc':  'No te instalaremos herramientas que no entiendas. Cada automatización que montemos la recorreremos contigo paso a paso. Si algo falla o quieres cambiarlo, sabrás exactamente dónde ir.',
+
+        'phil-ey':   'Nuestra forma de trabajar',
+        'phil-h2':   'Construimos herramientas.\nNo dependencias.',
+        'phil-lead': 'La mayoría de agencias digitales viven de que no entiendas lo que tienes. Nosotros hacemos lo contrario.',
+        'phil-items': [
+          ['Tus accesos, tus cuentas, tuya la propiedad', 'Dominio, hosting, Google Analytics, redes sociales — todo a tu nombre desde el día uno. Nunca retenemos accesos.'],
+          ['Formación incluida en cada proyecto', 'Cada entrega incluye una sesión en la que te explicamos qué tienes y cómo usarlo. No tienes que entender de tecnología — solo lo necesario para ser autónomo.'],
+          ['Sin contratos de permanencia en SEO', 'El SEO es un trabajo continuo, pero la relación tiene que ser voluntaria. Trabajamos mes a mes porque confiamos en los resultados, no en el contrato.'],
+          ['Si decides trabajar con otro, te lo ponemos fácil', 'Te entregamos todo documentado. Otro proveedor podrá continuar desde donde lo dejamos sin empezar de cero.'],
+          ['Transparencia total', 'Sabrás qué hacemos, cuándo y por qué. Sin tecnicismos innecesarios. Sin "confía en nosotros y ya está".']
+        ],
+
+        'cta-h2':  '¿Tienes preguntas sobre algún servicio?',
+        'cta-lead': 'Cuéntanos tu situación. Te respondemos en menos de 24 horas, sin compromiso.',
+        'cta-btn':  'Hablemos',
+
+        footer: 'Digital para autónomos y pequeñas empresas.'
+      },
+      en: {
+        'nav-services':  'Services',
+        'nav-portfolio': 'Work',
+        'nav-contact':   'Contact',
+
+        'page-ey':   'Services',
+        'page-h1':   'What we do,\nin detail.',
+        'page-lead': 'No mysterious packages. No fine print. Here\'s exactly what each service includes, how the process works, and what we need from you.',
+
+        'includes-label':   'What\'s included',
+        'you-bring-label':  'What you bring',
+        'process-label':    'How it works',
+        'whymatters-label': 'Why it matters',
+
+        's1-name':    'Web Design',
+        's1-badge':   'Available',
+        's1-tagline': 'Your website is the first impression many clients will have of your business. We build it right, from scratch, no generic templates.',
+        's1-includes': [
+          'Custom design — built around your brand and identity',
+          'Mobile-first from day one',
+          'Optimized loading speed (affects both SEO and user experience)',
+          'Contact form or WhatsApp button integrated',
+          'Basic on-page SEO: titles, meta descriptions, correct structure',
+          'Domain and hosting configuration',
+          'Google Analytics connected (if you want it)',
+          'Handover session: we walk you through everything'
+        ],
+        's1-brings': [
+          'Your copy — or a rough draft; we help you structure it',
+          'Your photos and brand images',
+          'Your logo — if you don\'t have one, we talk'
+        ],
+        's1-steps': [
+          ['Discovery', 'We talk about your business, your clients, and what you want the site to achieve.'],
+          ['Proposal', 'We show you a structure and style proposal before building anything. No surprises.'],
+          ['Build', 'We build the site. We keep you updated at each stage and you can give feedback in real time.'],
+          ['Review', 'Two rounds of revisions included. Until it\'s right.'],
+          ['Handover', 'Site live. You have all the access credentials. Training session included.']
+        ],
+        's1-timeline': 'Typical timeline: 2 – 4 weeks',
+        's1-emp-title': 'Your website, under your control.',
+        's1-emp-desc':  'By the end you\'ll know how to update a text, add a new photo, or read your basic metrics. You won\'t need to call us to change your business hours.',
+
+        's2-name':    'Local SEO',
+        's2-badge':   'Available',
+        's2-tagline': 'Showing up on Google when someone searches for what you offer, in your area. That\'s not magic or luck — it\'s methodical work.',
+        's2-includes': [
+          'Initial audit: we analyse where you start and how your competition stands',
+          'Google Business Profile optimisation',
+          'On-page SEO: text, titles, structure, and speed optimisation',
+          'Local keyword research relevant to your business',
+          'Fixing basic technical errors that hurt your ranking',
+          'Monthly clear report: what improved, what\'s next',
+          'No lock-in — we work month to month'
+        ],
+        's2-brings': [
+          'Access to your website (we\'ll show you how to grant it)',
+          'Up-to-date business information: hours, services, recent photos'
+        ],
+        's2-steps': [
+          ['Audit', 'We analyse where you are now, what your ideal client searches for, and how your competitors rank.'],
+          ['Initial optimisation', 'We apply the highest-impact changes first: Google listing, website, technical errors.'],
+          ['Monthly work', 'SEO is cumulative. Each month we improve, measure, and adjust.'],
+          ['Review session', 'We walk you through the report in person or by video call. No unnecessary jargon.']
+        ],
+        's2-timeline': 'First visible results: 6 – 12 weeks',
+        's2-emp-title': 'You\'ll understand why it works.',
+        's2-emp-desc':  'Every month we explain what we did, why, and what impact it had. You won\'t receive a PDF full of incomprehensible numbers. You\'ll understand SEO well enough to make informed decisions about your business.',
+
+        's3-name':    'Automation',
+        's3-badge':   'Coming soon',
+        's3-tagline': 'Smart forms, online bookings, automatic replies. Repetitive tasks your business does every day, handed off to technology.',
+        's3-includes': [
+          'Online booking and appointment systems',
+          'Lead capture forms connected to your email or CRM',
+          'Automatic replies and lead follow-up',
+          'WhatsApp Business integration',
+          'Automated workflows between tools'
+        ],
+        's3-why': [
+          'Every hour spent answering repetitive messages is an hour you\'re not running your business',
+          'Clients expect instant replies — automation delivers them without you being there',
+          'A well-built system works even when you\'re on holiday'
+        ],
+        's3-emp-title': 'You decide what to automate.',
+        's3-emp-desc':  'We won\'t install tools you don\'t understand. Every automation we build we\'ll walk through with you step by step. If something breaks or you want to change it, you\'ll know exactly where to go.',
+
+        'phil-ey':   'How we work',
+        'phil-h2':   'We build tools.\nNot dependencies.',
+        'phil-lead': 'Most digital agencies survive because you don\'t understand what you have. We do the opposite.',
+        'phil-items': [
+          ['Your logins, your accounts, your property', 'Domain, hosting, Google Analytics, social media — everything in your name from day one. We never hold access hostage.'],
+          ['Training included in every project', 'Every delivery includes a session where we explain what you have and how to use it. You don\'t need to understand technology — just enough to be independent.'],
+          ['No lock-in contracts for SEO', 'SEO is ongoing work, but the relationship has to be voluntary. We work month to month because we trust the results, not the contract.'],
+          ['If you move to another provider, we make it easy', 'We deliver everything documented. Another provider can pick up exactly where we left off without starting from scratch.'],
+          ['Full transparency', 'You\'ll know what we\'re doing, when, and why. No unnecessary jargon. No "just trust us".']
+        ],
+
+        'cta-h2':  'Have questions about a service?',
+        'cta-lead': 'Tell us your situation. We\'ll get back to you within 24 hours, no strings attached.',
+        'cta-btn':  'Let\'s talk',
+
+        footer: 'Digital for independent workers and small businesses.'
+      }
+    };
+
+    function buildList(ulId, items, tag) {
+      var ul = document.getElementById(ulId);
+      if (!ul) return;
+      ul.innerHTML = '';
+      items.forEach(function(text) {
+        var li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+      });
+    }
+
+    function buildSteps(containerId, steps) {
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = '';
+      steps.forEach(function(s, i) {
+        var div = document.createElement('div');
+        div.className = 'step';
+        div.innerHTML =
+          '<div class="step-num">' + (i + 1) + '</div>' +
+          '<div class="step-body">' +
+            '<div class="step-title">' + s[0] + '</div>' +
+            '<div class="step-desc">'  + s[1] + '</div>' +
+          '</div>';
+        el.appendChild(div);
+      });
+    }
+
+    function buildPhil(containerId, items) {
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = '';
+      items.forEach(function(item) {
+        var div = document.createElement('div');
+        div.className = 'phil-item';
+        div.innerHTML =
+          '<div class="phil-item-title">' + item[0] + '</div>' +
+          '<div class="phil-item-desc">'  + item[1] + '</div>';
+        el.appendChild(div);
+      });
+    }
+
+    var simpleIds = [
+      ['nav-services',      'nav-services'],
+      ['nav-portfolio',     'nav-portfolio'],
+      ['nav-contact',       'nav-contact'],
+      ['t-page-ey',         'page-ey'],
+      ['t-page-lead',       'page-lead'],
+      ['t-includes-label',  'includes-label'],
+      ['t-you-bring-label', 'you-bring-label'],
+      ['t-process-label',   'process-label'],
+      ['t-includes-label-2','includes-label'],
+      ['t-you-bring-label-2','you-bring-label'],
+      ['t-process-label-2', 'process-label'],
+      ['t-includes-label-3','includes-label'],
+      ['t-whymatters-label','whymatters-label'],
+      ['t-s1-name',         's1-name'],
+      ['t-s1-badge',        's1-badge'],
+      ['t-s1-tagline',      's1-tagline'],
+      ['t-s1-timeline',     's1-timeline'],
+      ['t-s1-emp-title',    's1-emp-title'],
+      ['t-s1-emp-desc',     's1-emp-desc'],
+      ['t-s2-name',         's2-name'],
+      ['t-s2-badge',        's2-badge'],
+      ['t-s2-tagline',      's2-tagline'],
+      ['t-s2-timeline',     's2-timeline'],
+      ['t-s2-emp-title',    's2-emp-title'],
+      ['t-s2-emp-desc',     's2-emp-desc'],
+      ['t-s3-name',         's3-name'],
+      ['t-s3-badge',        's3-badge'],
+      ['t-s3-tagline',      's3-tagline'],
+      ['t-s3-emp-title',    's3-emp-title'],
+      ['t-s3-emp-desc',     's3-emp-desc'],
+      ['t-phil-ey',         'phil-ey'],
+      ['t-phil-lead',       'phil-lead'],
+      ['t-cta-lead',        'cta-lead'],
+      ['t-cta-btn',         'cta-btn'],
+      ['t-footer',          'footer']
+    ];
+
+    function setLang(l) {
+      lang = l;
+      var c = copy[l];
+
+      simpleIds.forEach(function(pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.textContent = c[pair[1]];
+      });
+
+      // Multi-line headings
+      document.getElementById('t-page-h1').innerHTML  = c['page-h1'].replace('\n', '<br>');
+      document.getElementById('t-phil-h2').innerHTML  = c['phil-h2'].replace('\n', '<br>');
+      document.getElementById('t-cta-h2').textContent = c['cta-h2'];
+
+      // Lists
+      buildList('s1-includes', c['s1-includes']);
+      buildList('s1-brings',   c['s1-brings']);
+      buildList('s2-includes', c['s2-includes']);
+      buildList('s2-brings',   c['s2-brings']);
+      buildList('s3-includes', c['s3-includes']);
+      buildList('s3-why',      c['s3-why']);
+
+      // Steps
+      buildSteps('s1-steps', c['s1-steps']);
+      buildSteps('s2-steps', c['s2-steps']);
+
+      // Philosophy
+      buildPhil('phil-items', c['phil-items']);
+
+      document.getElementById('flag').textContent       = l === 'es' ? '🇬🇧' : '🇪🇸';
+      document.getElementById('lang-label').textContent = l === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = l;
+    }
+
+    function toggleLang() { setLang(lang === 'es' ? 'en' : 'es'); }
+
+    setLang('es');
+  </script>
+</body>
+</html>
