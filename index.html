@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Auto</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --red: #D0021B;
+      --bg: #F7F7F7;
+      --muted: #888888;
+      --border: #DDDDDD;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      user-select: none;
+      z-index: 100;
+      transition: color 0.2s;
+    }
+    .lang-toggle:hover { color: var(--black); }
+    .lang-toggle .flag { font-size: 18px; }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 24px 48px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 40px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .logo {
+      font-size: clamp(48px, 10vw, 88px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+    .logo .simple { color: var(--black); }
+    .logo .auto   { color: var(--red); }
+
+    .tagline {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .tagline strong { color: var(--black); font-weight: 600; }
+
+    .sub {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 400px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .input-row {
+      display: flex;
+      width: 100%;
+      max-width: 420px;
+      border: 1.5px solid var(--black);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .input-row input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      background: transparent;
+      color: var(--black);
+    }
+    .input-row input::placeholder { color: #BBBBBB; }
+    .input-row button {
+      border: none;
+      background: var(--black);
+      color: #fff;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .input-row button:hover { background: var(--red); }
+
+    .success-msg {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--border);
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <div class="lang-toggle" onclick="toggleLang()">
+    <span class="flag" id="flag">🇬🇧</span>
+    <span id="lang-label">EN</span>
+  </div>
+
+  <main>
+    <div class="badge"><span class="dot"></span> <span id="t-badge"></span></div>
+
+    <div class="logo">
+      <span class="simple">simple</span><span class="auto">auto</span>
+    </div>
+
+    <p class="tagline"><strong id="t-headline"></strong><br><span id="t-sub"></span></p>
+
+    <p class="sub" id="t-construction"></p>
+
+    <form class="input-row" id="form-row"
+          action="https://formspree.io/f/xnjweazd"
+          method="POST">
+      <input type="hidden" name="email" value="lead@simpleauto.com" />
+      <input type="text" name="message" id="contact-input" required />
+      <button type="submit" id="t-btn"></button>
+    </form>
+
+    <p class="success-msg hidden" id="success-msg"></p>
+  </main>
+
+  <footer>© 2026 Simple Auto</footer>
+
+  <script>
+    var lang = 'es';
+
+    var copy = {
+      es: {
+        badge:        'En construcción',
+        headline:     'Encárgate de tu negocio.',
+        sub:          'Nosotros te hacemos la parte digital.',
+        construction: 'Esta página está en construcción. Si quieres saber más, déjanos tu correo o teléfono y te contactamos.',
+        placeholder:  'Correo o teléfono',
+        btn:          '→',
+        success:      'Listo. Te contactamos pronto.'
+      },
+      en: {
+        badge:        'Under construction',
+        headline:     'Run your business.',
+        sub:          'We handle the digital side.',
+        construction: 'This page is under construction. If you\'d like to know more, leave your email or phone and we\'ll reach out.',
+        placeholder:  'Email or phone',
+        btn:          '→',
+        success:      'Got it. We\'ll be in touch soon.'
+      }
+    };
+
+    function setLang(l) {
+      lang = l;
+      var c = copy[l];
+      document.getElementById('t-badge').textContent        = c.badge;
+      document.getElementById('t-headline').textContent     = c.headline;
+      document.getElementById('t-sub').textContent          = c.sub;
+      document.getElementById('t-construction').textContent = c.construction;
+      document.getElementById('contact-input').placeholder  = c.placeholder;
+      document.getElementById('t-btn').textContent          = c.btn;
+      document.getElementById('success-msg').textContent    = c.success;
+      document.getElementById('flag').textContent           = l === 'es' ? '🇬🇧' : '🇪🇸';
+      document.getElementById('lang-label').textContent     = l === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = l;
+    }
+
+    function toggleLang() {
+      setLang(lang === 'es' ? 'en' : 'es');
+    }
+
+    setLang('es');
+  </script>
+</body>
+</html>
