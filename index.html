@@ -8,12 +8,12 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #111111;
-      --red:   #D0021B;
-      --bg:    #F7F7F7;
-      --white: #FFFFFF;
-      --muted: #888888;
-      --border:#DDDDDD;
+      --black:  #111111;
+      --red:    #D0021B;
+      --bg:     #F7F7F7;
+      --white:  #FFFFFF;
+      --muted:  #888888;
+      --border: #DDDDDD;
     }
 
     body {
@@ -32,7 +32,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      background: rgba(247,247,247,0.9);
+      background: rgba(247,247,247,0.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
@@ -71,9 +71,8 @@
       transition: color 0.15s;
     }
     .lang-toggle:hover { color: var(--black); }
-    .lang-toggle .flag { font-size: 16px; }
 
-    /* ── Shared layout ── */
+    /* ── Shared ── */
     .wrap {
       max-width: 1080px;
       margin: 0 auto;
@@ -93,39 +92,35 @@
       padding: 100px 40px 80px;
     }
 
-    .hero-eyebrow {
-      font-size: 11px;
+    /* P — Problem */
+    .problem {
+      font-size: clamp(36px, 6vw, 64px);
       font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--red);
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      color: var(--black);
+      max-width: 780px;
       margin-bottom: 28px;
+      transition: opacity 0.35s ease;
+      min-height: 1.1em;
     }
 
-    .logo {
-      font-size: clamp(56px, 10vw, 96px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 36px;
-    }
-    .logo .simple { color: var(--black); }
-    .logo .auto   { color: var(--red); }
-
-    .hero-h1 {
-      font-size: clamp(22px, 3.2vw, 30px);
-      font-weight: 600;
-      line-height: 1.3;
-      max-width: 600px;
-      margin-bottom: 18px;
+    /* A — Agitate */
+    .agitate {
+      font-size: clamp(16px, 2vw, 19px);
+      font-weight: 500;
+      color: var(--red);
+      margin-bottom: 20px;
+      max-width: 560px;
     }
 
-    .hero-p {
+    /* S — Solve */
+    .solve {
       font-size: clamp(15px, 1.8vw, 17px);
       color: var(--muted);
       line-height: 1.7;
       max-width: 520px;
-      margin-bottom: 44px;
+      margin-bottom: 40px;
     }
 
     .btn-primary {
@@ -141,7 +136,13 @@
     }
     .btn-primary:hover { background: var(--red); }
 
-    /* ── Section common ── */
+    .scope-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── Sections ── */
     .section {
       border-top: 1px solid var(--border);
       padding: 96px 0;
@@ -194,13 +195,10 @@
       gap: 14px;
     }
 
-    .svc-icon {
-      font-size: 30px;
-      line-height: 1;
-    }
+    .svc-icon { font-size: 28px; line-height: 1; }
 
     .svc-name {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: -0.01em;
     }
@@ -222,7 +220,7 @@
       border-radius: 4px;
       align-self: flex-start;
     }
-    .svc-badge.on  { background: #111; color: #fff; }
+    .svc-badge.on   { background: var(--black); color: #fff; }
     .svc-badge.soon { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
 
     /* ── Portfolio ── */
@@ -247,18 +245,15 @@
       align-items: flex-end;
       padding: 20px 24px;
     }
-
     .proj-thumb-label {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.5);
     }
 
-    .proj-body {
-      padding: 22px 24px 26px;
-    }
+    .proj-body { padding: 22px 24px 26px; }
 
     .proj-name {
       font-size: 16px;
@@ -339,22 +334,25 @@
     .success-msg { font-size: 15px; font-weight: 500; color: var(--black); }
 
     /* ── Footer ── */
+    .footer-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1080px;
-      margin: 0 auto;
       font-size: 12px;
       color: var(--muted);
     }
+
     @media (max-width: 600px) {
-      footer { flex-direction: column; gap: 6px; text-align: center; padding: 24px 20px; }
-      .nav-center { display: none; }
       nav { padding: 0 20px; }
-      .hero-inner, .wrap { padding-left: 20px; padding-right: 20px; }
+      .nav-center { display: none; }
+      .hero-inner, .wrap, footer { padding-left: 20px; padding-right: 20px; }
+      footer { flex-direction: column; gap: 6px; text-align: center; }
     }
 
     .hidden { display: none !important; }
@@ -362,50 +360,49 @@
 </head>
 <body>
 
-  <!-- ── Nav ── -->
+  <!-- Nav -->
   <nav>
-    <a class="nav-logo" href="#"><span class="simple">simple</span><span class="auto">auto</span></a>
+    <a class="nav-logo" href="#"><span>simple</span><span class="auto">auto</span></a>
     <div class="nav-center">
-      <a href="#services"  id="nav-services"></a>
-      <a href="#portfolio" id="nav-portfolio"></a>
-      <a href="#contact"   id="nav-contact"></a>
+      <a href="services.html" id="nav-services"></a>
+      <a href="#portfolio"    id="nav-portfolio"></a>
+      <a href="#contact"      id="nav-contact"></a>
     </div>
     <div class="lang-toggle" onclick="toggleLang()">
-      <span class="flag" id="flag">🇬🇧</span>
+      <span id="flag">🇬🇧</span>
       <span id="lang-label">EN</span>
     </div>
   </nav>
 
-  <!-- ── Hero ── -->
+  <!-- Hero — PAS -->
   <div class="hero">
     <div class="hero-inner">
-      <p class="hero-eyebrow" id="t-eyebrow"></p>
-      <div class="logo"><span class="simple">simple</span><span class="auto">auto</span></div>
-      <h1 class="hero-h1" id="t-h1"></h1>
-      <p class="hero-p" id="t-sub"></p>
+      <p class="problem" id="problem-text"></p>
+      <p class="agitate" id="t-agitate"></p>
+      <p class="solve"   id="t-solve"></p>
       <a href="#contact" class="btn-primary" id="t-cta"></a>
+      <p class="scope-note" id="t-scope"></p>
     </div>
   </div>
 
-  <!-- ── Services ── -->
+  <!-- Services -->
   <section class="section" id="services">
     <div class="wrap">
-      <p class="section-eyebrow" id="t-svc-eyebrow"></p>
+      <p class="section-eyebrow" id="t-svc-ey"></p>
       <h2 class="section-h2"    id="t-svc-h2"></h2>
       <p class="section-lead"   id="t-svc-lead"></p>
-
       <div class="services-grid">
         <div class="svc-card">
           <div class="svc-icon">🌐</div>
           <div class="svc-name" id="t-s1-name"></div>
           <p  class="svc-desc"  id="t-s1-desc"></p>
-          <span class="svc-badge on" id="t-s1-badge"></span>
+          <span class="svc-badge on"   id="t-s1-badge"></span>
         </div>
         <div class="svc-card">
           <div class="svc-icon">📈</div>
           <div class="svc-name" id="t-s2-name"></div>
           <p  class="svc-desc"  id="t-s2-desc"></p>
-          <span class="svc-badge on" id="t-s2-badge"></span>
+          <span class="svc-badge on"   id="t-s2-badge"></span>
         </div>
         <div class="svc-card">
           <div class="svc-icon">⚙️</div>
@@ -414,20 +411,22 @@
           <span class="svc-badge soon" id="t-s3-badge"></span>
         </div>
       </div>
+      <p style="margin-top:32px;">
+        <a href="services.html" id="t-svc-more" style="font-size:14px;font-weight:600;color:var(--black);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--black)'"></a>
+      </p>
     </div>
   </section>
 
-  <!-- ── Portfolio ── -->
+  <!-- Portfolio -->
   <section class="section" id="portfolio">
     <div class="wrap">
-      <p class="section-eyebrow" id="t-port-eyebrow"></p>
+      <p class="section-eyebrow" id="t-port-ey"></p>
       <h2 class="section-h2"    id="t-port-h2"></h2>
       <p class="section-lead"   id="t-port-lead"></p>
-
       <div class="portfolio-grid">
 
         <div class="proj-card">
-          <div class="proj-thumb" style="background: linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);">
+          <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
             <span class="proj-thumb-label">Web</span>
           </div>
           <div class="proj-body">
@@ -438,7 +437,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-thumb" style="background: linear-gradient(135deg,#1b4332 0%,#2d6a4f 100%);">
+          <div class="proj-thumb" style="background:linear-gradient(135deg,#1b4332,#2d6a4f);">
             <span class="proj-thumb-label">Web</span>
           </div>
           <div class="proj-body">
@@ -449,7 +448,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-thumb" style="background: linear-gradient(135deg,#3d0c02 0%,#7a1010 100%);">
+          <div class="proj-thumb" style="background:linear-gradient(135deg,#3d0c02,#7a1010);">
             <span class="proj-thumb-label">Web</span>
           </div>
           <div class="proj-body">
@@ -463,17 +462,15 @@
     </div>
   </section>
 
-  <!-- ── Contact ── -->
+  <!-- Contact -->
   <section class="section" id="contact">
     <div class="wrap">
       <div class="contact-layout">
-
         <div>
-          <p class="section-eyebrow" id="t-ct-eyebrow"></p>
+          <p class="section-eyebrow" id="t-ct-ey"></p>
           <h2 class="section-h2"    id="t-ct-h2"></h2>
           <p class="section-lead"   id="t-ct-lead" style="margin-bottom:0;"></p>
         </div>
-
         <div>
           <div id="form-wrap" class="form-stack">
             <input  type="text"  id="f-name" />
@@ -485,12 +482,11 @@
           </div>
           <p class="success-msg hidden" id="success-msg"></p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <div style="max-width:1080px;margin:0 auto;">
+  <div class="footer-wrap">
     <footer>
       <span>© 2026 Simple Auto</span>
       <span id="t-footer"></span>
@@ -500,143 +496,176 @@
   <script>
     var lang = 'es';
 
+    var problems = {
+      es: [
+        'Tu negocio es bueno.\nNadie lo sabe.',
+        'Tus clientes te buscan en Google.\nNo te encuentran.',
+        'Tu competencia ya tiene web.\nTú, todavía no.',
+        'Trabajas duro.\nTu web no hace lo mismo.'
+      ],
+      en: [
+        'Your business is good.\nNobody knows it.',
+        'Your clients search for you online.\nThey can\'t find you.',
+        'Your competition has a website.\nYou don\'t. Yet.',
+        'You work hard.\nYour website doesn\'t.'
+      ]
+    };
+    var probIdx = 0;
+    var probEl;
+
     var copy = {
       es: {
-        eyebrow:      'Especialistas, no generalistas',
-        h1:           'Soluciones digitales para autónomos y pequeñas empresas.',
-        sub:          'No hacemos de todo para todos. Nos especializamos en construir la presencia digital que tu negocio necesita para crecer: sitios web, posicionamiento en Google y herramientas que funcionan.',
-        cta:          'Hablemos',
-
         'nav-services':  'Servicios',
         'nav-portfolio': 'Proyectos',
         'nav-contact':   'Contacto',
 
-        'svc-eyebrow': 'Servicios',
-        'svc-h2':      'Lo que hacemos',
-        'svc-lead':    'Tres servicios concretos. Sin paquetes innecesarios, sin promesas vacías.',
-        's1-name':     'Diseño Web',
-        's1-desc':     'Creamos tu sitio web desde cero. Rápido, profesional y optimizado para convertir visitas en clientes reales. Diseño a medida, sin plantillas genéricas.',
-        's1-badge':    'Disponible',
-        's2-name':     'SEO Local',
-        's2-desc':     'Aparecer en Google no es suerte. Te posicionamos para que los clientes correctos te encuentren cuando te buscan, antes que a tu competencia.',
-        's2-badge':    'Disponible',
-        's3-name':     'Automatización',
-        's3-desc':     'Formularios, reservas online, flujos de trabajo automáticos. La tecnología trabajando para ti, sin que tengas que entender de tecnología.',
-        's3-badge':    'Próximamente',
+        agitate: 'Cada día sin presencia digital, un cliente va a otro.',
+        solve:   'Construimos tu web, tu SEO y tus herramientas. En semanas, no meses.',
+        cta:     'Hablemos',
+        scope:   'Ponemos la estructura. El contenido —fotos y textos— lo aportas tú.',
 
-        'port-eyebrow': 'Proyectos',
-        'port-h2':      'Trabajo reciente',
-        'port-lead':    'Sitios web que hemos creado para negocios reales.',
-        'p-desc':       'Sitio web para negocio local. Diseño limpio, carga rápida y optimizado para móvil.',
-        'p-link':       'Ver sitio →',
+        'svc-ey':   'Servicios',
+        'svc-h2':   'Lo que hacemos',
+        'svc-lead': 'Tres servicios. Sin paquetes innecesarios.',
+        'svc-more': 'Ver qué incluye cada servicio →',
+        's1-name':  'Diseño Web',
+        's1-desc':  'Tu sitio desde cero. Rápido, profesional y hecho para convertir visitas en clientes. A medida, sin plantillas.',
+        's1-badge': 'Disponible',
+        's2-name':  'SEO Local',
+        's2-desc':  'Aparecer en Google no es suerte. Te posicionamos para que te encuentren los clientes correctos, antes que a tu competencia.',
+        's2-badge': 'Disponible',
+        's3-name':  'Automatización',
+        's3-desc':  'Reservas, formularios, flujos automáticos. La tecnología trabajando para ti, sin que tengas que entenderla.',
+        's3-badge': 'Próximamente',
 
-        'ct-eyebrow': 'Contacto',
-        'ct-h2':      'Hablemos de tu negocio.',
-        'ct-lead':    'Cuéntanos qué necesitas. Te respondemos en menos de 24 horas y sin compromiso.',
-        ph_name:      'Nombre',
-        ph_email:     'Correo electrónico',
-        ph_phone:     'Teléfono',
-        ph_message:   'Cuéntanos en qué podemos ayudarte (opcional)',
-        btn:          'Enviar',
-        success:      'Listo. Te contactamos pronto.',
-        error:        'Algo salió mal. Intenta de nuevo.',
+        'port-ey':   'Proyectos',
+        'port-h2':   'Trabajo reciente',
+        'port-lead': 'Sitios que hemos construido para negocios reales.',
+        'p-desc':    'Sitio web para negocio local. Diseño limpio, carga rápida, optimizado para móvil.',
+        'p-link':    'Ver sitio →',
 
-        footer:       'Soluciones digitales para autónomos y pymes.'
+        'ct-ey':   'Contacto',
+        'ct-h2':   'Cuéntanos tu situación.',
+        'ct-lead': 'Sin compromiso. Te respondemos en menos de 24 horas.',
+        ph_name:   'Nombre',
+        ph_email:  'Correo electrónico',
+        ph_phone:  'Teléfono',
+        ph_msg:    'Describe brevemente tu negocio (opcional)',
+        btn:       'Enviar',
+        success:   'Listo. Te contactamos pronto.',
+        error:     'Algo salió mal. Intenta de nuevo.',
+
+        footer: 'Digital para autónomos y pequeñas empresas.'
       },
       en: {
-        eyebrow:      'Specialists, not generalists',
-        h1:           'Digital solutions for independent workers and small businesses.',
-        sub:          'We don\'t do everything for everyone. We specialize in building the digital presence your business needs to grow: websites, Google rankings, and tools that work.',
-        cta:          'Let\'s talk',
-
         'nav-services':  'Services',
         'nav-portfolio': 'Work',
         'nav-contact':   'Contact',
 
-        'svc-eyebrow': 'Services',
-        'svc-h2':      'What we do',
-        'svc-lead':    'Three concrete services. No unnecessary packages, no empty promises.',
-        's1-name':     'Web Design',
-        's1-desc':     'We build your website from scratch. Fast, professional, and optimized to turn visitors into real clients. Custom design, no generic templates.',
-        's1-badge':    'Available',
-        's2-name':     'Local SEO',
-        's2-desc':     'Showing up on Google isn\'t luck. We position you so the right clients find you when they\'re searching — before your competition.',
-        's2-badge':    'Available',
-        's3-name':     'Automation',
-        's3-desc':     'Contact forms, online bookings, automated workflows. Technology working for you, without needing to understand technology.',
-        's3-badge':    'Coming soon',
+        agitate: 'Every day without a digital presence, a client goes elsewhere.',
+        solve:   'We build your website, your SEO, and your tools. In weeks, not months.',
+        cta:     'Let\'s talk',
+        scope:   'We build the structure. Content — photos and copy — is yours to provide.',
 
-        'port-eyebrow': 'Work',
-        'port-h2':      'Recent projects',
-        'port-lead':    'Websites we\'ve built for real businesses.',
-        'p-desc':       'Website for a local business. Clean design, fast load times, mobile-optimized.',
-        'p-link':       'View site →',
+        'svc-ey':   'Services',
+        'svc-h2':   'What we do',
+        'svc-lead': 'Three services. No unnecessary packages.',
+        'svc-more': 'See what each service includes →',
+        's1-name':  'Web Design',
+        's1-desc':  'Your site from scratch. Fast, professional, and built to turn visitors into clients. Custom, no templates.',
+        's1-badge': 'Available',
+        's2-name':  'Local SEO',
+        's2-desc':  'Showing up on Google isn\'t luck. We position you so the right clients find you, before your competition.',
+        's2-badge': 'Available',
+        's3-name':  'Automation',
+        's3-desc':  'Bookings, forms, automated workflows. Technology working for you, without needing to understand it.',
+        's3-badge': 'Coming soon',
 
-        'ct-eyebrow': 'Contact',
-        'ct-h2':      'Let\'s talk about your business.',
-        'ct-lead':    'Tell us what you need. We\'ll get back to you within 24 hours, no strings attached.',
-        ph_name:      'Name',
-        ph_email:     'Email address',
-        ph_phone:     'Phone',
-        ph_message:   'Tell us how we can help (optional)',
-        btn:          'Send',
-        success:      'Got it. We\'ll be in touch soon.',
-        error:        'Something went wrong. Please try again.',
+        'port-ey':   'Work',
+        'port-h2':   'Recent projects',
+        'port-lead': 'Sites we\'ve built for real businesses.',
+        'p-desc':    'Website for a local business. Clean design, fast load times, mobile-optimized.',
+        'p-link':    'View site →',
 
-        footer:       'Digital solutions for independent workers and small businesses.'
+        'ct-ey':   'Contact',
+        'ct-h2':   'Tell us your situation.',
+        'ct-lead': 'No strings attached. We\'ll get back to you within 24 hours.',
+        ph_name:   'Name',
+        ph_email:  'Email address',
+        ph_phone:  'Phone',
+        ph_msg:    'Briefly describe your business (optional)',
+        btn:       'Send',
+        success:   'Got it. We\'ll be in touch soon.',
+        error:     'Something went wrong. Please try again.',
+
+        footer: 'Digital for independent workers and small businesses.'
       }
     };
 
     var idMap = [
-      ['t-eyebrow',    'eyebrow'],
-      ['t-h1',         'h1'],
-      ['t-sub',        'sub'],
-      ['t-cta',        'cta'],
-      ['nav-services', 'nav-services'],
-      ['nav-portfolio','nav-portfolio'],
-      ['nav-contact',  'nav-contact'],
-      ['t-svc-eyebrow','svc-eyebrow'],
-      ['t-svc-h2',     'svc-h2'],
-      ['t-svc-lead',   'svc-lead'],
-      ['t-s1-name',    's1-name'],
-      ['t-s1-desc',    's1-desc'],
-      ['t-s1-badge',   's1-badge'],
-      ['t-s2-name',    's2-name'],
-      ['t-s2-desc',    's2-desc'],
-      ['t-s2-badge',   's2-badge'],
-      ['t-s3-name',    's3-name'],
-      ['t-s3-desc',    's3-desc'],
-      ['t-s3-badge',   's3-badge'],
-      ['t-port-eyebrow','port-eyebrow'],
-      ['t-port-h2',    'port-h2'],
-      ['t-port-lead',  'port-lead'],
-      ['t-p1-desc',    'p-desc'],
-      ['t-p2-desc',    'p-desc'],
-      ['t-p3-desc',    'p-desc'],
-      ['t-p1-link',    'p-link'],
-      ['t-p2-link',    'p-link'],
-      ['t-p3-link',    'p-link'],
-      ['t-ct-eyebrow', 'ct-eyebrow'],
-      ['t-ct-h2',      'ct-h2'],
-      ['t-ct-lead',    'ct-lead'],
-      ['t-btn',        'btn'],
-      ['t-footer',     'footer']
+      ['nav-services',  'nav-services'],
+      ['nav-portfolio', 'nav-portfolio'],
+      ['nav-contact',   'nav-contact'],
+      ['t-agitate',     'agitate'],
+      ['t-solve',       'solve'],
+      ['t-cta',         'cta'],
+      ['t-scope',       'scope'],
+      ['t-svc-ey',      'svc-ey'],
+      ['t-svc-h2',      'svc-h2'],
+      ['t-svc-lead',    'svc-lead'],
+      ['t-svc-more',    'svc-more'],
+      ['t-s1-name',     's1-name'],
+      ['t-s1-desc',     's1-desc'],
+      ['t-s1-badge',    's1-badge'],
+      ['t-s2-name',     's2-name'],
+      ['t-s2-desc',     's2-desc'],
+      ['t-s2-badge',    's2-badge'],
+      ['t-s3-name',     's3-name'],
+      ['t-s3-desc',     's3-desc'],
+      ['t-s3-badge',    's3-badge'],
+      ['t-port-ey',     'port-ey'],
+      ['t-port-h2',     'port-h2'],
+      ['t-port-lead',   'port-lead'],
+      ['t-p1-desc',     'p-desc'],
+      ['t-p2-desc',     'p-desc'],
+      ['t-p3-desc',     'p-desc'],
+      ['t-p1-link',     'p-link'],
+      ['t-p2-link',     'p-link'],
+      ['t-p3-link',     'p-link'],
+      ['t-ct-ey',       'ct-ey'],
+      ['t-ct-h2',       'ct-h2'],
+      ['t-ct-lead',     'ct-lead'],
+      ['t-btn',         'btn'],
+      ['t-footer',      'footer']
     ];
+
+    function renderProblem() {
+      if (!probEl) return;
+      var lines = problems[lang][probIdx].split('\n');
+      probEl.innerHTML = lines.join('<br>');
+    }
+
+    function cycleProblem() {
+      probEl.style.opacity = '0';
+      setTimeout(function() {
+        probIdx = (probIdx + 1) % problems[lang].length;
+        renderProblem();
+        probEl.style.opacity = '1';
+      }, 350);
+    }
 
     function setLang(l) {
       lang = l;
       var c = copy[l];
-
       idMap.forEach(function(pair) {
         var el = document.getElementById(pair[0]);
         if (el) el.textContent = c[pair[1]];
       });
-
+      renderProblem();
       document.getElementById('f-name').placeholder    = c.ph_name;
       document.getElementById('f-email').placeholder   = c.ph_email;
       document.getElementById('f-phone').placeholder   = c.ph_phone;
-      document.getElementById('f-message').placeholder = c.ph_message;
-
+      document.getElementById('f-message').placeholder = c.ph_msg;
       document.getElementById('flag').textContent       = l === 'es' ? '🇬🇧' : '🇪🇸';
       document.getElementById('lang-label').textContent = l === 'es' ? 'EN' : 'ES';
       document.documentElement.lang = l;
@@ -652,14 +681,14 @@
       btn.disabled = true;
       btn.textContent = '...';
 
-      var name    = document.getElementById('f-name').value.trim();
-      var phone   = document.getElementById('f-phone').value.trim();
-      var message = document.getElementById('f-message').value.trim();
+      var name  = document.getElementById('f-name').value.trim();
+      var phone = document.getElementById('f-phone').value.trim();
+      var msg   = document.getElementById('f-message').value.trim();
 
       var parts = [];
-      if (name)    parts.push('Nombre: '   + name);
-      if (phone)   parts.push('Teléfono: ' + phone);
-      if (message) parts.push('Mensaje: '  + message);
+      if (name)  parts.push('Nombre: '   + name);
+      if (phone) parts.push('Teléfono: ' + phone);
+      if (msg)   parts.push('Mensaje: '  + msg);
 
       var data = new FormData();
       data.append('email',   email);
@@ -671,12 +700,12 @@
         headers: { 'Accept': 'application/json' }
       })
       .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, j: j }; }); })
-      .then(function(result) {
-        if (result.ok) {
+      .then(function(res) {
+        if (res.ok) {
           document.getElementById('form-wrap').classList.add('hidden');
-          var msg = document.getElementById('success-msg');
-          msg.textContent = copy[lang].success;
-          msg.classList.remove('hidden');
+          var el = document.getElementById('success-msg');
+          el.textContent = copy[lang].success;
+          el.classList.remove('hidden');
         } else { throw new Error(); }
       })
       .catch(function() {
@@ -688,7 +717,9 @@
       });
     }
 
+    probEl = document.getElementById('problem-text');
     setLang('es');
+    setInterval(cycleProblem, 3500);
   </script>
 </body>
 </html>
