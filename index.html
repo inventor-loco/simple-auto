@@ -114,7 +114,7 @@
       overflow: hidden;
       background: #fff;
     }
-    .input-row input {
+    .input-row input[type="text"] {
       flex: 1;
       border: none;
       outline: none;
@@ -124,7 +124,7 @@
       background: transparent;
       color: var(--black);
     }
-    .input-row input::placeholder { color: #BBBBBB; }
+    .input-row input[type="text"]::placeholder { color: #BBBBBB; }
     .input-row button {
       border: none;
       background: var(--black);
@@ -137,9 +137,17 @@
       white-space: nowrap;
       transition: background 0.15s;
     }
-    .input-row button:hover { background: var(--red); }
+    .input-row button:hover:not(:disabled) { background: var(--red); }
+    .input-row button:disabled { opacity: 0.5; cursor: default; }
 
-    .success-msg {
+    .form-error {
+      font-size: 13px;
+      color: var(--red);
+      margin-top: 8px;
+    }
+
+    /* success block shown by formspree ajax */
+    [data-fs-success] {
       font-size: 15px;
       font-weight: 500;
       color: var(--black);
@@ -173,15 +181,17 @@
 
     <p class="sub" id="t-construction"></p>
 
-    <form class="input-row" id="form-row"
-          action="https://formspree.io/f/xnjweazd"
-          method="POST">
+    <!-- success message (shown by @formspree/ajax after submission) -->
+    <p data-fs-success class="hidden"></p>
+
+    <form id="contact-form" class="input-row">
+      <!-- dummy email required by Formspree schema -->
       <input type="hidden" name="email" value="lead@simpleauto.com" />
-      <input type="text" name="message" id="contact-input" required />
-      <button type="submit" id="t-btn"></button>
+      <input type="text" name="message" id="contact-input" required data-fs-field />
+      <button type="submit" id="t-btn" data-fs-submit-btn></button>
     </form>
 
-    <p class="success-msg hidden" id="success-msg"></p>
+    <p class="form-error hidden" data-fs-error></p>
   </main>
 
   <footer>© 2026 Simple Auto</footer>
@@ -219,7 +229,7 @@
       document.getElementById('t-construction').textContent = c.construction;
       document.getElementById('contact-input').placeholder  = c.placeholder;
       document.getElementById('t-btn').textContent          = c.btn;
-      document.getElementById('success-msg').textContent    = c.success;
+      document.querySelector('[data-fs-success]').textContent = c.success;
       document.getElementById('flag').textContent           = l === 'es' ? '🇬🇧' : '🇪🇸';
       document.getElementById('lang-label').textContent     = l === 'es' ? 'EN' : 'ES';
       document.documentElement.lang = l;
@@ -229,7 +239,21 @@
       setLang(lang === 'es' ? 'en' : 'es');
     }
 
+    // Formspree Ajax SDK
+    window.formspree = window.formspree || function() {
+      (formspree.q = formspree.q || []).push(arguments);
+    };
+    formspree('initForm', { formElement: '#contact-form', formId: 'xnjweazd' });
+
+    // After successful submission, hide the form and construction text
+    document.getElementById('contact-form').addEventListener('formspree:success', function() {
+      document.getElementById('contact-form').classList.add('hidden');
+      document.getElementById('t-construction').classList.add('hidden');
+      document.querySelector('[data-fs-success]').classList.remove('hidden');
+    });
+
     setLang('es');
   </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
