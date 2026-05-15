@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webs y SEO para abogados en Las Palmas de Gran Canaria — Simple Auto</title>
+  <meta name="description" content="Guía práctica y servicios de diseño web y SEO local para abogados y despachos en Las Palmas. Trust signals, RGPD, Google Business Profile y captación de clientes." />
+  <link rel="canonical" href="https://simpleauto.es/abogados.html" />
+  <meta property="og:title" content="Webs y SEO para abogados en Las Palmas — Simple Auto" />
+  <meta property="og:description" content="Guía gratuita y servicios para que tu despacho en Las Palmas capte clientes desde Google. RGPD, GBP, áreas de práctica que posicionan." />
+  <meta property="og:type" content="article" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://simpleauto.es/#org",
+        "name": "Simple Auto",
+        "description": "Diseño web, SEO local y automatización para profesionales independientes en Las Palmas de Gran Canaria.",
+        "areaServed": "Las Palmas de Gran Canaria"
+      },
+      {
+        "@type": "Service",
+        "serviceType": "Diseño web y SEO local para abogados",
+        "provider": { "@id": "https://simpleauto.es/#org" },
+        "areaServed": "Las Palmas de Gran Canaria",
+        "audience": { "@type": "Audience", "audienceType": "Abogados y despachos independientes" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://simpleauto.es/" },
+          { "@type": "ListItem", "position": 2, "name": "Profesiones", "item": "https://simpleauto.es/#profesiones" },
+          { "@type": "ListItem", "position": 3, "name": "Abogados", "item": "https://simpleauto.es/abogados.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #111111;
+      --red:    #D0021B;
+      --bg:     #F7F7F7;
+      --white:  #FFFFFF;
+      --muted:  #888888;
+      --border: #DDDDDD;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(247,247,247,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .nav-logo .auto { color: var(--red); }
+    .nav-center { display: flex; gap: 32px; }
+    .nav-center a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-center a:hover, .nav-center a.active { color: var(--black); }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      user-select: none;
+      transition: color 0.15s;
+    }
+    .lang-toggle:hover { color: var(--black); }
+
+    /* ── Shared ── */
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .wrap-wide {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── Hero ── */
+    .funnel-hero {
+      padding: 140px 0 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+    .hero-h1 {
+      font-size: clamp(34px, 5.5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      margin-bottom: 24px;
+      max-width: 760px;
+    }
+    .hero-agitate {
+      font-size: clamp(16px, 2vw, 19px);
+      font-weight: 500;
+      color: var(--red);
+      line-height: 1.5;
+      margin-bottom: 18px;
+      max-width: 620px;
+    }
+    .hero-solve {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 620px;
+      margin-bottom: 36px;
+    }
+    .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--black);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--red); }
+    .btn-secondary {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .btn-secondary:hover { color: var(--red); }
+
+    /* ── Table of contents ── */
+    .toc {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .toc-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .toc-list a {
+      font-size: 15px;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.15s;
+      line-height: 1.55;
+    }
+    .toc-list a:hover { color: var(--red); }
+    .toc-num {
+      display: inline-block;
+      width: 28px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* ── Guide blocks ── */
+    .guide {
+      padding: 72px 0 32px;
+    }
+    .guide-block {
+      padding: 24px 0 44px;
+      border-bottom: 1px solid var(--border);
+    }
+    .guide-block:last-child { border-bottom: 0; }
+    .guide-num {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .guide-h2 {
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .guide-body { font-size: 16px; line-height: 1.75; color: var(--black); }
+    .guide-body p { margin-bottom: 18px; color: var(--black); }
+    .guide-body p.muted { color: var(--muted); }
+    .guide-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      margin: 24px 0 10px;
+    }
+    .guide-body ul, .guide-body ol {
+      padding-left: 22px;
+      margin-bottom: 18px;
+    }
+    .guide-body li { margin-bottom: 8px; line-height: 1.7; }
+    .guide-body code {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .guide-body strong { color: var(--black); }
+    .callout {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 6px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--black);
+    }
+    .keyword-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 22px;
+      font-size: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .keyword-table th, .keyword-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .keyword-table th {
+      background: var(--bg);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .keyword-table tr:last-child td { border-bottom: 0; }
+
+    /* ── Case study ── */
+    .case {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+    .case-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .case-h2 {
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .case-lead {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 640px;
+    }
+    .case-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    @media (max-width: 680px) {
+      .case-metrics { grid-template-columns: 1fr; }
+    }
+    .case-metric {
+      background: var(--white);
+      padding: 22px 22px;
+    }
+    .case-metric-num {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .case-metric-label {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .case-footnote {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* ── Contact form ── */
+    .contact-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 720px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 36px; }
+    }
+    .ct-h2 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .ct-lead {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .form-stack input,
+    .form-stack textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-stack input:focus,
+    .form-stack textarea:focus { border-color: var(--black); }
+    .form-stack input::placeholder,
+    .form-stack textarea::placeholder { color: #BBBBBB; }
+    .form-stack textarea { resize: vertical; min-height: 110px; }
+    .form-stack button {
+      width: 100%;
+      border: none;
+      background: var(--black);
+      color: #fff;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 4px;
+    }
+    .form-stack button:hover:not(:disabled) { background: var(--red); }
+    .form-stack button:disabled { opacity: 0.4; cursor: default; }
+    .form-error  { font-size: 13px; color: var(--red); }
+    .success-msg { font-size: 15px; font-weight: 500; color: var(--black); }
+    .form-privacy {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.55;
+    }
+
+    /* ── Cross-link block ── */
+    .crosslinks {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+    .cl-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .cl-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 680px) { .cl-grid { grid-template-columns: 1fr; } }
+    .cl-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .cl-card:hover { border-color: var(--black); transform: translateY(-2px); }
+    .cl-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .cl-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Footer ── */
+    .footer-wrap { max-width: 1080px; margin: 0 auto; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-center { display: none; }
+      .wrap, .wrap-wide, footer { padding-left: 20px; padding-right: 20px; }
+      footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="index.html"><span>simple</span><span class="auto">auto</span></a>
+    <div class="nav-center">
+      <a href="services.html" id="nav-services"></a>
+      <a href="index.html#profesiones" class="active" id="nav-profesiones"></a>
+      <a href="index.html#portfolio"   id="nav-portfolio"></a>
+      <a href="#contact"               id="nav-contact"></a>
+    </div>
+    <div class="lang-toggle" onclick="toggleLang()">
+      <span id="flag">🇬🇧</span>
+      <span id="lang-label">EN</span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="funnel-hero">
+    <div class="wrap">
+      <p class="hero-eyebrow" id="t-hero-ey"></p>
+      <h1 class="hero-h1"     id="t-hero-h1"></h1>
+      <p class="hero-agitate" id="t-hero-agitate"></p>
+      <p class="hero-solve"   id="t-hero-solve"></p>
+      <div class="hero-ctas">
+        <a href="#contact"      class="btn-primary"   id="t-hero-cta"></a>
+        <a href="services.html" class="btn-secondary" id="t-hero-secondary"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Table of contents -->
+  <section class="toc">
+    <div class="wrap">
+      <p class="toc-label" id="t-toc-label"></p>
+      <ol class="toc-list" id="toc-list"></ol>
+    </div>
+  </section>
+
+  <!-- Guide -->
+  <section class="guide">
+    <div class="wrap" id="guide-blocks"></div>
+  </section>
+
+  <!-- Case -->
+  <section class="case">
+    <div class="wrap">
+      <p class="case-tag"  id="t-case-tag"></p>
+      <h2 class="case-h2"  id="t-case-h2"></h2>
+      <p class="case-lead" id="t-case-lead"></p>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num" id="t-m1-num"></div>
+          <div class="case-metric-label" id="t-m1-lbl"></div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num" id="t-m2-num"></div>
+          <div class="case-metric-label" id="t-m2-lbl"></div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num" id="t-m3-num"></div>
+          <div class="case-metric-label" id="t-m3-lbl"></div>
+        </div>
+      </div>
+      <p class="case-footnote" id="t-case-foot"></p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section" id="contact">
+    <div class="wrap-wide">
+      <div class="contact-layout">
+        <div>
+          <p class="hero-eyebrow" id="t-ct-ey"></p>
+          <h2 class="ct-h2"      id="t-ct-h2"></h2>
+          <p  class="ct-lead"    id="t-ct-lead"></p>
+        </div>
+        <div>
+          <div id="form-wrap" class="form-stack">
+            <input  type="text"  id="f-name" />
+            <input  type="email" id="f-email" />
+            <input  type="tel"   id="f-phone" />
+            <textarea            id="f-message" rows="4"></textarea>
+            <button type="button" id="t-btn" onclick="handleSubmit()"></button>
+            <p class="form-error hidden" id="form-error"></p>
+            <p class="form-privacy" id="t-form-privacy"></p>
+          </div>
+          <p class="success-msg hidden" id="success-msg"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-links -->
+  <section class="crosslinks">
+    <div class="wrap-wide">
+      <p class="cl-label" id="t-cl-label"></p>
+      <div class="cl-grid">
+        <a href="asesores-fiscales.html" class="cl-card">
+          <div class="cl-name" id="t-cl1-name"></div>
+          <div class="cl-desc" id="t-cl1-desc"></div>
+        </a>
+        <a href="arquitectos.html" class="cl-card">
+          <div class="cl-name" id="t-cl2-name"></div>
+          <div class="cl-desc" id="t-cl2-desc"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-wrap">
+    <footer>
+      <span>© 2026 Simple Auto</span>
+      <span id="t-footer"></span>
+    </footer>
+  </div>
+
+  <script>
+    var FUNNEL = 'abogados';
+    var lang = 'es';
+
+    var copy = {
+      es: {
+        'nav-services':    'Servicios',
+        'nav-profesiones': 'Profesiones',
+        'nav-portfolio':   'Proyectos',
+        'nav-contact':     'Contacto',
+
+        'hero-ey':        'Para abogados en Las Palmas',
+        'hero-h1':        'Más clientes para tu despacho en Las Palmas, sin depender del boca a boca.',
+        'hero-agitate':   'Cada cliente que busca «abogado en Las Palmas» y no te encuentra contrata al despacho que sí aparece — aunque no esté mejor preparado que tú.',
+        'hero-solve':     'Esta página es una guía gratuita para abogados y despachos de Las Palmas de Gran Canaria. Cómo te buscan tus clientes, qué tiene que decir tu web, cumplimiento RGPD para despachos y un plan concreto para la primera semana. Sin formulario por delante, sin email obligatorio. Si después quieres que lo hagamos contigo, abajo tienes cómo.',
+        'hero-cta':       'Hablemos',
+        'hero-secondary': 'Ver servicios →',
+
+        'toc-label':      'En esta guía',
+        'toc': [
+          'Cómo te buscan los clientes en Las Palmas',
+          'Google Business Profile para despachos',
+          'Trust signals: lo que hace creíble tu web',
+          'Estructura: una página por área de práctica',
+          'Cumplimiento RGPD, LOPDGDD y cookies',
+          'Confidencialidad y el formulario de contacto',
+          'Errores frecuentes',
+          'Plan de la primera semana'
+        ],
+
+        'guide': [
+          {
+            'num': '01',
+            'h2': 'Cómo te buscan los clientes en Las Palmas',
+            'html': '<p>El primer paso es entender que tu cliente no busca «abogado». Busca un problema concreto y un sitio concreto. Cuanto más se acerque tu web a esa búsqueda real, menos tendrás que competir por la palabra genérica.</p>' +
+                    '<p>Estas son búsquedas reales que se hacen en Las Palmas de Gran Canaria. Casi todas se hacen desde el móvil, casi todas terminan en una llamada en menos de 24 horas si encuentran al despacho adecuado:</p>' +
+                    '<table class="keyword-table">' +
+                      '<thead><tr><th>Búsqueda</th><th>Intención</th></tr></thead>' +
+                      '<tbody>' +
+                      '<tr><td><code>abogado de familia las palmas</code></td><td>Separación o divorcio, urgencia alta</td></tr>' +
+                      '<tr><td><code>abogado herencias gran canaria</code></td><td>Reciente fallecimiento, comparan 2–3 despachos</td></tr>' +
+                      '<tr><td><code>abogado laboralista vegueta</code></td><td>Despido, plazo legal corto</td></tr>' +
+                      '<tr><td><code>abogado extranjería triana</code></td><td>Renovación o arraigo, decisión rápida</td></tr>' +
+                      '<tr><td><code>cita abogado las palmas</code></td><td>Listo para contratar, intención máxima</td></tr>' +
+                      '<tr><td><code>cuanto cuesta un abogado en gran canaria</code></td><td>Investigando, todavía no contrata</td></tr>' +
+                      '<tr><td><code>abogado cerca de mí</code></td><td>Móvil + geolocalización, Google Maps</td></tr>' +
+                      '</tbody>' +
+                    '</table>' +
+                    '<p><strong>La diferencia importa.</strong> Optimizar para «abogado las palmas» te pone a competir con todos los despachos de la isla. Optimizar para «abogado herencias las palmas» te pone a competir con tres o cuatro. Y la persona que busca lo segundo necesita exactamente lo que tú haces.</p>' +
+                    '<div class="callout">Acción concreta: anota tus tres áreas de práctica reales (no las quince que «también haces»). Esas tres son las que merecen una página propia en tu web y una sección propia en tu Google Business Profile.</div>'
+          },
+          {
+            'num': '02',
+            'h2': 'Google Business Profile para despachos',
+            'html': '<p>Para un cliente que busca «abogado en Las Palmas» desde el móvil, lo primero que ve no es tu web. Es un mapa con tres fichas. Si tu despacho no está en esas tres fichas, no existes para esa búsqueda — por bonita que sea tu web.</p>' +
+                    '<p>Reclamar y optimizar el Google Business Profile (la ficha de Google Maps) es el cambio de mayor impacto y menor coste que puede hacer un despacho. Esto es lo que tiene que tener:</p>' +
+                    '<h3>Categoría principal correcta</h3>' +
+                    '<ul>' +
+                      '<li>«Abogado» como categoría principal.</li>' +
+                      '<li>Si trabajas un área concreta, añade la subcategoría: «Abogado de familia», «Abogado laboralista», «Abogado de extranjería». Google las usa para filtrar resultados específicos.</li>' +
+                    '</ul>' +
+                    '<h3>Dirección o área de servicio</h3>' +
+                    '<ul>' +
+                      '<li>Si recibes clientes en el despacho, muestra la dirección pública.</li>' +
+                      '<li>Si trabajas desde casa o solo por videollamada, configura «Área de servicio» (Las Palmas, Telde, San Bartolomé, etc.) y oculta la dirección.</li>' +
+                      '<li>Nunca pongas tu domicilio particular si no atiendes ahí.</li>' +
+                    '</ul>' +
+                    '<h3>Colegiación visible</h3>' +
+                    '<ul>' +
+                      '<li>En la descripción: «Colegiado/a en el Ilustre Colegio de Abogados de Las Palmas (ICALPA), nº [número].»</li>' +
+                      '<li>Es trust signal y filtro de competencia. La mayoría de despachos no lo ponen.</li>' +
+                    '</ul>' +
+                    '<h3>Fotos reales, no de archivo</h3>' +
+                    '<ul>' +
+                      '<li>Fachada del despacho (para que el cliente lo reconozca al llegar).</li>' +
+                      '<li>Recepción o sala de reuniones.</li>' +
+                      '<li>Equipo (rostros reales). Una foto de un mazo de juez es la peor decisión visual posible.</li>' +
+                    '</ul>' +
+                    '<h3>Horarios reales</h3>' +
+                    '<ul>' +
+                      '<li>Si no atiendes los viernes por la tarde, cierralo. Si atiendes urgencias 24/7, pónlo. Un cliente que llama fuera de horario y nadie responde no vuelve a llamar.</li>' +
+                    '</ul>' +
+                    '<h3>Servicios desglosados</h3>' +
+                    '<ul>' +
+                      '<li>Añade cada área de práctica como «servicio» dentro del perfil con su descripción. Eso aumenta tus apariciones para búsquedas de área específica.</li>' +
+                    '</ul>'
+          },
+          {
+            'num': '03',
+            'h2': 'Trust signals: lo que hace creíble tu web',
+            'html': '<p>Cuando un cliente potencial llega a tu web, decide en treinta segundos si vas a ser su abogado o no. Esa decisión casi nunca se basa en el contenido de las páginas — se basa en señales rápidas que le dicen «este despacho es real, está cualificado, y voy a recuperar la llamada si la hago».</p>' +
+                    '<p>Checklist de trust signals para un despacho de Las Palmas:</p>' +
+                    '<ul>' +
+                      '<li><strong>Número de colegiado visible</strong> en el footer de cada página. ICALPA + número. Sin esto, la web no es la de un abogado — es la de cualquiera.</li>' +
+                      '<li><strong>Foto real del titular o del equipo</strong>. Nada de gente de stock en traje. Si no quieres salir tú, contrata media hora de un fotógrafo local.</li>' +
+                      '<li><strong>Áreas de práctica concretas</strong>. No «todo tipo de derecho». Listar tres a cinco áreas reales transmite especialización; listar quince transmite que tocas lo que cae.</li>' +
+                      '<li><strong>Honorarios orientativos o «primera consulta»</strong>. No tienes que poner precios cerrados, pero un cliente quiere saber si está fuera de presupuesto antes de llamar.</li>' +
+                      '<li><strong>Casos representativos anonimizados</strong>. «Despacho que recuperó una indemnización por despido improcedente en X meses». No nombres, solo el resultado y la categoría.</li>' +
+                      '<li><strong>Reseñas de Google embebidas o enlazadas</strong>. Las reseñas no se pueden inventar — y todos los clientes lo saben.</li>' +
+                      '<li><strong>Datos de contacto profesionales</strong>. Teléfono fijo o profesional, no número personal. Email del dominio del despacho, no @gmail.</li>' +
+                      '<li><strong>Dirección con mapa de Google</strong> embebido. El cliente quiere ver dónde se va a meter.</li>' +
+                    '</ul>' +
+                    '<div class="callout">Una web de abogado sin número de colegiado en el footer no genera confianza. Por encima de cualquier optimización de SEO, ese cambio de cinco minutos es probablemente el de mayor retorno.</div>'
+          },
+          {
+            'num': '04',
+            'h2': 'Estructura: una página por área de práctica',
+            'html': '<p>El error más común en webs de despachos pequeños es resumir todas las áreas en una sola página llamada «Servicios» o «Áreas». Es cómodo de mantener — y es exactamente lo que hace que no posiciones en Google.</p>' +
+                    '<p>Google premia páginas específicas que respondan a una búsqueda concreta. Una página que habla de derecho de familia, laboral, herencias, extranjería y mercantil al mismo tiempo no responde bien a ninguna de esas búsquedas.</p>' +
+                    '<h3>Estructura recomendada para un despacho pequeño</h3>' +
+                    '<ul>' +
+                      '<li><strong>Inicio</strong>: quién eres, especialización, ubicación, llamada a la acción.</li>' +
+                      '<li><strong>El despacho / Sobre</strong>: trayectoria, colegiación, idiomas, fotos reales.</li>' +
+                      '<li><strong>Áreas</strong> (página índice + una página por área):' +
+                        '<ul>' +
+                          '<li>/familia — Divorcios, custodia, herencias familiares</li>' +
+                          '<li>/laboral — Despidos, reclamaciones, conciliación</li>' +
+                          '<li>/extranjeria — Arraigos, residencia, nacionalidad</li>' +
+                          '<li>...y así, una por área real (no quince).</li>' +
+                        '</ul>' +
+                      '</li>' +
+                      '<li><strong>Honorarios o primera consulta</strong>: condiciones, transparencia.</li>' +
+                      '<li><strong>Blog / Actualidad</strong> (opcional pero recomendable): una nota por cambio normativo relevante posiciona muy bien.</li>' +
+                      '<li><strong>Contacto</strong>: formulario + teléfono + mapa.</li>' +
+                      '<li><strong>Aviso legal · Privacidad · Cookies</strong>: enlaces en el footer (ver bloque 5).</li>' +
+                    '</ul>' +
+                    '<h3>Por qué funciona</h3>' +
+                    '<p>Cuando un usuario busca «abogado herencias gran canaria», Google quiere mostrarle una página cuyo título, URL y contenido hablen específicamente de herencias en Gran Canaria. Si tu única página al respecto es «Servicios — derecho de familia, laboral, herencias…», competes en desventaja contra cualquier despacho que tenga una página dedicada solo a herencias.</p>' +
+                    '<p>Esto no es teoría — es exactamente el patrón que separa a los despachos que captan clientes desde Google de los que dependen del boca a boca.</p>'
+          },
+          {
+            'num': '05',
+            'h2': 'Cumplimiento RGPD, LOPDGDD y cookies',
+            'html': '<p>Una web de abogado que no cumple con la normativa de protección de datos es, además de una mala práctica, una vulnerabilidad reputacional importante. Si un cliente que sabe de RGPD ve que tu propia web no lo cumple, no te va a contratar para que defiendas los suyos.</p>' +
+                    '<p>Esto es lo que cualquier web de despacho debe tener:</p>' +
+                    '<h3>Aviso legal</h3>' +
+                    '<ul>' +
+                      '<li>Identidad del titular del despacho (nombre o razón social).</li>' +
+                      '<li>NIF.</li>' +
+                      '<li>Dirección de contacto.</li>' +
+                      '<li>Email y teléfono.</li>' +
+                      '<li>Colegio profesional al que pertenece (ICALPA en Las Palmas) y número de colegiado.</li>' +
+                      '<li>Normativa profesional aplicable y enlace al código deontológico.</li>' +
+                    '</ul>' +
+                    '<h3>Política de privacidad</h3>' +
+                    '<ul>' +
+                      '<li>Responsable del tratamiento.</li>' +
+                      '<li>Finalidades del tratamiento (gestión de consultas, prestación de servicios jurídicos).</li>' +
+                      '<li>Base jurídica (consentimiento, ejecución de contrato, obligación legal).</li>' +
+                      '<li>Plazos de conservación.</li>' +
+                      '<li>Cesiones a terceros (si las hay) y encargados de tratamiento.</li>' +
+                      '<li>Derechos del interesado y cómo ejercerlos.</li>' +
+                    '</ul>' +
+                    '<h3>Política de cookies (LSSI-CE)</h3>' +
+                    '<ul>' +
+                      '<li>Banner de consentimiento que <strong>no aplique cookies analíticas ni de marketing hasta tener aceptación</strong>.</li>' +
+                      '<li>Opciones reales para aceptar, rechazar o configurar.</li>' +
+                      '<li>Página dedicada de cookies con tabla detallada.</li>' +
+                    '</ul>' +
+                    '<h3>Formulario de contacto</h3>' +
+                    '<p>El formulario debe incluir una casilla de consentimiento <strong>separada y no premarcada</strong> con un texto del estilo:</p>' +
+                    '<div class="callout">«He leído y acepto la <a href="#">Política de Privacidad</a>. Consiento el tratamiento de mis datos para responder a mi consulta.»</div>' +
+                    '<p>Sin esa casilla, el envío no es legal. Y sí, Google lo ve.</p>'
+          },
+          {
+            'num': '06',
+            'h2': 'Confidencialidad y el formulario de contacto',
+            'html': '<p>Hay un punto específico de los abogados que la mayoría de plantillas web ignoran: el secreto profesional empieza antes de la primera reunión. Y el formulario de contacto puede convertirse en un agujero si lo diseñas como cualquier otro.</p>' +
+                    '<h3>Qué no pedir en el formulario público</h3>' +
+                    '<ul>' +
+                      '<li>Detalles del caso. Nunca. «Cuéntanos brevemente tu situación» es una invitación a que un usuario haga un volcado de información sensible en una caja de texto que está sin cifrar de extremo a extremo.</li>' +
+                      '<li>DNI, número de expediente judicial, nombres de terceros implicados.</li>' +
+                      '<li>Documentos adjuntos. Que los envíen por canal seguro después de la primera llamada.</li>' +
+                    '</ul>' +
+                    '<h3>Qué sí pedir</h3>' +
+                    '<ul>' +
+                      '<li>Nombre y apellidos.</li>' +
+                      '<li>Email y teléfono.</li>' +
+                      '<li>Área de consulta (selector con tus áreas: familia, laboral, etc.).</li>' +
+                      '<li>Disponibilidad para una llamada de 15 minutos.</li>' +
+                    '</ul>' +
+                    '<p>El objetivo del formulario no es resolver la consulta. Es conseguir el primer contacto. Esa llamada inicial es donde sí se puede entrar en detalle, con el cliente consciente de que está hablando con un abogado en condiciones de confidencialidad.</p>' +
+                    '<div class="callout">Texto sugerido para la página de contacto: «Por motivos de confidencialidad, por favor no incluyas detalles del caso en este formulario. Te llamamos en menos de 24 horas y hablamos en persona o por teléfono.»</div>'
+          },
+          {
+            'num': '07',
+            'h2': 'Errores frecuentes',
+            'html': '<p>Patrones que vemos repetidos en webs de despachos pequeños y que cuestan clientes silenciosamente:</p>' +
+                    '<ul>' +
+                      '<li><strong>«Todo tipo de derecho»</strong> en la página de inicio. Equivale a no especializarte, y el cliente lo lee como «no destaca en lo mío».</li>' +
+                      '<li><strong>Doce o quince áreas listadas</strong> sin una página por cada una. Mejor cinco áreas con cinco páginas profundas.</li>' +
+                      '<li><strong>Solo keyword «abogados»</strong>. La búsqueda genérica es la más cara y la más competida. Las búsquedas locales y de área son las que convierten.</li>' +
+                      '<li><strong>Sin número de colegiado en el footer</strong>. Pierdes confianza y, técnicamente, incumples obligaciones de información.</li>' +
+                      '<li><strong>Stock photos de balanzas, mazos y libros antiguos</strong>. Te hace indistinguible de los otros 200 despachos con la misma plantilla.</li>' +
+                      '<li><strong>Plantilla nacional sin ninguna mención a Las Palmas</strong>. Si tu web podría ser de un despacho de Bilbao, Google no la posicionará para búsquedas de Gran Canaria.</li>' +
+                      '<li><strong>Honorarios en PDF descargable</strong>. Google no lee PDFs igual que HTML. Y el cliente no quiere descargar nada, quiere ver.</li>' +
+                      '<li><strong>Sin teléfono visible en la cabecera</strong>. La mitad de los clientes potenciales prefieren llamar a rellenar un formulario. Pónlo arriba a la derecha.</li>' +
+                    '</ul>'
+          },
+          {
+            'num': '08',
+            'h2': 'Plan de la primera semana',
+            'html': '<p>Si tuvieses una semana entre asunto y asunto para mejorar la captación de tu despacho, este es el orden de impacto. Cada uno es accionable hoy mismo.</p>' +
+                    '<ol>' +
+                      '<li><strong>Día 1 — Google Business Profile</strong>. Reclámalo si no es tuyo, ajusta categoría, sube fotos reales, añade colegiación al texto, configura horarios reales.</li>' +
+                      '<li><strong>Día 2 — Auditoría de trust signals</strong>. Revisa que el número de colegiado aparezca en el footer, que haya foto real, que las áreas estén concretas. Cambios de 30 minutos cada uno.</li>' +
+                      '<li><strong>Día 3 — Una página dedicada a tu área principal</strong>. Si tu mayor volumen son herencias, escribe la página «Abogado de herencias en Las Palmas» — 600 palabras concretas, no plantilla.</li>' +
+                      '<li><strong>Día 4 — Aviso legal y política de privacidad actualizados</strong>. Si tu web no los tiene (o son de hace 5 años), genera versiones nuevas con tus datos reales.</li>' +
+                      '<li><strong>Día 5 — Schema.org LegalService</strong>. Añade datos estructurados de LegalService a tu web. Es invisible al usuario pero Google lo lee y mejora cómo apareces.</li>' +
+                      '<li><strong>Día 6 — Reseñas</strong>. Pide a 3–5 clientes recientes una reseña en Google. No esperes a que lleguen solas — el silencio es el patrón natural.</li>' +
+                      '<li><strong>Día 7 — Medir</strong>. Comprueba en Google Search Console las búsquedas que ya te traen visitas. Empieza por mejorar las que ya están en posición 4–10 — son las más rentables de mejorar.</li>' +
+                    '</ol>' +
+                    '<p>Lo importante: este plan funciona aunque no tengas web. La diferencia entre un despacho que aparece en Google y uno que no, en Las Palmas, está más cerca de estas siete acciones que de un rediseño completo. Si después necesitas que alguien te lo construya, cuéntanoslo abajo — pero estos pasos los puedes empezar tú mismo esta misma tarde.</p>'
+          }
+        ],
+
+        'case-tag':   'Ejemplo ilustrativo',
+        'case-h2':    'Despacho de derecho de familia en Triana',
+        'case-lead':  'Un despacho pequeño en el barrio de Triana, especializado en divorcios y custodia. Antes: web genérica de plantilla, sin Google Business Profile reclamado, ninguna página dedicada al área de familia. Tras aplicar los pasos de esta guía durante tres meses.',
+        'm1-num':     '+340%',
+        'm1-lbl':     'Aumento de impresiones en búsqueda local en 90 días',
+        'm2-num':     '8 → 23',
+        'm2-lbl':     'Consultas / mes recibidas desde Google',
+        'm3-num':     'Top 3',
+        'm3-lbl':     'Posición Maps para «abogado familia las palmas»',
+        'case-foot':  'Ejemplo construido a partir de patrones observados en despachos pequeños de Las Palmas. Resultados reales varían según especialización, competencia local y contenido publicado.',
+
+        'ct-ey':       'Hablemos',
+        'ct-h2':       '¿Quieres que lo hagamos contigo?',
+        'ct-lead':     'Si después de leer esto tienes claro qué quieres mejorar, podemos ayudarte. Una llamada de 20 minutos. Te decimos si podemos hacerlo, cuánto cuesta y en cuánto tiempo. Sin compromiso, sin permanencia.',
+        'ph_name':     'Nombre',
+        'ph_email':    'Correo electrónico',
+        'ph_phone':    'Teléfono',
+        'ph_msg':      'Soy abogado/a en Las Palmas y quiero más consultas desde Google. Cuéntame cómo me podéis ayudar.',
+        'btn':         'Enviar',
+        'form-privacy':'Tus datos se usan solo para responder a tu consulta. Por confidencialidad, por favor no incluyas detalles del caso en este formulario.',
+        'success':     'Listo. Te contactamos en menos de 24 horas.',
+        'error':       'Algo salió mal. Intenta de nuevo o escríbenos directamente.',
+
+        'cl-label':    '¿No es lo tuyo? Mira también',
+        'cl1-name':    'Para asesores fiscales',
+        'cl1-desc':    'Guía gratuita: IGIC, REF Canarias, alta de autónomos y captación local.',
+        'cl2-name':    'Para arquitectos',
+        'cl2-desc':    'Guía gratuita: portfolio que vende, cédula, CEE y captación de promotores.',
+
+        'footer':      'Especialistas digitales para profesionales independientes en Las Palmas de Gran Canaria.'
+      },
+      en: {
+        'nav-services':    'Services',
+        'nav-profesiones': 'For your profession',
+        'nav-portfolio':   'Work',
+        'nav-contact':     'Contact',
+
+        'hero-ey':        'For lawyers in Las Palmas',
+        'hero-h1':        'More clients for your practice in Las Palmas, without relying on word of mouth.',
+        'hero-agitate':   'Every prospect who searches "lawyer in Las Palmas" and can\'t find you hires the firm that does show up — even if they\'re no better prepared than you are.',
+        'hero-solve':     'This page is a free guide for lawyers and small firms in Las Palmas de Gran Canaria. How your clients actually search, what your site needs to say, GDPR compliance for legal practices, and a concrete first-week plan. No gate, no email required. If you want help running it after, you\'ll find that below too.',
+        'hero-cta':       'Let\'s talk',
+        'hero-secondary': 'See services →',
+
+        'toc-label':      'In this guide',
+        'toc': [
+          'How your clients search in Las Palmas',
+          'Google Business Profile for law firms',
+          'Trust signals: what makes your site credible',
+          'Structure: one page per practice area',
+          'GDPR, Spanish LOPDGDD and cookies',
+          'Confidentiality and the contact form',
+          'Common mistakes',
+          'First-week action plan'
+        ],
+
+        'guide': [
+          {
+            'num': '01',
+            'h2': 'How your clients search in Las Palmas',
+            'html': '<p>The first thing to understand: your prospect isn\'t searching for "lawyer". They\'re searching for a specific problem in a specific place. The closer your site sits to that real search, the less you have to fight for the generic keyword.</p>' +
+                    '<p>These are real searches happening every day in Las Palmas de Gran Canaria. Almost all from mobile, almost all converting to a phone call within 24 hours when the right practice shows up:</p>' +
+                    '<table class="keyword-table">' +
+                      '<thead><tr><th>Search</th><th>Intent</th></tr></thead>' +
+                      '<tbody>' +
+                      '<tr><td><code>abogado de familia las palmas</code></td><td>Separation or divorce, high urgency</td></tr>' +
+                      '<tr><td><code>abogado herencias gran canaria</code></td><td>Recent bereavement, comparing 2–3 firms</td></tr>' +
+                      '<tr><td><code>abogado laboralista vegueta</code></td><td>Dismissal, short legal deadline</td></tr>' +
+                      '<tr><td><code>abogado extranjería triana</code></td><td>Residence/renewal, fast decision</td></tr>' +
+                      '<tr><td><code>cita abogado las palmas</code></td><td>Ready to hire, maximum intent</td></tr>' +
+                      '<tr><td><code>cuanto cuesta un abogado en gran canaria</code></td><td>Researching, not ready yet</td></tr>' +
+                      '<tr><td><code>abogado cerca de mí</code></td><td>Mobile + geolocation, Google Maps</td></tr>' +
+                      '</tbody>' +
+                    '</table>' +
+                    '<p><strong>The difference matters.</strong> Optimising for "abogado las palmas" puts you against every lawyer on the island. Optimising for "abogado herencias las palmas" puts you against three or four. And the person searching the second one needs exactly what you do.</p>' +
+                    '<div class="callout">Concrete action: write down your three real practice areas (not the fifteen you "also handle"). Those three deserve their own page on your site and their own section in your Google Business Profile.</div>'
+          },
+          {
+            'num': '02',
+            'h2': 'Google Business Profile for law firms',
+            'html': '<p>For a prospect searching "lawyer in Las Palmas" from a phone, the first thing they see isn\'t your website. It\'s a map with three listings. If your firm isn\'t one of those three, you don\'t exist for that search — no matter how good your site is.</p>' +
+                    '<p>Claiming and optimising the Google Business Profile (the Google Maps listing) is the highest-impact, lowest-cost change a small firm can make. Here\'s what it needs:</p>' +
+                    '<h3>Correct primary category</h3>' +
+                    '<ul>' +
+                      '<li>"Lawyer" as primary category.</li>' +
+                      '<li>If you work a specific area, add the subcategory: "Family law attorney", "Labour lawyer", "Immigration attorney". Google uses these to filter specific results.</li>' +
+                    '</ul>' +
+                    '<h3>Address or service area</h3>' +
+                    '<ul>' +
+                      '<li>If you receive clients at the office, show the public address.</li>' +
+                      '<li>If you work from home or only by video call, set "Service area" (Las Palmas, Telde, San Bartolomé, etc.) and hide the address.</li>' +
+                      '<li>Never show your home address if you don\'t actually meet clients there.</li>' +
+                    '</ul>' +
+                    '<h3>Bar registration visible</h3>' +
+                    '<ul>' +
+                      '<li>In the description: "Registered with the Las Palmas Bar Association (ICALPA), nº [number]."</li>' +
+                      '<li>It\'s a trust signal and a competition filter. Most firms don\'t bother.</li>' +
+                    '</ul>' +
+                    '<h3>Real photos, not stock</h3>' +
+                    '<ul>' +
+                      '<li>The office façade (so clients recognise it when they arrive).</li>' +
+                      '<li>Reception or meeting room.</li>' +
+                      '<li>The team (real faces). A photo of a judge\'s gavel is the worst possible visual choice.</li>' +
+                    '</ul>' +
+                    '<h3>Real hours</h3>' +
+                    '<ul>' +
+                      '<li>If you\'re closed Friday afternoons, close them. If you handle emergencies 24/7, put it. A prospect who calls outside hours and gets no answer doesn\'t call again.</li>' +
+                    '</ul>' +
+                    '<h3>Itemised services</h3>' +
+                    '<ul>' +
+                      '<li>Add each practice area as a "service" within the profile with its description. This increases your appearances for area-specific searches.</li>' +
+                    '</ul>'
+          },
+          {
+            'num': '03',
+            'h2': 'Trust signals: what makes your site credible',
+            'html': '<p>When a prospect lands on your site, they decide in thirty seconds whether you\'re going to be their lawyer or not. That decision almost never relies on the page content — it relies on quick signals telling them "this firm is real, qualified, and will call me back if I reach out".</p>' +
+                    '<p>Trust-signal checklist for a Las Palmas practice:</p>' +
+                    '<ul>' +
+                      '<li><strong>Bar number visible</strong> in every page\'s footer. ICALPA + number. Without this, the site isn\'t a lawyer\'s — it\'s anyone\'s.</li>' +
+                      '<li><strong>Real photo of the principal or team</strong>. No stock people in suits. If you\'d rather not pose, hire a local photographer for half an hour.</li>' +
+                      '<li><strong>Concrete practice areas</strong>. Not "all areas of law". Listing three to five real areas signals specialisation; listing fifteen signals that you take whatever lands.</li>' +
+                      '<li><strong>Indicative fees or "first consultation"</strong>. You don\'t need fixed prices, but a client wants to know if they\'re out of budget before calling.</li>' +
+                      '<li><strong>Anonymised representative cases</strong>. "Firm that recovered an unfair-dismissal claim in X months." No names, just outcome and category.</li>' +
+                      '<li><strong>Google reviews embedded or linked</strong>. Reviews can\'t be faked — and every client knows it.</li>' +
+                      '<li><strong>Professional contact details</strong>. Landline or professional number, not personal mobile. Email on the firm\'s domain, not @gmail.</li>' +
+                      '<li><strong>Address with an embedded Google map</strong>. The client wants to see where they\'re going.</li>' +
+                    '</ul>' +
+                    '<div class="callout">A lawyer\'s website without a bar number in the footer doesn\'t build trust. Above any SEO optimisation, that five-minute change is probably the highest-return one you can make today.</div>'
+          },
+          {
+            'num': '04',
+            'h2': 'Structure: one page per practice area',
+            'html': '<p>The most common mistake on small-firm websites is summarising every area on a single page called "Services" or "Practice Areas". It\'s easy to maintain — and it\'s precisely what stops you ranking on Google.</p>' +
+                    '<p>Google rewards specific pages that answer a specific search. A page covering family, employment, inheritance, immigration and commercial law all at once answers none of those searches well.</p>' +
+                    '<h3>Recommended structure for a small firm</h3>' +
+                    '<ul>' +
+                      '<li><strong>Home</strong>: who you are, specialisation, location, call to action.</li>' +
+                      '<li><strong>About</strong>: track record, bar registration, languages, real photos.</li>' +
+                      '<li><strong>Practice areas</strong> (index page + one page per area):' +
+                        '<ul>' +
+                          '<li>/family — Divorce, custody, family inheritance</li>' +
+                          '<li>/employment — Dismissal, claims, conciliation</li>' +
+                          '<li>/immigration — Residence, naturalisation</li>' +
+                          '<li>...and so on, one per real area (not fifteen).</li>' +
+                        '</ul>' +
+                      '</li>' +
+                      '<li><strong>Fees or first consultation</strong>: terms, transparency.</li>' +
+                      '<li><strong>Blog / News</strong> (optional but recommended): a note on each relevant regulatory change ranks very well.</li>' +
+                      '<li><strong>Contact</strong>: form + phone + map.</li>' +
+                      '<li><strong>Legal notice · Privacy · Cookies</strong>: footer links (see block 5).</li>' +
+                    '</ul>' +
+                    '<h3>Why this works</h3>' +
+                    '<p>When a user searches "abogado herencias gran canaria", Google wants to surface a page whose title, URL and content specifically discuss inheritance law in Gran Canaria. If your only relevant page is "Services — family, employment, inheritance…", you\'re competing at a disadvantage against any firm with a dedicated inheritance page.</p>' +
+                    '<p>This isn\'t theory — it\'s exactly the pattern that separates firms that win clients from Google from those that depend on word of mouth.</p>'
+          },
+          {
+            'num': '05',
+            'h2': 'GDPR, Spanish LOPDGDD and cookies',
+            'html': '<p>A law firm\'s website that doesn\'t comply with data protection law is both bad practice and a serious reputational risk. If a prospect who knows GDPR sees your own site doesn\'t comply, they aren\'t going to hire you to defend theirs.</p>' +
+                    '<p>Here\'s what every practice website needs:</p>' +
+                    '<h3>Legal notice</h3>' +
+                    '<ul>' +
+                      '<li>Practice owner identity (name or legal entity).</li>' +
+                      '<li>Tax ID (NIF).</li>' +
+                      '<li>Contact address.</li>' +
+                      '<li>Email and phone.</li>' +
+                      '<li>Bar association (ICALPA in Las Palmas) and registration number.</li>' +
+                      '<li>Applicable professional rules and link to code of conduct.</li>' +
+                    '</ul>' +
+                    '<h3>Privacy policy</h3>' +
+                    '<ul>' +
+                      '<li>Data controller.</li>' +
+                      '<li>Purposes (handling enquiries, providing legal services).</li>' +
+                      '<li>Legal basis (consent, contract, legal obligation).</li>' +
+                      '<li>Retention periods.</li>' +
+                      '<li>Third-party transfers (if any) and processors.</li>' +
+                      '<li>Data-subject rights and how to exercise them.</li>' +
+                    '</ul>' +
+                    '<h3>Cookie policy (LSSI-CE)</h3>' +
+                    '<ul>' +
+                      '<li>Consent banner that <strong>does not load analytics or marketing cookies until accepted</strong>.</li>' +
+                      '<li>Real options to accept, reject, or configure.</li>' +
+                      '<li>Dedicated cookies page with a detailed table.</li>' +
+                    '</ul>' +
+                    '<h3>Contact form</h3>' +
+                    '<p>The form must include a <strong>separate, unticked</strong> consent checkbox with wording like:</p>' +
+                    '<div class="callout">"I have read and accept the <a href="#">Privacy Policy</a>. I consent to my data being processed to respond to my enquiry."</div>' +
+                    '<p>Without that checkbox, the submission isn\'t legally compliant. And yes, Google notices.</p>'
+          },
+          {
+            'num': '06',
+            'h2': 'Confidentiality and the contact form',
+            'html': '<p>One thing specific to lawyers that most website templates ignore: professional confidentiality starts before the first meeting. And the contact form can become a liability if you design it like any other.</p>' +
+                    '<h3>What not to ask in a public form</h3>' +
+                    '<ul>' +
+                      '<li>Case details. Ever. "Briefly tell us your situation" is an invitation for a user to dump sensitive information into a text box that isn\'t end-to-end encrypted.</li>' +
+                      '<li>ID numbers, case file numbers, names of third parties.</li>' +
+                      '<li>Document attachments. Have them sent via secure channel after the first call.</li>' +
+                    '</ul>' +
+                    '<h3>What to ask</h3>' +
+                    '<ul>' +
+                      '<li>First and last name.</li>' +
+                      '<li>Email and phone.</li>' +
+                      '<li>Area of enquiry (dropdown with your areas: family, employment, etc.).</li>' +
+                      '<li>Availability for a 15-minute call.</li>' +
+                    '</ul>' +
+                    '<p>The form\'s job isn\'t to resolve the enquiry. It\'s to get the first contact. That initial call is where detail can be discussed, with the client aware they\'re talking to a lawyer under confidentiality.</p>' +
+                    '<div class="callout">Suggested wording for the contact page: "For confidentiality reasons, please do not include case details in this form. We\'ll call you within 24 hours and speak in person or by phone."</div>'
+          },
+          {
+            'num': '07',
+            'h2': 'Common mistakes',
+            'html': '<p>Patterns we see repeated on small-firm websites that quietly cost clients:</p>' +
+                    '<ul>' +
+                      '<li><strong>"All areas of law"</strong> on the homepage. Equivalent to no specialisation, and clients read it as "doesn\'t stand out in mine".</li>' +
+                      '<li><strong>Twelve or fifteen areas listed</strong> without a page each. Better: five areas with five in-depth pages.</li>' +
+                      '<li><strong>Only the keyword "lawyer"</strong>. The generic search is the most expensive and competitive. Local and area searches are what convert.</li>' +
+                      '<li><strong>No bar number in the footer</strong>. You lose trust and technically fail to meet professional information obligations.</li>' +
+                      '<li><strong>Stock photos of scales, gavels and old books</strong>. Makes you indistinguishable from 200 other firms with the same template.</li>' +
+                      '<li><strong>National template with no mention of Las Palmas</strong>. If your site could belong to a firm in Bilbao, Google won\'t rank it for Gran Canaria searches.</li>' +
+                      '<li><strong>Fees as a downloadable PDF</strong>. Google doesn\'t read PDFs like HTML. And clients don\'t want to download anything, they want to see.</li>' +
+                      '<li><strong>No phone visible in the header</strong>. Half of prospects prefer to call rather than fill in a form. Put it top-right.</li>' +
+                    '</ul>'
+          },
+          {
+            'num': '08',
+            'h2': 'First-week action plan',
+            'html': '<p>If you had a slow week between cases to improve your firm\'s lead capture, this is the order of impact. Each one is actionable today.</p>' +
+                    '<ol>' +
+                      '<li><strong>Day 1 — Google Business Profile</strong>. Claim it if it isn\'t yours, set the category, upload real photos, add bar registration to the description, set real hours.</li>' +
+                      '<li><strong>Day 2 — Trust-signals audit</strong>. Verify the bar number is in the footer, that there\'s a real photo, that the areas are concrete. 30-minute changes each.</li>' +
+                      '<li><strong>Day 3 — A dedicated page for your main area</strong>. If your biggest volume is inheritance, write the page "Inheritance lawyer in Las Palmas" — 600 specific words, not a template.</li>' +
+                      '<li><strong>Day 4 — Refresh legal notice and privacy policy</strong>. If your site doesn\'t have them (or they\'re five years old), generate new versions with your real details.</li>' +
+                      '<li><strong>Day 5 — Schema.org LegalService</strong>. Add LegalService structured data to your site. Invisible to users but Google reads it and improves how you appear.</li>' +
+                      '<li><strong>Day 6 — Reviews</strong>. Ask 3–5 recent clients for a Google review. Don\'t wait for them to come on their own — silence is the natural pattern.</li>' +
+                      '<li><strong>Day 7 — Measure</strong>. In Google Search Console, look at the searches already bringing visits. Start by improving the ones already at positions 4–10 — they\'re the cheapest to push up.</li>' +
+                    '</ol>' +
+                    '<p>The point: this plan works even without a website. The gap between a Las Palmas firm that shows up on Google and one that doesn\'t is closer to these seven actions than to a full redesign. If you later want help building it, tell us below — but you can start every step yourself this afternoon.</p>'
+          }
+        ],
+
+        'case-tag':   'Illustrative example',
+        'case-h2':    'Family-law practice in Triana',
+        'case-lead':  'A small practice in the Triana district, specialising in divorce and custody. Before: generic template site, no Google Business Profile claimed, no dedicated family-law page. After applying the steps in this guide over three months.',
+        'm1-num':     '+340%',
+        'm1-lbl':     'Local-search impressions in 90 days',
+        'm2-num':     '8 → 23',
+        'm2-lbl':     'Enquiries / month from Google',
+        'm3-num':     'Top 3',
+        'm3-lbl':     'Maps ranking for "abogado familia las palmas"',
+        'case-foot':  'Example built from patterns observed in small practices in Las Palmas. Actual results vary with specialisation, local competition, and published content.',
+
+        'ct-ey':       'Let\'s talk',
+        'ct-h2':       'Want us to do this with you?',
+        'ct-lead':     'If after reading this you know what you want to improve, we can help. A 20-minute call. We tell you if we can do it, how much it costs, and how long it takes. No commitment, no lock-in.',
+        'ph_name':     'Name',
+        'ph_email':    'Email address',
+        'ph_phone':    'Phone',
+        'ph_msg':      'I\'m a lawyer in Las Palmas and I want more enquiries from Google. Tell me how you can help.',
+        'btn':         'Send',
+        'form-privacy':'Your data is used only to reply to your enquiry. For confidentiality reasons, please don\'t include case details in this form.',
+        'success':     'Got it. We\'ll be in touch within 24 hours.',
+        'error':       'Something went wrong. Please try again or email us directly.',
+
+        'cl-label':    'Not for you? Have a look at',
+        'cl1-name':    'For tax advisors',
+        'cl1-desc':    'Free guide: IGIC, REF Canarias, self-employed registration, and local lead capture.',
+        'cl2-name':    'For architects',
+        'cl2-desc':    'Free guide: portfolio that sells, habitability/CEE certificates, developer outreach.',
+
+        'footer':      'Digital specialists for independent professionals in Las Palmas de Gran Canaria.'
+      }
+    };
+
+    var simpleIds = [
+      ['nav-services',    'nav-services'],
+      ['nav-profesiones', 'nav-profesiones'],
+      ['nav-portfolio',   'nav-portfolio'],
+      ['nav-contact',     'nav-contact'],
+      ['t-hero-ey',       'hero-ey'],
+      ['t-hero-h1',       'hero-h1'],
+      ['t-hero-agitate',  'hero-agitate'],
+      ['t-hero-solve',    'hero-solve'],
+      ['t-hero-cta',      'hero-cta'],
+      ['t-hero-secondary','hero-secondary'],
+      ['t-toc-label',     'toc-label'],
+      ['t-case-tag',      'case-tag'],
+      ['t-case-h2',       'case-h2'],
+      ['t-case-lead',     'case-lead'],
+      ['t-m1-num',        'm1-num'],
+      ['t-m1-lbl',        'm1-lbl'],
+      ['t-m2-num',        'm2-num'],
+      ['t-m2-lbl',        'm2-lbl'],
+      ['t-m3-num',        'm3-num'],
+      ['t-m3-lbl',        'm3-lbl'],
+      ['t-case-foot',     'case-foot'],
+      ['t-ct-ey',         'ct-ey'],
+      ['t-ct-h2',         'ct-h2'],
+      ['t-ct-lead',       'ct-lead'],
+      ['t-btn',           'btn'],
+      ['t-form-privacy',  'form-privacy'],
+      ['t-cl-label',      'cl-label'],
+      ['t-cl1-name',      'cl1-name'],
+      ['t-cl1-desc',      'cl1-desc'],
+      ['t-cl2-name',      'cl2-name'],
+      ['t-cl2-desc',      'cl2-desc'],
+      ['t-footer',        'footer']
+    ];
+
+    function buildToc(items) {
+      var el = document.getElementById('toc-list');
+      el.innerHTML = '';
+      items.forEach(function(text, i) {
+        var li = document.createElement('li');
+        var num = String(i + 1).padStart(2, '0');
+        li.innerHTML = '<a href="#g-' + num + '"><span class="toc-num">' + num + '</span>' + text + '</a>';
+        el.appendChild(li);
+      });
+    }
+
+    function buildGuide(blocks) {
+      var el = document.getElementById('guide-blocks');
+      el.innerHTML = '';
+      blocks.forEach(function(b) {
+        var div = document.createElement('div');
+        div.className = 'guide-block';
+        div.id = 'g-' + b.num;
+        div.innerHTML =
+          '<span class="guide-num">' + b.num + '</span>' +
+          '<h2 class="guide-h2">' + b.h2 + '</h2>' +
+          '<div class="guide-body">' + b.html + '</div>';
+        el.appendChild(div);
+      });
+    }
+
+    function setLang(l) {
+      lang = l;
+      var c = copy[l];
+      simpleIds.forEach(function(pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.textContent = c[pair[1]];
+      });
+      buildToc(c['toc']);
+      buildGuide(c['guide']);
+      document.getElementById('f-name').placeholder    = c.ph_name;
+      document.getElementById('f-email').placeholder   = c.ph_email;
+      document.getElementById('f-phone').placeholder   = c.ph_phone;
+      document.getElementById('f-message').placeholder = c.ph_msg;
+      document.getElementById('flag').textContent       = l === 'es' ? '🇬🇧' : '🇪🇸';
+      document.getElementById('lang-label').textContent = l === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = l;
+    }
+
+    function toggleLang() { setLang(lang === 'es' ? 'en' : 'es'); }
+
+    function handleSubmit() {
+      var email = document.getElementById('f-email').value.trim();
+      if (!email) { document.getElementById('f-email').focus(); return; }
+
+      var btn = document.getElementById('t-btn');
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      var name  = document.getElementById('f-name').value.trim();
+      var phone = document.getElementById('f-phone').value.trim();
+      var msg   = document.getElementById('f-message').value.trim();
+
+      var parts = [];
+      if (name)  parts.push('Nombre: '   + name);
+      if (phone) parts.push('Teléfono: ' + phone);
+      if (msg)   parts.push('Mensaje: '  + msg);
+      parts.push('Funnel: ' + FUNNEL);
+
+      var data = new FormData();
+      data.append('email',    email);
+      data.append('message',  parts.join('\n'));
+      data.append('_subject', 'Nuevo lead — funnel ' + FUNNEL);
+      data.append('funnel',   FUNNEL);
+
+      fetch('https://formspree.io/f/mkoydwkl', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, j: j }; }); })
+      .then(function(res) {
+        if (res.ok) {
+          document.getElementById('form-wrap').classList.add('hidden');
+          var el = document.getElementById('success-msg');
+          el.textContent = copy[lang].success;
+          el.classList.remove('hidden');
+        } else { throw new Error(); }
+      })
+      .catch(function() {
+        var err = document.getElementById('form-error');
+        err.textContent = copy[lang].error;
+        err.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = copy[lang].btn;
+      });
+    }
+
+    setLang('es');
+  </script>
+</body>
+</html>

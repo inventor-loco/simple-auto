@@ -57,7 +57,7 @@
       text-decoration: none;
       transition: color 0.15s;
     }
-    .nav-center a:hover { color: var(--black); }
+    .nav-center a:hover, .nav-center a.active { color: var(--black); }
 
     .lang-toggle {
       display: flex;
@@ -223,6 +223,22 @@
     .svc-badge.on   { background: var(--black); color: #fff; }
     .svc-badge.soon { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
 
+    /* ── Profesiones cards (clickable) ── */
+    a.svc-card {
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+    }
+    a.svc-card:hover { background: var(--bg); }
+    .prof-arrow {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      margin-top: auto;
+      transition: color 0.15s;
+    }
+    a.svc-card:hover .prof-arrow { color: var(--red); }
+
     /* ── Portfolio ── */
     .portfolio-grid {
       display: grid;
@@ -364,9 +380,10 @@
   <nav>
     <a class="nav-logo" href="#"><span>simple</span><span class="auto">auto</span></a>
     <div class="nav-center">
-      <a href="services.html" id="nav-services"></a>
-      <a href="#portfolio"    id="nav-portfolio"></a>
-      <a href="#contact"      id="nav-contact"></a>
+      <a href="services.html"   id="nav-services"></a>
+      <a href="#profesiones"    id="nav-profesiones"></a>
+      <a href="#portfolio"      id="nav-portfolio"></a>
+      <a href="#contact"        id="nav-contact"></a>
     </div>
     <div class="lang-toggle" onclick="toggleLang()">
       <span id="flag">🇬🇧</span>
@@ -413,6 +430,35 @@
       <p style="margin-top:32px;">
         <a href="services.html" id="t-svc-more" style="font-size:14px;font-weight:600;color:var(--black);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--black)'"></a>
       </p>
+    </div>
+  </section>
+
+  <!-- Profesiones -->
+  <section class="section" id="profesiones">
+    <div class="wrap">
+      <p class="section-eyebrow" id="t-prof-ey"></p>
+      <h2 class="section-h2"    id="t-prof-h2"></h2>
+      <p class="section-lead"   id="t-prof-lead"></p>
+      <div class="services-grid">
+        <a href="abogados.html" class="svc-card">
+          <div class="svc-icon">⚖️</div>
+          <div class="svc-name" id="t-prof-ab-name"></div>
+          <p  class="svc-desc"  id="t-prof-ab-desc"></p>
+          <span class="prof-arrow" id="t-prof-ab-cta"></span>
+        </a>
+        <a href="asesores-fiscales.html" class="svc-card">
+          <div class="svc-icon">🧾</div>
+          <div class="svc-name" id="t-prof-as-name"></div>
+          <p  class="svc-desc"  id="t-prof-as-desc"></p>
+          <span class="prof-arrow" id="t-prof-as-cta"></span>
+        </a>
+        <a href="arquitectos.html" class="svc-card">
+          <div class="svc-icon">📐</div>
+          <div class="svc-name" id="t-prof-ar-name"></div>
+          <p  class="svc-desc"  id="t-prof-ar-desc"></p>
+          <span class="prof-arrow" id="t-prof-ar-cta"></span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -514,9 +560,10 @@
 
     var copy = {
       es: {
-        'nav-services':  'Servicios',
-        'nav-portfolio': 'Proyectos',
-        'nav-contact':   'Contacto',
+        'nav-services':    'Servicios',
+        'nav-profesiones': 'Profesiones',
+        'nav-portfolio':   'Proyectos',
+        'nav-contact':     'Contacto',
 
         agitate: 'Cada cliente que no te encuentra contrata a otro profesional de la isla.',
         solve:   'Webs, SEO local y herramientas para abogados, asesores, arquitectos y otros profesionales independientes en Las Palmas de Gran Canaria. Especialistas en tu sector — no agencia generalista.',
@@ -535,6 +582,19 @@
         's3-name':  'Automatización',
         's3-desc':  'Citas online, intake de clientes, recordatorios y enlaces con tu gestión. La operativa invisible que evita perder llamadas.',
         's3-badge': 'Próximamente',
+
+        'prof-ey':      'Para tu profesión',
+        'prof-h2':      'Hecho para tu sector, no en general.',
+        'prof-lead':    'Cada profesión se busca diferente en Las Palmas. En cada página encontrarás guías prácticas gratuitas y un plan concreto para tu caso.',
+        'prof-ab-name': 'Abogados y despachos',
+        'prof-ab-desc': 'Captación local, RGPD, número de colegiado, áreas de práctica que posicionan en Google. Guía gratuita incluida.',
+        'prof-ab-cta':  'Ver guía para abogados →',
+        'prof-as-name': 'Asesores fiscales y gestorías',
+        'prof-as-desc': 'IGIC, REF Canarias, alta de autónomos, calendario fiscal — el contenido que un cliente canario busca de verdad.',
+        'prof-as-cta':  'Ver guía para asesores →',
+        'prof-ar-name': 'Arquitectos y estudios',
+        'prof-ar-desc': 'Portfolio que vende, cédula de habitabilidad, CEE, captación de promotores. Plantilla de página de proyecto incluida.',
+        'prof-ar-cta':  'Ver guía para arquitectos →',
 
         'port-ey':   'Proyectos',
         'port-h2':   'Trabajo reciente',
@@ -556,9 +616,10 @@
         footer: 'Especialistas digitales para profesionales independientes en Las Palmas de Gran Canaria.'
       },
       en: {
-        'nav-services':  'Services',
-        'nav-portfolio': 'Work',
-        'nav-contact':   'Contact',
+        'nav-services':    'Services',
+        'nav-profesiones': 'For your profession',
+        'nav-portfolio':   'Work',
+        'nav-contact':     'Contact',
 
         agitate: 'Every prospect who can\'t find you hires a different professional on the island.',
         solve:   'Websites, local SEO and tools for lawyers, advisors, architects and other independent professionals in Las Palmas de Gran Canaria. Specialists in your field — not a generalist agency.',
@@ -577,6 +638,19 @@
         's3-name':  'Automation',
         's3-desc':  'Online bookings, client intake, reminders, and links to your practice management. The invisible work that stops calls slipping through.',
         's3-badge': 'Coming soon',
+
+        'prof-ey':      'For your profession',
+        'prof-h2':      'Built for your field, not for everyone.',
+        'prof-lead':    'Every profession is searched differently in Las Palmas. On each page you\'ll find a free practical guide and a concrete plan for your case.',
+        'prof-ab-name': 'Lawyers and practices',
+        'prof-ab-desc': 'Local client capture, GDPR, bar registry number, practice areas that rank on Google. Free guide included.',
+        'prof-ab-cta':  'Open the lawyers guide →',
+        'prof-as-name': 'Tax advisors and gestorías',
+        'prof-as-desc': 'IGIC, REF Canarias, self-employed registration, tax calendar — the content a Canary client actually searches for.',
+        'prof-as-cta':  'Open the advisors guide →',
+        'prof-ar-name': 'Architects and studios',
+        'prof-ar-desc': 'Portfolio that sells, habitability certificate, energy certificate, developer outreach. Project-page template included.',
+        'prof-ar-cta':  'Open the architects guide →',
 
         'port-ey':   'Work',
         'port-h2':   'Recent projects',
@@ -600,9 +674,10 @@
     };
 
     var idMap = [
-      ['nav-services',  'nav-services'],
-      ['nav-portfolio', 'nav-portfolio'],
-      ['nav-contact',   'nav-contact'],
+      ['nav-services',    'nav-services'],
+      ['nav-profesiones', 'nav-profesiones'],
+      ['nav-portfolio',   'nav-portfolio'],
+      ['nav-contact',     'nav-contact'],
       ['t-agitate',     'agitate'],
       ['t-solve',       'solve'],
       ['t-cta',         'cta'],
@@ -619,6 +694,18 @@
       ['t-s3-name',     's3-name'],
       ['t-s3-desc',     's3-desc'],
       ['t-s3-badge',    's3-badge'],
+      ['t-prof-ey',     'prof-ey'],
+      ['t-prof-h2',     'prof-h2'],
+      ['t-prof-lead',   'prof-lead'],
+      ['t-prof-ab-name','prof-ab-name'],
+      ['t-prof-ab-desc','prof-ab-desc'],
+      ['t-prof-ab-cta', 'prof-ab-cta'],
+      ['t-prof-as-name','prof-as-name'],
+      ['t-prof-as-desc','prof-as-desc'],
+      ['t-prof-as-cta', 'prof-as-cta'],
+      ['t-prof-ar-name','prof-ar-name'],
+      ['t-prof-ar-desc','prof-ar-desc'],
+      ['t-prof-ar-cta', 'prof-ar-cta'],
       ['t-port-ey',     'port-ey'],
       ['t-port-h2',     'port-h2'],
       ['t-port-lead',   'port-lead'],
