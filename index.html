@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Auto — Webs y SEO para profesionales independientes en Las Palmas de Gran Canaria</title>
+  <title>Simple Auto — Soluciones a medida para profesionales independientes y pymes en Las Palmas de Gran Canaria</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -36,7 +36,6 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
       font-size: 17px;
       font-weight: 700;
@@ -45,11 +44,7 @@
       color: var(--black);
     }
     .nav-logo .auto { color: var(--red); }
-
-    .nav-center {
-      display: flex;
-      gap: 32px;
-    }
+    .nav-center { display: flex; gap: 32px; }
     .nav-center a {
       font-size: 14px;
       font-weight: 500;
@@ -58,7 +53,6 @@
       transition: color 0.15s;
     }
     .nav-center a:hover, .nav-center a.active { color: var(--black); }
-
     .lang-toggle {
       display: flex;
       align-items: center;
@@ -72,7 +66,6 @@
     }
     .lang-toggle:hover { color: var(--black); }
 
-    /* ── Shared ── */
     .wrap {
       max-width: 1080px;
       margin: 0 auto;
@@ -91,8 +84,6 @@
       margin: 0 auto;
       padding: 100px 40px 80px;
     }
-
-    /* P — Problem */
     .problem {
       font-size: clamp(36px, 6vw, 64px);
       font-weight: 700;
@@ -104,8 +95,6 @@
       transition: opacity 0.35s ease;
       min-height: 1.1em;
     }
-
-    /* A — Agitate */
     .agitate {
       font-size: clamp(16px, 2vw, 19px);
       font-weight: 500;
@@ -113,8 +102,6 @@
       margin-bottom: 20px;
       max-width: 560px;
     }
-
-    /* S — Solve */
     .solve {
       font-size: clamp(15px, 1.8vw, 17px);
       color: var(--muted);
@@ -122,7 +109,6 @@
       max-width: 520px;
       margin-bottom: 40px;
     }
-
     .btn-primary {
       display: inline-block;
       background: var(--black);
@@ -136,18 +122,11 @@
     }
     .btn-primary:hover { background: var(--red); }
 
-    .scope-note {
-      margin-top: 16px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* ── Sections ── */
+    /* ── Contact ── */
     .section {
       border-top: 1px solid var(--border);
       padding: 96px 0;
     }
-
     .section-eyebrow {
       font-size: 11px;
       font-weight: 700;
@@ -156,7 +135,6 @@
       color: var(--red);
       margin-bottom: 12px;
     }
-
     .section-h2 {
       font-size: clamp(28px, 4vw, 40px);
       font-weight: 700;
@@ -164,136 +142,14 @@
       line-height: 1.15;
       margin-bottom: 14px;
     }
-
     .section-lead {
       font-size: 16px;
       color: var(--muted);
       line-height: 1.7;
       max-width: 500px;
-      margin-bottom: 64px;
+      margin-bottom: 0;
     }
 
-    /* ── Services ── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    @media (max-width: 720px) {
-      .services-grid { grid-template-columns: 1fr; }
-    }
-
-    .svc-card {
-      background: var(--white);
-      padding: 44px 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .svc-icon { font-size: 28px; line-height: 1; }
-
-    .svc-name {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .svc-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.75;
-      flex: 1;
-    }
-
-    .svc-badge {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 9px;
-      border-radius: 4px;
-      align-self: flex-start;
-    }
-    .svc-badge.on   { background: var(--black); color: #fff; }
-    .svc-badge.soon { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
-
-    /* ── Profesiones cards (clickable) ── */
-    a.svc-card {
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.2s;
-    }
-    a.svc-card:hover { background: var(--bg); }
-    .prof-arrow {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--black);
-      margin-top: auto;
-      transition: color 0.15s;
-    }
-    a.svc-card:hover .prof-arrow { color: var(--red); }
-
-    /* ── Portfolio ── */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .proj-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .proj-card:hover { border-color: var(--black); transform: translateY(-3px); }
-
-    .proj-thumb {
-      height: 190px;
-      display: flex;
-      align-items: flex-end;
-      padding: 20px 24px;
-    }
-    .proj-thumb-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .proj-body { padding: 22px 24px 26px; }
-
-    .proj-name {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 7px;
-    }
-
-    .proj-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-
-    .proj-link {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--black);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .proj-link:hover { color: var(--red); }
-
-    /* ── Contact ── */
     .contact-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -304,12 +160,7 @@
       .contact-layout { grid-template-columns: 1fr; gap: 40px; }
     }
 
-    .form-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .form-stack { display: flex; flex-direction: column; gap: 10px; }
     .form-stack input,
     .form-stack textarea {
       width: 100%;
@@ -350,10 +201,7 @@
     .success-msg { font-size: 15px; font-weight: 500; color: var(--black); }
 
     /* ── Footer ── */
-    .footer-wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-    }
+    .footer-wrap { max-width: 1080px; margin: 0 auto; }
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 40px;
@@ -376,14 +224,13 @@
 </head>
 <body>
 
-  <!-- Nav -->
   <nav>
     <a class="nav-logo" href="#"><span>simple</span><span class="auto">auto</span></a>
     <div class="nav-center">
-      <a href="services.html"   id="nav-services"></a>
-      <a href="#profesiones"    id="nav-profesiones"></a>
-      <a href="#portfolio"      id="nav-portfolio"></a>
-      <a href="#contact"        id="nav-contact"></a>
+      <a href="services.html"  id="nav-services"></a>
+      <a href="sectores.html"  id="nav-profesiones"></a>
+      <a href="proyectos.html" id="nav-portfolio"></a>
+      <a href="#contact"       id="nav-contact"></a>
     </div>
     <div class="lang-toggle" onclick="toggleLang()">
       <span id="flag">🇬🇧</span>
@@ -391,7 +238,6 @@
     </div>
   </nav>
 
-  <!-- Hero — PAS -->
   <div class="hero">
     <div class="hero-inner">
       <p class="problem" id="problem-text"></p>
@@ -401,120 +247,13 @@
     </div>
   </div>
 
-  <!-- Services -->
-  <section class="section" id="services">
-    <div class="wrap">
-      <p class="section-eyebrow" id="t-svc-ey"></p>
-      <h2 class="section-h2"    id="t-svc-h2"></h2>
-      <p class="section-lead"   id="t-svc-lead"></p>
-      <div class="services-grid">
-        <div class="svc-card">
-          <div class="svc-icon">🌐</div>
-          <div class="svc-name" id="t-s1-name"></div>
-          <p  class="svc-desc"  id="t-s1-desc"></p>
-          <span class="svc-badge on"   id="t-s1-badge"></span>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">📈</div>
-          <div class="svc-name" id="t-s2-name"></div>
-          <p  class="svc-desc"  id="t-s2-desc"></p>
-          <span class="svc-badge on"   id="t-s2-badge"></span>
-        </div>
-        <div class="svc-card">
-          <div class="svc-icon">⚙️</div>
-          <div class="svc-name" id="t-s3-name"></div>
-          <p  class="svc-desc"  id="t-s3-desc"></p>
-          <span class="svc-badge soon" id="t-s3-badge"></span>
-        </div>
-      </div>
-      <p style="margin-top:32px;">
-        <a href="services.html" id="t-svc-more" style="font-size:14px;font-weight:600;color:var(--black);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--black)'"></a>
-      </p>
-    </div>
-  </section>
-
-  <!-- Profesiones -->
-  <section class="section" id="profesiones">
-    <div class="wrap">
-      <p class="section-eyebrow" id="t-prof-ey"></p>
-      <h2 class="section-h2"    id="t-prof-h2"></h2>
-      <p class="section-lead"   id="t-prof-lead"></p>
-      <div class="services-grid">
-        <a href="abogados.html" class="svc-card">
-          <div class="svc-icon">⚖️</div>
-          <div class="svc-name" id="t-prof-ab-name"></div>
-          <p  class="svc-desc"  id="t-prof-ab-desc"></p>
-          <span class="prof-arrow" id="t-prof-ab-cta"></span>
-        </a>
-        <a href="asesores-fiscales.html" class="svc-card">
-          <div class="svc-icon">🧾</div>
-          <div class="svc-name" id="t-prof-as-name"></div>
-          <p  class="svc-desc"  id="t-prof-as-desc"></p>
-          <span class="prof-arrow" id="t-prof-as-cta"></span>
-        </a>
-        <a href="arquitectos.html" class="svc-card">
-          <div class="svc-icon">📐</div>
-          <div class="svc-name" id="t-prof-ar-name"></div>
-          <p  class="svc-desc"  id="t-prof-ar-desc"></p>
-          <span class="prof-arrow" id="t-prof-ar-cta"></span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio -->
-  <section class="section" id="portfolio">
-    <div class="wrap">
-      <p class="section-eyebrow" id="t-port-ey"></p>
-      <h2 class="section-h2"    id="t-port-h2"></h2>
-      <p class="section-lead"   id="t-port-lead"></p>
-      <div class="portfolio-grid">
-
-        <div class="proj-card">
-          <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
-            <span class="proj-thumb-label">Web</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">Proyecto 01</div>
-            <p class="proj-desc" id="t-p1-desc"></p>
-            <a href="#" class="proj-link" id="t-p1-link"></a>
-          </div>
-        </div>
-
-        <div class="proj-card">
-          <div class="proj-thumb" style="background:linear-gradient(135deg,#1b4332,#2d6a4f);">
-            <span class="proj-thumb-label">Web</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">Proyecto 02</div>
-            <p class="proj-desc" id="t-p2-desc"></p>
-            <a href="#" class="proj-link" id="t-p2-link"></a>
-          </div>
-        </div>
-
-        <div class="proj-card">
-          <div class="proj-thumb" style="background:linear-gradient(135deg,#3d0c02,#7a1010);">
-            <span class="proj-thumb-label">Web</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-name">Proyecto 03</div>
-            <p class="proj-desc" id="t-p3-desc"></p>
-            <a href="#" class="proj-link" id="t-p3-link"></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
   <section class="section" id="contact">
     <div class="wrap">
       <div class="contact-layout">
         <div>
           <p class="section-eyebrow" id="t-ct-ey"></p>
           <h2 class="section-h2"    id="t-ct-h2"></h2>
-          <p class="section-lead"   id="t-ct-lead" style="margin-bottom:0;"></p>
+          <p class="section-lead"   id="t-ct-lead"></p>
         </div>
         <div>
           <div id="form-wrap" class="form-stack">
@@ -543,16 +282,16 @@
 
     var problems = {
       es: [
-        'Tus clientes en Las Palmas\nno te encuentran en Google.',
-        'Tu despacho compite con\nfichas mejor posicionadas.',
-        'Tu trayectoria profesional es sólida.\nTu web no la refleja.',
-        'Cada llamada perdida es\nun cliente del despacho de al lado.'
+        'Las conversaciones con clientes\nse pierden en WhatsApp.',
+        'Copias leads de Idealista\nal Excel a mano. Cada día.',
+        'Tardas cuatro horas en responder.\nEl cliente ya contrató a otro.',
+        'Tu negocio funciona.\nLa operativa interna, no.'
       ],
       en: [
-        'Your clients in Las Palmas\ncan\'t find you on Google.',
-        'Your practice competes with\nbetter-ranked listings.',
-        'Your professional record is solid.\nYour website doesn\'t show it.',
-        'Every missed call is\na client for the practice next door.'
+        'Client conversations\ndisappear into WhatsApp.',
+        'You copy Idealista leads\ninto Excel by hand. Every day.',
+        'You reply four hours later.\nThe client already hired someone else.',
+        'Your business runs.\nThe back office doesn\'t.'
       ]
     };
     var probIdx = 0;
@@ -561,115 +300,49 @@
     var copy = {
       es: {
         'nav-services':    'Servicios',
-        'nav-profesiones': 'Profesiones',
+        'nav-profesiones': 'Sectores',
         'nav-portfolio':   'Proyectos',
         'nav-contact':     'Contacto',
 
-        agitate: 'Cada cliente que no te encuentra contrata a otro profesional de la isla.',
-        solve:   'Webs, SEO local y herramientas para abogados, asesores, arquitectos y otros profesionales independientes en Las Palmas de Gran Canaria. Especialistas en tu sector — no agencia generalista.',
+        agitate: 'Cada atasco invisible te cuesta horas y clientes.',
+        solve:   'Construimos a medida los sistemas que tu negocio necesita por dentro. No somos una agencia de marketing.',
         cta:     'Hablemos',
 
-        'svc-ey':   'Servicios',
-        'svc-h2':   'Lo que hacemos por tu despacho',
-        'svc-lead': 'Tres servicios diseñados para profesionales independientes en Las Palmas. Sin paquetes genéricos.',
-        'svc-more': 'Ver qué incluye cada servicio →',
-        's1-name':  'Diseño Web',
-        's1-desc':  'Una web seria, pensada para profesionales: clara, profesional y construida para que un cliente confíe en ti en treinta segundos. Redacción especializada incluida.',
-        's1-badge': 'Disponible',
-        's2-name':  'SEO Local en Las Palmas',
-        's2-desc':  'Aparecer cuando alguien busca «abogado», «asesor fiscal» o «arquitecto» en Las Palmas. Búsquedas reales de la isla, no plantillas nacionales.',
-        's2-badge': 'Disponible',
-        's3-name':  'Automatización',
-        's3-desc':  'Citas online, intake de clientes, recordatorios y enlaces con tu gestión. La operativa invisible que evita perder llamadas.',
-        's3-badge': 'Próximamente',
-
-        'prof-ey':      'Para tu profesión',
-        'prof-h2':      'Hecho para tu sector, no en general.',
-        'prof-lead':    'Cada profesión se busca diferente en Las Palmas. En cada página encontrarás guías prácticas gratuitas y un plan concreto para tu caso.',
-        'prof-ab-name': 'Abogados y despachos',
-        'prof-ab-desc': 'Captación local, RGPD, número de colegiado, áreas de práctica que posicionan en Google. Guía gratuita incluida.',
-        'prof-ab-cta':  'Ver guía para abogados →',
-        'prof-as-name': 'Asesores fiscales y gestorías',
-        'prof-as-desc': 'IGIC, REF Canarias, alta de autónomos, calendario fiscal — el contenido que un cliente canario busca de verdad.',
-        'prof-as-cta':  'Ver guía para asesores →',
-        'prof-ar-name': 'Arquitectos y estudios',
-        'prof-ar-desc': 'Portfolio que vende, cédula de habitabilidad, CEE, captación de promotores. Plantilla de página de proyecto incluida.',
-        'prof-ar-cta':  'Ver guía para arquitectos →',
-
-        'port-ey':   'Proyectos',
-        'port-h2':   'Trabajo reciente',
-        'port-lead': 'Webs que hemos construido para profesionales independientes en Las Palmas.',
-        'p-desc':    'Web para profesional independiente en Las Palmas. Posicionamiento local, captación de cliente y zona segura de documentos.',
-        'p-link':    'Ver sitio →',
-
         'ct-ey':   'Contacto',
-        'ct-h2':   'Cuéntanos sobre tu despacho.',
-        'ct-lead': 'Una llamada de 20 minutos. Te decimos si podemos ayudarte y cómo. Sin compromiso.',
+        'ct-h2':   'Cuéntanos qué se atasca.',
+        'ct-lead': 'Una llamada de 20 minutos. Identificamos dónde se atasca tu negocio y te decimos si podemos arreglarlo. Sin compromiso.',
         ph_name:   'Nombre',
         ph_email:  'Correo electrónico',
         ph_phone:  'Teléfono',
-        ph_msg:    'Cuéntanos brevemente sobre tu actividad profesional (opcional)',
+        ph_msg:    'Qué te roba más tiempo cada semana (opcional)',
         btn:       'Enviar',
         success:   'Listo. Te contactamos pronto.',
         error:     'Algo salió mal. Intenta de nuevo.',
 
-        footer: 'Especialistas digitales para profesionales independientes en Las Palmas de Gran Canaria.'
+        footer: 'Las Palmas de Gran Canaria.'
       },
       en: {
         'nav-services':    'Services',
-        'nav-profesiones': 'For your profession',
+        'nav-profesiones': 'Sectors',
         'nav-portfolio':   'Work',
         'nav-contact':     'Contact',
 
-        agitate: 'Every prospect who can\'t find you hires a different professional on the island.',
-        solve:   'Websites, local SEO and tools for lawyers, advisors, architects and other independent professionals in Las Palmas de Gran Canaria. Specialists in your field — not a generalist agency.',
+        agitate: 'Every invisible bottleneck costs you hours and clients.',
+        solve:   'We custom-build the systems your business needs under the hood. We\'re not a marketing agency.',
         cta:     'Let\'s talk',
 
-        'svc-ey':   'Services',
-        'svc-h2':   'What we do for your practice',
-        'svc-lead': 'Three services built for independent professionals in Las Palmas. No generic packages.',
-        'svc-more': 'See what each service includes →',
-        's1-name':  'Web Design',
-        's1-desc':  'A serious website built for professionals: clear, credible, designed so a visitor trusts you within thirty seconds. Specialist copywriting included.',
-        's1-badge': 'Available',
-        's2-name':  'Local SEO in Las Palmas',
-        's2-desc':  'Show up when someone searches "lawyer", "tax advisor" or "architect" in Las Palmas. Real local search behaviour, not national templates.',
-        's2-badge': 'Available',
-        's3-name':  'Automation',
-        's3-desc':  'Online bookings, client intake, reminders, and links to your practice management. The invisible work that stops calls slipping through.',
-        's3-badge': 'Coming soon',
-
-        'prof-ey':      'For your profession',
-        'prof-h2':      'Built for your field, not for everyone.',
-        'prof-lead':    'Every profession is searched differently in Las Palmas. On each page you\'ll find a free practical guide and a concrete plan for your case.',
-        'prof-ab-name': 'Lawyers and practices',
-        'prof-ab-desc': 'Local client capture, GDPR, bar registry number, practice areas that rank on Google. Free guide included.',
-        'prof-ab-cta':  'Open the lawyers guide →',
-        'prof-as-name': 'Tax advisors and gestorías',
-        'prof-as-desc': 'IGIC, REF Canarias, self-employed registration, tax calendar — the content a Canary client actually searches for.',
-        'prof-as-cta':  'Open the advisors guide →',
-        'prof-ar-name': 'Architects and studios',
-        'prof-ar-desc': 'Portfolio that sells, habitability certificate, energy certificate, developer outreach. Project-page template included.',
-        'prof-ar-cta':  'Open the architects guide →',
-
-        'port-ey':   'Work',
-        'port-h2':   'Recent projects',
-        'port-lead': 'Websites built for independent professionals in Las Palmas.',
-        'p-desc':    'Site for an independent professional in Las Palmas. Local positioning, lead capture, and a secure document area.',
-        'p-link':    'View site →',
-
         'ct-ey':   'Contact',
-        'ct-h2':   'Tell us about your practice.',
-        'ct-lead': 'A 20-minute call. We\'ll tell you if we can help and how. No commitment.',
+        'ct-h2':   'Tell us what\'s stuck.',
+        'ct-lead': 'A 20-minute call. We find where your business gets stuck and tell you if we can fix it. No commitment.',
         ph_name:   'Name',
         ph_email:  'Email address',
         ph_phone:  'Phone',
-        ph_msg:    'Briefly tell us about your practice (optional)',
+        ph_msg:    'What eats most of your time each week (optional)',
         btn:       'Send',
         success:   'Got it. We\'ll be in touch soon.',
         error:     'Something went wrong. Please try again.',
 
-        footer: 'Digital specialists for independent professionals in Las Palmas de Gran Canaria.'
+        footer: 'Las Palmas de Gran Canaria.'
       }
     };
 
@@ -678,54 +351,19 @@
       ['nav-profesiones', 'nav-profesiones'],
       ['nav-portfolio',   'nav-portfolio'],
       ['nav-contact',     'nav-contact'],
-      ['t-agitate',     'agitate'],
-      ['t-solve',       'solve'],
-      ['t-cta',         'cta'],
-      ['t-svc-ey',      'svc-ey'],
-      ['t-svc-h2',      'svc-h2'],
-      ['t-svc-lead',    'svc-lead'],
-      ['t-svc-more',    'svc-more'],
-      ['t-s1-name',     's1-name'],
-      ['t-s1-desc',     's1-desc'],
-      ['t-s1-badge',    's1-badge'],
-      ['t-s2-name',     's2-name'],
-      ['t-s2-desc',     's2-desc'],
-      ['t-s2-badge',    's2-badge'],
-      ['t-s3-name',     's3-name'],
-      ['t-s3-desc',     's3-desc'],
-      ['t-s3-badge',    's3-badge'],
-      ['t-prof-ey',     'prof-ey'],
-      ['t-prof-h2',     'prof-h2'],
-      ['t-prof-lead',   'prof-lead'],
-      ['t-prof-ab-name','prof-ab-name'],
-      ['t-prof-ab-desc','prof-ab-desc'],
-      ['t-prof-ab-cta', 'prof-ab-cta'],
-      ['t-prof-as-name','prof-as-name'],
-      ['t-prof-as-desc','prof-as-desc'],
-      ['t-prof-as-cta', 'prof-as-cta'],
-      ['t-prof-ar-name','prof-ar-name'],
-      ['t-prof-ar-desc','prof-ar-desc'],
-      ['t-prof-ar-cta', 'prof-ar-cta'],
-      ['t-port-ey',     'port-ey'],
-      ['t-port-h2',     'port-h2'],
-      ['t-port-lead',   'port-lead'],
-      ['t-p1-desc',     'p-desc'],
-      ['t-p2-desc',     'p-desc'],
-      ['t-p3-desc',     'p-desc'],
-      ['t-p1-link',     'p-link'],
-      ['t-p2-link',     'p-link'],
-      ['t-p3-link',     'p-link'],
-      ['t-ct-ey',       'ct-ey'],
-      ['t-ct-h2',       'ct-h2'],
-      ['t-ct-lead',     'ct-lead'],
-      ['t-btn',         'btn'],
-      ['t-footer',      'footer']
+      ['t-agitate', 'agitate'],
+      ['t-solve',   'solve'],
+      ['t-cta',     'cta'],
+      ['t-ct-ey',   'ct-ey'],
+      ['t-ct-h2',   'ct-h2'],
+      ['t-ct-lead', 'ct-lead'],
+      ['t-btn',     'btn'],
+      ['t-footer',  'footer']
     ];
 
     function renderProblem() {
       if (!probEl) return;
-      var lines = problems[lang][probIdx].split('\n');
-      probEl.innerHTML = lines.join('<br>');
+      probEl.innerHTML = problems[lang][probIdx].split('\n').join('<br>');
     }
 
     function cycleProblem() {

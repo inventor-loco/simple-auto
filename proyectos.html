@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyectos — Simple Auto</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #111111;
+      --red:    #D0021B;
+      --bg:     #F7F7F7;
+      --white:  #FFFFFF;
+      --muted:  #888888;
+      --border: #DDDDDD;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+    }
+
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(247,247,247,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .nav-logo .auto { color: var(--red); }
+    .nav-center { display: flex; gap: 32px; }
+    .nav-center a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-center a:hover, .nav-center a.active { color: var(--black); }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      user-select: none;
+      transition: color 0.15s;
+    }
+    .lang-toggle:hover { color: var(--black); }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .page-hero { padding: 140px 0 60px; }
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .page-h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .page-lead {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    .acc-list { padding-bottom: 96px; }
+    .acc {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+    .acc[open] { border-color: var(--black); }
+    .acc.upcoming { background: transparent; }
+    .acc.upcoming summary { cursor: default; }
+    .acc.upcoming .acc-name { color: var(--muted); }
+    .acc summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .acc summary::-webkit-details-marker { display: none; }
+    .acc-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg,#1a1a2e,#16213e);
+    }
+    .acc.upcoming .acc-thumb {
+      background: var(--bg);
+      border: 1px dashed var(--border);
+    }
+    .acc-titles {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .acc-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .acc-tag {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .acc-chev {
+      font-size: 18px;
+      color: var(--muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .acc[open] .acc-chev { transform: rotate(45deg); color: var(--red); }
+    .acc.upcoming .acc-chev { display: none; }
+    .acc-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .acc-badge.live  { background: var(--black); color: #fff; }
+    .acc-badge.soon  { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+
+    .acc-body {
+      padding: 0 26px 24px 100px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.7;
+    }
+    .acc-body p { margin-bottom: 14px; }
+    .stat-row {
+      display: flex;
+      gap: 36px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--black);
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    @media (max-width: 540px) {
+      .acc-body { padding-left: 26px; }
+    }
+
+    .end-cta {
+      border-top: 1px solid var(--border);
+      padding: 64px 40px;
+      text-align: center;
+    }
+    .end-cta-h {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--black);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--red); }
+
+    .footer-wrap { max-width: 1080px; margin: 0 auto; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-center { display: none; }
+      .wrap, footer, .end-cta { padding-left: 20px; padding-right: 20px; }
+      footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html"><span>simple</span><span class="auto">auto</span></a>
+    <div class="nav-center">
+      <a href="services.html"  id="nav-services"></a>
+      <a href="sectores.html"  id="nav-profesiones"></a>
+      <a href="proyectos.html" class="active" id="nav-portfolio"></a>
+      <a href="index.html#contact" id="nav-contact"></a>
+    </div>
+    <div class="lang-toggle" onclick="toggleLang()">
+      <span id="flag">🇬🇧</span>
+      <span id="lang-label">EN</span>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <section class="page-hero">
+      <p class="page-eyebrow" id="t-ey"></p>
+      <h1 class="page-h1" id="t-h1"></h1>
+      <p class="page-lead" id="t-lead"></p>
+    </section>
+
+    <div class="acc-list">
+
+      <details class="acc" open>
+        <summary>
+          <span class="acc-thumb"></span>
+          <span class="acc-titles">
+            <span class="acc-name" id="t-p1-name">Janeisa Inmobiliaria</span>
+            <span class="acc-tag"  id="t-p1-tag"></span>
+          </span>
+          <span class="acc-badge live" id="t-p1-badge"></span>
+          <span class="acc-chev">＋</span>
+        </summary>
+        <div class="acc-body">
+          <p id="t-p1-body"></p>
+          <div class="stat-row">
+            <div>
+              <div class="stat-num">0</div>
+              <div class="stat-label" id="t-p1-stat1"></div>
+            </div>
+            <div>
+              <div class="stat-num">&lt;30s</div>
+              <div class="stat-label" id="t-p1-stat2"></div>
+            </div>
+            <div>
+              <div class="stat-num">3D</div>
+              <div class="stat-label" id="t-p1-stat3"></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="acc upcoming">
+        <summary>
+          <span class="acc-thumb"></span>
+          <span class="acc-titles">
+            <span class="acc-name" id="t-p2-name"></span>
+            <span class="acc-tag"  id="t-p2-tag"></span>
+          </span>
+          <span class="acc-badge soon" id="t-p2-badge"></span>
+        </summary>
+      </details>
+
+      <details class="acc upcoming">
+        <summary>
+          <span class="acc-thumb"></span>
+          <span class="acc-titles">
+            <span class="acc-name" id="t-p3-name"></span>
+            <span class="acc-tag"  id="t-p3-tag"></span>
+          </span>
+          <span class="acc-badge soon" id="t-p3-badge"></span>
+        </summary>
+      </details>
+
+    </div>
+  </div>
+
+  <section class="end-cta">
+    <h3 class="end-cta-h" id="t-cta-h"></h3>
+    <a href="index.html#contact" class="btn-primary" id="t-cta"></a>
+  </section>
+
+  <div class="footer-wrap">
+    <footer>
+      <span>© 2026 Simple Auto</span>
+      <span id="t-footer"></span>
+    </footer>
+  </div>
+
+  <script>
+    var lang = 'es';
+
+    var copy = {
+      es: {
+        'nav-services': 'Servicios',
+        'nav-profesiones': 'Sectores',
+        'nav-portfolio': 'Proyectos',
+        'nav-contact': 'Contacto',
+
+        ey: 'Proyectos',
+        h1: 'Trabajo en marcha.',
+        lead: 'Pilotos con profesionales independientes en Las Palmas. Cada cliente prueba una pieza distinta de la solución.',
+
+        'p1-tag':   'Inmobiliaria independiente en Las Palmas de Gran Canaria.',
+        'p1-body':  'La agente perdía clientes por responder tarde y se le acumulaban leads en WhatsApp sin entrar en su agenda. Montamos un sistema que captura cada contacto entrante en una sola lista, contesta al instante y prepara la visita con un recorrido 3D antes de pisar el inmueble.',
+        'p1-stat1': 'Clientes ghosteados',
+        'p1-stat2': 'Respuesta inicial',
+        'p1-stat3': 'Visitas con recorrido',
+        'p1-badge': 'Activo',
+
+        'p2-name': 'Próximo caso',
+        'p2-tag':  'Asesoría fiscal en Las Palmas — empezamos pronto.',
+        'p2-badge':'Próximamente',
+        'p3-name': 'Próximo caso',
+        'p3-tag':  'Estudio de arquitectura — en conversaciones.',
+        'p3-badge':'Próximamente',
+
+        'cta-h':   '¿Quieres ser el siguiente piloto?',
+        cta:       'Hablemos',
+        footer:    'Las Palmas de Gran Canaria.'
+      },
+      en: {
+        'nav-services': 'Services',
+        'nav-profesiones': 'Sectors',
+        'nav-portfolio': 'Work',
+        'nav-contact': 'Contact',
+
+        ey: 'Work',
+        h1: 'Work in progress.',
+        lead: 'Pilots with independent professionals in Las Palmas. Every client tests a different piece of the solution.',
+
+        'p1-tag':   'Independent real estate agency in Las Palmas de Gran Canaria.',
+        'p1-body':  'The agent was losing clients by replying late, and her WhatsApp inbox piled up with leads that never made it into her calendar. We built a system that captures every inbound contact in a single list, replies instantly, and prepares the viewing with a 3D walkthrough before anyone sets foot in the property.',
+        'p1-stat1': 'Ghosted clients',
+        'p1-stat2': 'Initial reply',
+        'p1-stat3': 'Viewings with walkthrough',
+        'p1-badge': 'Live',
+
+        'p2-name': 'Next case',
+        'p2-tag':  'Tax advisor in Las Palmas — starting soon.',
+        'p2-badge':'Coming soon',
+        'p3-name': 'Next case',
+        'p3-tag':  'Architecture studio — in conversation.',
+        'p3-badge':'Coming soon',
+
+        'cta-h':   'Want to be the next pilot?',
+        cta:       'Let\'s talk',
+        footer:    'Las Palmas de Gran Canaria.'
+      }
+    };
+
+    var idMap = [
+      ['nav-services','nav-services'],
+      ['nav-profesiones','nav-profesiones'],
+      ['nav-portfolio','nav-portfolio'],
+      ['nav-contact','nav-contact'],
+      ['t-ey','ey'], ['t-h1','h1'], ['t-lead','lead'],
+      ['t-p1-tag','p1-tag'], ['t-p1-body','p1-body'], ['t-p1-badge','p1-badge'],
+      ['t-p1-stat1','p1-stat1'], ['t-p1-stat2','p1-stat2'], ['t-p1-stat3','p1-stat3'],
+      ['t-p2-name','p2-name'], ['t-p2-tag','p2-tag'], ['t-p2-badge','p2-badge'],
+      ['t-p3-name','p3-name'], ['t-p3-tag','p3-tag'], ['t-p3-badge','p3-badge'],
+      ['t-cta-h','cta-h'], ['t-cta','cta'], ['t-footer','footer']
+    ];
+
+    function setLang(l) {
+      lang = l;
+      var c = copy[l];
+      idMap.forEach(function(pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.textContent = c[pair[1]];
+      });
+      document.getElementById('flag').textContent       = l === 'es' ? '🇬🇧' : '🇪🇸';
+      document.getElementById('lang-label').textContent = l === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = l;
+    }
+    function toggleLang() { setLang(lang === 'es' ? 'en' : 'es'); }
+
+    setLang('es');
+  </script>
+</body>
+</html>

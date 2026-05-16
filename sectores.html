@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sectores — Simple Auto</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #111111;
+      --red:    #D0021B;
+      --bg:     #F7F7F7;
+      --white:  #FFFFFF;
+      --muted:  #888888;
+      --border: #DDDDDD;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+    }
+
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(247,247,247,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .nav-logo .auto { color: var(--red); }
+    .nav-center { display: flex; gap: 32px; }
+    .nav-center a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-center a:hover, .nav-center a.active { color: var(--black); }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      user-select: none;
+      transition: color 0.15s;
+    }
+    .lang-toggle:hover { color: var(--black); }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .page-hero {
+      padding: 140px 0 60px;
+    }
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .page-h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .page-lead {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    .acc-list { padding-bottom: 96px; }
+    .acc {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+    .acc[open] { border-color: var(--black); }
+    .acc summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .acc summary::-webkit-details-marker { display: none; }
+    .acc-icon { font-size: 22px; line-height: 1; flex-shrink: 0; }
+    .acc-titles {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .acc-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .acc-tag {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .acc-chev {
+      font-size: 18px;
+      color: var(--muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .acc[open] .acc-chev { transform: rotate(45deg); color: var(--red); }
+    .acc-body {
+      padding: 0 26px 22px 66px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.7;
+    }
+    .acc-body p { margin-bottom: 14px; }
+    .acc-body .deep-link {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--black);
+      padding-bottom: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .acc-body .deep-link:hover { color: var(--red); border-color: var(--red); }
+    @media (max-width: 540px) {
+      .acc-body { padding-left: 26px; }
+    }
+
+    .end-cta {
+      border-top: 1px solid var(--border);
+      padding: 64px 40px;
+      text-align: center;
+    }
+    .end-cta-h {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--black);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--red); }
+
+    .footer-wrap { max-width: 1080px; margin: 0 auto; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-center { display: none; }
+      .wrap, footer, .end-cta { padding-left: 20px; padding-right: 20px; }
+      footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html"><span>simple</span><span class="auto">auto</span></a>
+    <div class="nav-center">
+      <a href="services.html"  id="nav-services"></a>
+      <a href="sectores.html"  class="active" id="nav-profesiones"></a>
+      <a href="proyectos.html" id="nav-portfolio"></a>
+      <a href="index.html#contact" id="nav-contact"></a>
+    </div>
+    <div class="lang-toggle" onclick="toggleLang()">
+      <span id="flag">🇬🇧</span>
+      <span id="lang-label">EN</span>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <section class="page-hero">
+      <p class="page-eyebrow" id="t-ey"></p>
+      <h1 class="page-h1" id="t-h1"></h1>
+      <p class="page-lead" id="t-lead"></p>
+    </section>
+
+    <div class="acc-list">
+
+      <details class="acc">
+        <summary>
+          <span class="acc-icon">⚖️</span>
+          <span class="acc-titles">
+            <span class="acc-name" id="t-ab-name"></span>
+            <span class="acc-tag"  id="t-ab-tag"></span>
+          </span>
+          <span class="acc-chev">＋</span>
+        </summary>
+        <div class="acc-body">
+          <p id="t-ab-body"></p>
+          <a href="abogados.html" class="deep-link" id="t-ab-link"></a>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>
+          <span class="acc-icon">🧾</span>
+          <span class="acc-titles">
+            <span class="acc-name" id="t-as-name"></span>
+            <span class="acc-tag"  id="t-as-tag"></span>
+          </span>
+          <span class="acc-chev">＋</span>
+        </summary>
+        <div class="acc-body">
+          <p id="t-as-body"></p>
+          <a href="asesores-fiscales.html" class="deep-link" id="t-as-link"></a>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>
+          <span class="acc-icon">📐</span>
+          <span class="acc-titles">
+            <span class="acc-name" id="t-ar-name"></span>
+            <span class="acc-tag"  id="t-ar-tag"></span>
+          </span>
+          <span class="acc-chev">＋</span>
+        </summary>
+        <div class="acc-body">
+          <p id="t-ar-body"></p>
+          <a href="arquitectos.html" class="deep-link" id="t-ar-link"></a>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <section class="end-cta">
+    <h3 class="end-cta-h" id="t-cta-h"></h3>
+    <a href="index.html#contact" class="btn-primary" id="t-cta"></a>
+  </section>
+
+  <div class="footer-wrap">
+    <footer>
+      <span>© 2026 Simple Auto</span>
+      <span id="t-footer"></span>
+    </footer>
+  </div>
+
+  <script>
+    var lang = 'es';
+
+    var copy = {
+      es: {
+        'nav-services': 'Servicios',
+        'nav-profesiones': 'Sectores',
+        'nav-portfolio': 'Proyectos',
+        'nav-contact': 'Contacto',
+
+        ey: 'Sectores',
+        h1: 'Los mismos atascos, adaptados a tu sector.',
+        lead: 'Cada profesión pierde tiempo en cosas distintas. El sistema que las arregla es el mismo, pero la solución la afinamos a tu caso.',
+
+        'ab-name': 'Abogados y despachos',
+        'ab-tag':  'Captación local, RGPD, áreas de práctica que ranquean.',
+        'ab-body': 'Trabajamos con despachos independientes que pierden expedientes en agendas dispersas y que quieren posicionarse en Las Palmas sin competir con su propio colega. Captación de clientes locales, cumplimiento RGPD, número de colegiado visible, áreas de práctica enfocadas a búsquedas reales. Guía gratuita incluida.',
+        'ab-link': 'Ver guía para abogados →',
+
+        'as-name': 'Asesores fiscales y gestorías',
+        'as-tag':  'IGIC, REF Canarias, alta de autónomos, calendario fiscal.',
+        'as-body': 'Para asesorías que tramitan altas, IGIC, REF Canarias y autónomos en Las Palmas. Contenido escrito para cómo el cliente canario realmente busca, sin plantillas nacionales. Automatizamos también el intake de documentación para que dejes de pedir el mismo PDF tres veces.',
+        'as-link': 'Ver guía para asesores →',
+
+        'ar-name': 'Arquitectos y estudios',
+        'ar-tag':  'Portfolio que vende, cédula, CEE, captación de promotores.',
+        'ar-body': 'Para estudios y arquitectos independientes que entregan obra pero pierden encargos por culpa de un portfolio pobre. Plantilla de página de proyecto, contenido sobre cédula de habitabilidad y CEE, y captación de promotores. Solución pensada para el ciclo largo de venta de tu sector.',
+        'ar-link': 'Ver guía para arquitectos →',
+
+        'cta-h':   '¿Tu sector no está aquí?',
+        cta:       'Cuéntanoslo',
+        footer:    'Las Palmas de Gran Canaria.'
+      },
+      en: {
+        'nav-services': 'Services',
+        'nav-profesiones': 'Sectors',
+        'nav-portfolio': 'Work',
+        'nav-contact': 'Contact',
+
+        ey: 'Sectors',
+        h1: 'Same headaches, adapted to your sector.',
+        lead: 'Every profession loses time on different things. The system that fixes them is the same — we just tune the solution to your case.',
+
+        'ab-name': 'Lawyers and practices',
+        'ab-tag':  'Local client capture, GDPR, practice areas that rank.',
+        'ab-body': 'We work with independent practices that lose cases in scattered calendars and want to position in Las Palmas without competing against a fellow lawyer down the street. Local client capture, GDPR compliance, visible bar number, practice areas built around real searches. Free guide included.',
+        'ab-link': 'Open the lawyers guide →',
+
+        'as-name': 'Tax advisors and gestorías',
+        'as-tag':  'IGIC, REF Canarias, self-employed registration, tax calendar.',
+        'as-body': 'For advisors handling self-employment filings, IGIC, REF Canarias and registrations in Las Palmas. Content written for how a Canary client actually searches — no recycled national templates. We also automate intake so you stop asking for the same PDF three times.',
+        'as-link': 'Open the advisors guide →',
+
+        'ar-name': 'Architects and studios',
+        'ar-tag':  'Portfolio that sells, habitability certificate, CEE, developer outreach.',
+        'ar-body': 'For independent studios that deliver great work but lose commissions because of a thin portfolio. Project-page template, content on habitability and energy certificates, and outreach to developers. Built around the long sales cycle of your sector.',
+        'ar-link': 'Open the architects guide →',
+
+        'cta-h':   'Sector not listed?',
+        cta:       'Tell us about it',
+        footer:    'Las Palmas de Gran Canaria.'
+      }
+    };
+
+    var idMap = [
+      ['nav-services','nav-services'],
+      ['nav-profesiones','nav-profesiones'],
+      ['nav-portfolio','nav-portfolio'],
+      ['nav-contact','nav-contact'],
+      ['t-ey','ey'], ['t-h1','h1'], ['t-lead','lead'],
+      ['t-ab-name','ab-name'], ['t-ab-tag','ab-tag'], ['t-ab-body','ab-body'], ['t-ab-link','ab-link'],
+      ['t-as-name','as-name'], ['t-as-tag','as-tag'], ['t-as-body','as-body'], ['t-as-link','as-link'],
+      ['t-ar-name','ar-name'], ['t-ar-tag','ar-tag'], ['t-ar-body','ar-body'], ['t-ar-link','ar-link'],
+      ['t-cta-h','cta-h'], ['t-cta','cta'], ['t-footer','footer']
+    ];
+
+    function setLang(l) {
+      lang = l;
+      var c = copy[l];
+      idMap.forEach(function(pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.textContent = c[pair[1]];
+      });
+      document.getElementById('flag').textContent       = l === 'es' ? '🇬🇧' : '🇪🇸';
+      document.getElementById('lang-label').textContent = l === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = l;
+    }
+    function toggleLang() { setLang(lang === 'es' ? 'en' : 'es'); }
+
+    setLang('es');
+  </script>
+</body>
+</html>
