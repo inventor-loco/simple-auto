@@ -1,446 +1,825 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Auto — Soluciones a medida para profesionales independientes y pymes en Las Palmas de Gran Canaria</title>
+  <title>simple-auto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:  #111111;
-      --red:    #D0021B;
-      --bg:     #F7F7F7;
-      --white:  #FFFFFF;
-      --muted:  #888888;
-      --border: #DDDDDD;
+      --mono:     'Fira Code', monospace;
+      --display:  'Syne', sans-serif;
+      --body:     'DM Sans', sans-serif;
+      --headline: 'Bricolage Grotesque', sans-serif;
+      --wordmark: 'Space Grotesk', sans-serif;
     }
+
+    /* DARK THEME — "new" colors. simple=white, auto=blue */
+    body.theme-dark {
+      --bg:           #0A0F1E;
+      --surface:      #131929;
+      --border:       #1E2A45;
+      --text:         #F8F9FF;
+      --muted:        #7A89AA;
+      --accent:       #00D4FF;   /* blue */
+      --simple:       #F8F9FF;   /* white */
+      --auto:         #00D4FF;   /* blue */
+      --on-accent:    #0A0F1E;
+      --input-bg:     #0A0F1E;
+      --glow:         rgba(0,212,255,0.08);
+      --accent-shadow:rgba(0,212,255,0.28);
+    }
+
+    /* BRIGHT THEME — "current" colors. simple=black, auto=red.
+       red/blue and white/black are the inverted pairs of the dark theme. */
+    body.theme-light {
+      --bg:           #F7F7F7;
+      --surface:      #FFFFFF;
+      --border:       #DDDDDD;
+      --text:         #111111;
+      --muted:        #888888;
+      --accent:       #D0021B;   /* red */
+      --simple:       #111111;   /* black */
+      --auto:         #D0021B;   /* red */
+      --on-accent:    #FFFFFF;
+      --input-bg:     #FFFFFF;
+      --glow:         rgba(208,2,27,0.06);
+      --accent-shadow:rgba(208,2,27,0.22);
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       background: var(--bg);
-      color: var(--black);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    /* ── Nav ── */
+    /* NAV */
     nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 100;
-      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
-      background: rgba(247,247,247,0.92);
-      backdrop-filter: blur(10px);
+      padding: 1.4rem 2.5rem;
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
-      font-size: 17px;
+      font-family: var(--wordmark);
       font-weight: 700;
+      font-size: 1.05rem;
       letter-spacing: -0.02em;
-      text-decoration: none;
-      color: var(--black);
     }
-    .nav-logo .auto { color: var(--red); }
-    .nav-center { display: flex; gap: 32px; }
-    .nav-center a {
-      font-size: 14px;
-      font-weight: 500;
+    .nav-logo .logo-simple { color: var(--simple); }
+    .nav-logo .logo-auto   { color: var(--auto); }
+    .nav-logo .logo-dash   { color: var(--muted); }
+
+    .nav-controls { display: flex; align-items: center; gap: 0.6rem; }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 30px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
       color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
+      font-size: 0.9rem;
+      transition: color 0.2s, border-color 0.2s;
     }
-    .nav-center a:hover, .nav-center a.active { color: var(--black); }
+    .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
     .lang-toggle {
       display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
+      gap: 0.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px;
+    }
+    .lang-btn {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.28rem 0.65rem;
+      border: none;
+      border-radius: 4px;
       cursor: pointer;
       color: var(--muted);
-      user-select: none;
-      transition: color 0.15s;
+      background: transparent;
+      transition: all 0.2s;
     }
-    .lang-toggle:hover { color: var(--black); }
+    .lang-btn.active { background: var(--accent); color: var(--on-accent); font-weight: 600; }
 
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    /* ── Hero ── */
+    /* HERO */
     .hero {
-      min-height: 100vh;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse at top, var(--glow) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* HEADLINE */
+    .headline {
+      font-family: var(--headline);
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 780px;
+      margin-bottom: 1.8rem;
+    }
+    .headline .solid  { color: var(--text); }
+    .headline .hollow {
+      color: var(--accent);
+      -webkit-text-stroke: 0;
+    }
+
+    /* TAGLINE */
+    .tagline {
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      color: var(--muted);
+      max-width: 460px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+    .tagline strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.4rem;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    /* FEATURES */
+    .features {
+      list-style: none;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .features li {
       display: flex;
       align-items: center;
-      padding-top: 60px;
+      justify-content: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text);
     }
-    .hero-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 100px 40px 80px;
+    .features li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
     }
-    .problem {
-      font-size: clamp(36px, 6vw, 64px);
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.1;
-      color: var(--black);
-      max-width: 780px;
-      margin-bottom: 28px;
-      transition: opacity 0.35s ease;
-      min-height: 1.1em;
-    }
-    .agitate {
-      font-size: clamp(16px, 2vw, 19px);
-      font-weight: 500;
-      color: var(--red);
-      margin-bottom: 20px;
-      max-width: 560px;
-    }
-    .solve {
-      font-size: clamp(15px, 1.8vw, 17px);
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 520px;
-      margin-bottom: 40px;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: var(--black);
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 6px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-    .btn-primary:hover { background: var(--red); }
 
-    /* ── Contact ── */
-    .section {
-      border-top: 1px solid var(--border);
-      padding: 96px 0;
+    /* PRICE */
+    .price-block {
+      margin-bottom: 1.6rem;
     }
-    .section-eyebrow {
-      font-size: 11px;
+    .price-from {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .price-main {
+      font-family: var(--display);
+      font-size: 3rem;
       font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      display: block;
+    }
+    .price-alt {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* EMAIL FORM */
+    .email-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .email-input {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      text-align: center;
+    }
+    .email-input::placeholder { color: var(--muted); }
+    .email-input:focus { border-color: var(--accent); }
+
+    .cta-btn {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      background: var(--accent);
+      color: var(--on-accent);
+      border: none;
+      border-radius: 8px;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+
+      /* centering — belt and suspenders */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px var(--accent-shadow);
+    }
+    .cta-btn:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
+
+    .form-note {
+      font-size: 0.74rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .form-note.error { color: #ff6b6b; }
+
+    /* THANKYOU */
+    .thankyou {
+      display: none;
+      text-align: center;
+      padding: 1.2rem 0;
+    }
+    .thankyou-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+    .thankyou-title {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .thankyou-sub { font-size: 0.87rem; color: var(--muted); }
+
+    /* CAROUSEL */
+    .reviews {
+      width: 100%;
+      padding: 3.5rem 0 3rem;
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .reviews-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 12px;
+      text-align: center;
+      margin-bottom: 2rem;
     }
-    .section-h2 {
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      margin-bottom: 14px;
-    }
-    .section-lead {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 500px;
-      margin-bottom: 0;
-    }
-
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    @media (max-width: 680px) {
-      .contact-layout { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    .form-stack { display: flex; flex-direction: column; gap: 10px; }
-    .form-stack input,
-    .form-stack textarea {
+    .carousel-track-wrap {
+      overflow: hidden;
       width: 100%;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      padding: 13px 16px;
-      font-size: 15px;
-      font-family: inherit;
-      background: #fff;
-      color: var(--black);
-      outline: none;
-      transition: border-color 0.15s;
     }
-    .form-stack input:focus,
-    .form-stack textarea:focus { border-color: var(--black); }
-    .form-stack input::placeholder,
-    .form-stack textarea::placeholder { color: #BBBBBB; }
-    .form-stack textarea { resize: vertical; min-height: 90px; }
-
-    .form-stack button {
-      width: 100%;
-      border: none;
-      background: var(--black);
-      color: #fff;
-      padding: 14px;
-      font-size: 15px;
-      font-weight: 600;
-      font-family: inherit;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.15s;
-      margin-top: 4px;
-    }
-    .form-stack button:hover:not(:disabled) { background: var(--red); }
-    .form-stack button:disabled { opacity: 0.4; cursor: default; }
-
-    .form-error  { font-size: 13px; color: var(--red); }
-    .success-msg { font-size: 15px; font-weight: 500; color: var(--black); }
-
-    /* ── Footer ── */
-    .footer-wrap { max-width: 1080px; margin: 0 auto; }
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 40px;
+    .carousel-track {
       display: flex;
-      justify-content: space-between;
+      gap: 1.2rem;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .review-card {
+      flex-shrink: 0;
+      width: clamp(260px, 75vw, 360px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: left;
+    }
+    .review-thumb {
+      width: 100%;
+      height: 180px;
+      background: var(--border);
+      display: block;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .review-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .review-thumb:hover img { transform: scale(1.03); }
+    .thumb-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
       align-items: center;
-      font-size: 12px;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.65rem;
       color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .thumb-visit {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 0.7rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      padding: 0.2rem 0.45rem;
+      letter-spacing: 0.06em;
+      backdrop-filter: blur(4px);
+    }
+    .review-body {
+      padding: 1.2rem 1.4rem 1.4rem;
+    }
+    .review-site {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .review-site:hover { text-decoration: underline; }
+    .review-project {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .review-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+    .review-text.placeholder {
+      color: var(--border);
+      font-style: normal;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+    .review-author {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .verified-link {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+    }
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.8rem;
+    }
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
     }
 
-    @media (max-width: 600px) {
-      nav { padding: 0 20px; }
-      .nav-center { display: none; }
-      .hero-inner, .wrap, footer { padding-left: 20px; padding-right: 20px; }
-      footer { flex-direction: column; gap: 6px; text-align: center; }
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
     }
 
-    .hidden { display: none !important; }
+    /* i18n */
+    [data-lang]      { display: none; }
+    span[data-lang]  { display: none; }
+    .lang-en [data-lang="en"],
+    .lang-es [data-lang="es"]       { display: block; }
+    .lang-en span[data-lang="en"],
+    .lang-es span[data-lang="es"]   { display: inline; }
+
+    @media (max-width: 520px) {
+      nav { padding: 1rem 1.2rem; }
+      .hero { padding: 3rem 1.2rem 3rem; }
+      .card { padding: 1.8rem 1.2rem; }
+    }
   </style>
 </head>
-<body>
+<body class="lang-en theme-dark">
 
-  <nav>
-    <a class="nav-logo" href="#"><span>simple</span><span class="auto">auto</span></a>
-    <div class="nav-center">
-      <a href="services.html"  id="nav-services"></a>
-      <a href="sectores.html"  id="nav-profesiones"></a>
-      <a href="proyectos.html" id="nav-portfolio"></a>
-      <a href="#contact"       id="nav-contact"></a>
-    </div>
-    <div class="lang-toggle" onclick="toggleLang()">
-      <span id="flag">🇬🇧</span>
-      <span id="lang-label">EN</span>
-    </div>
-  </nav>
-
-  <div class="hero">
-    <div class="hero-inner">
-      <p class="problem" id="problem-text"></p>
-      <p class="agitate" id="t-agitate"></p>
-      <p class="solve"   id="t-solve"></p>
-      <a href="#contact" class="btn-primary" id="t-cta"></a>
+<nav>
+  <div class="nav-logo"><span class="logo-simple">simple</span><span class="logo-dash">-</span><span class="logo-auto">auto</span></div>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark / bright mode">
+      <span id="theme-icon">☀</span>
+    </button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
     </div>
   </div>
+</nav>
 
-  <section class="section" id="contact">
-    <div class="wrap">
-      <div class="contact-layout">
-        <div>
-          <p class="section-eyebrow" id="t-ct-ey"></p>
-          <h2 class="section-h2"    id="t-ct-h2"></h2>
-          <p class="section-lead"   id="t-ct-lead"></p>
-        </div>
-        <div>
-          <div id="form-wrap" class="form-stack">
-            <input  type="text"  id="f-name" />
-            <input  type="email" id="f-email" />
-            <input  type="tel"   id="f-phone" />
-            <textarea            id="f-message" rows="3"></textarea>
-            <button type="button" id="t-btn" onclick="handleSubmit()"></button>
-            <p class="form-error hidden" id="form-error"></p>
-          </div>
-          <p class="success-msg hidden" id="success-msg"></p>
-        </div>
+<section class="hero">
+
+  <h1 class="headline">
+    <span class="solid">
+      <span data-lang="en">Your idea deserves<br>to exist online.</span>
+      <span data-lang="es">Tu idea merece<br>existir en internet.</span>
+    </span>
+    <br>
+    <span class="hollow">
+      <span data-lang="en">Let's build it today.</span>
+      <span data-lang="es">La construimos hoy.</span>
+    </span>
+  </h1>
+
+  <p class="tagline">
+    <span data-lang="en">Join the workshop or book a private session and we build your website together. Your idea will be online in less than <strong>4 hours</strong>, guaranteed. One payment, no subscriptions.</span>
+    <span data-lang="es">Únete al taller o reserva una sesión privada y construimos tu sitio juntos. Tu idea estará en internet en menos de <strong>4 horas</strong>, garantizado. Un solo pago, sin suscripciones.</span>
+  </p>
+
+  <div class="card">
+
+    <ul class="features">
+      <li>
+        <span data-lang="en">Website live on the internet</span>
+        <span data-lang="es">Sitio web publicado en internet</span>
+      </li>
+      <li>
+        <span data-lang="en">Your own address (yourname.com)<br><span style="color:var(--muted);font-size:0.82em;">domain approx. 20 EUR/year</span></span>
+        <span data-lang="es">Tu propia dirección (tunombre.com)<br><span style="color:var(--muted);font-size:0.82em;">dominio aprox. 20 EUR/año</span></span>
+      </li>
+      <li>
+        <span data-lang="en">AI tool on your computer to edit it yourself</span>
+        <span data-lang="es">Herramienta de IA en tu computador para editarlo</span>
+      </li>
+      <li>
+        <span data-lang="en">Session recording</span>
+        <span data-lang="es">Grabación de la sesión</span>
+      </li>
+      <li>
+        <span data-lang="en">One payment. Optional subscription for site maintenance and improvement.</span>
+        <span data-lang="es">Un solo pago. Suscripción opcional para mantenimiento y mejora del sitio.</span>
+      </li>
+    </ul>
+
+    <div class="price-block">
+      <span class="price-from">
+        <span data-lang="en">from</span>
+        <span data-lang="es">desde</span>
+      </span>
+      <span class="price-main">50 EUR</span>
+      <span class="price-alt">
+        <span data-lang="en">or 200 EUR for a private session</span>
+        <span data-lang="es">o 200 EUR para una sesión privada</span>
+      </span>
+    </div>
+
+    <div class="email-wrap" id="form">
+      <input
+        class="email-input"
+        type="email"
+        id="email"
+        autocomplete="email"
+        placeholder="your@email.com"
+      />
+      <button class="cta-btn" id="cta-btn" onclick="handleSubmit()">
+        <span data-lang="en">Send me the details</span>
+        <span data-lang="es">Envíame los detalles</span>
+      </button>
+      <p class="form-note" id="form-note">
+        <span data-lang="en">No spam. Ever.</span>
+        <span data-lang="es">Sin spam. Nunca.</span>
+      </p>
+    </div>
+
+    <div class="thankyou" id="thankyou">
+      <div class="thankyou-label">sent</div>
+      <div class="thankyou-title">
+        <span data-lang="en">Check your inbox.</span>
+        <span data-lang="es">Revisa tu correo.</span>
+      </div>
+      <div class="thankyou-sub">
+        <span data-lang="en">Full details are on their way.</span>
+        <span data-lang="es">La información completa está en camino.</span>
       </div>
     </div>
-  </section>
 
-  <div class="footer-wrap">
-    <footer>
-      <span>© 2026 Simple Auto</span>
-      <span id="t-footer"></span>
-    </footer>
   </div>
 
-  <script>
-    var lang = 'es';
+</section>
 
-    var problems = {
-      es: [
-        'Las conversaciones con clientes\nse pierden en WhatsApp.',
-        'Copias leads de Idealista\nal Excel a mano. Cada día.',
-        'Tardas cuatro horas en responder.\nEl cliente ya contrató a otro.',
-        'Tu negocio funciona.\nLa operativa interna, no.'
-      ],
-      en: [
-        'Client conversations\ndisappear into WhatsApp.',
-        'You copy Idealista leads\ninto Excel by hand. Every day.',
-        'You reply four hours later.\nThe client already hired someone else.',
-        'Your business runs.\nThe back office doesn\'t.'
-      ]
-    };
-    var probIdx = 0;
-    var probEl;
+<div class="reviews">
+  <div class="reviews-label">
+    <span data-lang="en">Websites already built</span>
+    <span data-lang="es">Sitios ya construidos</span>
+  </div>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="track">
 
-    var copy = {
-      es: {
-        'nav-services':    'Servicios',
-        'nav-profesiones': 'Sectores',
-        'nav-portfolio':   'Proyectos',
-        'nav-contact':     'Contacto',
+      <!-- 1: Damanna -->
+      <div class="review-card">
+        <a class="review-thumb" href="https://damanna.co" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading preview...</div>
+          <img data-src="https://damanna.co" alt="damanna.co screenshot" style="display:none" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="review-body">
+          <a class="review-site" href="https://damanna.co" target="_blank" rel="noopener">damanna.co</a>
+          <div class="review-project">Damanna — Wellness for businesses and individuals</div>
+          <div class="review-text placeholder">Review coming soon</div>
+          <div class="review-author">Matias O.</div>
+        </div>
+      </div>
 
-        agitate: 'Cada atasco invisible te cuesta horas y clientes.',
-        solve:   'Construimos a medida los sistemas que tu negocio necesita por dentro. No somos una agencia de marketing.',
-        cta:     'Hablemos',
+      <!-- 2: Psicologia Bajo Coste -->
+      <div class="review-card">
+        <a class="review-thumb" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading preview...</div>
+          <img data-src="https://psicologiabajocoste.com" alt="psicologiabajocoste.com screenshot" style="display:none" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="review-body">
+          <a class="review-site" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">psicologiabajocoste.com</a>
+          <div class="review-project">Psicologia Bajo Coste — Online Psychology</div>
+          <div class="review-text">"Increible servicio. Muy eficaz y muy cercano y agradable, se adelantaba a las demandas y necesidades que tenia y aportó incontables soluciones novedosas y creativas. Volvere a acudir a el sin duda."</div>
+          <div class="review-author">Natalia Sierra &nbsp;<a class="verified-link" href="https://maps.app.goo.gl/hv4825F8jdd6TdKe6" target="_blank" rel="noopener">verified</a></div>
+        </div>
+      </div>
 
-        'ct-ey':   'Contacto',
-        'ct-h2':   'Cuéntanos qué se atasca.',
-        'ct-lead': 'Una llamada de 20 minutos. Identificamos dónde se atasca tu negocio y te decimos si podemos arreglarlo. Sin compromiso.',
-        ph_name:   'Nombre',
-        ph_email:  'Correo electrónico',
-        ph_phone:  'Teléfono',
-        ph_msg:    'Qué te roba más tiempo cada semana (opcional)',
-        btn:       'Enviar',
-        success:   'Listo. Te contactamos pronto.',
-        error:     'Algo salió mal. Intenta de nuevo.',
+      <!-- 3: Luce D'Estate -->
+      <div class="review-card">
+        <a class="review-thumb" href="https://lucedestate.vercel.app" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading preview...</div>
+          <img data-src="https://lucedestate.vercel.app" alt="lucedestate.vercel.app screenshot" style="display:none" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="review-body">
+          <a class="review-site" href="https://lucedestate.vercel.app" target="_blank" rel="noopener">lucedestate.vercel.app</a>
+          <div class="review-project">Luce d'Estate — Yoga Retreat</div>
+          <div class="review-text placeholder">Review coming soon</div>
+          <div class="review-author">Francesca Orietti</div>
+        </div>
+      </div>
 
-        footer: 'Las Palmas de Gran Canaria.'
-      },
-      en: {
-        'nav-services':    'Services',
-        'nav-profesiones': 'Sectors',
-        'nav-portfolio':   'Work',
-        'nav-contact':     'Contact',
+      <!-- 4: Excel QKD -->
+      <div class="review-card">
+        <a class="review-thumb" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading preview...</div>
+          <img data-src="https://excel-qkd.vercel.app" alt="excel-qkd.vercel.app screenshot" style="display:none" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="review-body">
+          <a class="review-site" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">excel-qkd.vercel.app</a>
+          <div class="review-project">EXCEL-QKD — Publicly Funded Research Project</div>
+          <div class="review-text placeholder">Review coming soon</div>
+          <div class="review-author">Rafael Perez</div>
+        </div>
+      </div>
 
-        agitate: 'Every invisible bottleneck costs you hours and clients.',
-        solve:   'We custom-build the systems your business needs under the hood. We\'re not a marketing agency.',
-        cta:     'Let\'s talk',
+    </div>
+  </div>
+  <div class="carousel-nav" id="dots"></div>
+</div>
 
-        'ct-ey':   'Contact',
-        'ct-h2':   'Tell us what\'s stuck.',
-        'ct-lead': 'A 20-minute call. We find where your business gets stuck and tell you if we can fix it. No commitment.',
-        ph_name:   'Name',
-        ph_email:  'Email address',
-        ph_phone:  'Phone',
-        ph_msg:    'What eats most of your time each week (optional)',
-        btn:       'Send',
-        success:   'Got it. We\'ll be in touch soon.',
-        error:     'Something went wrong. Please try again.',
+<footer>
+  simple-auto &nbsp;&middot;&nbsp;
+  <span data-lang="en">Your website, done today.</span>
+  <span data-lang="es">Tu sitio web, listo hoy.</span>
+</footer>
 
-        footer: 'Las Palmas de Gran Canaria.'
-      }
-    };
+<script>
+  var lang = 'en';
 
-    var idMap = [
-      ['nav-services',    'nav-services'],
-      ['nav-profesiones', 'nav-profesiones'],
-      ['nav-portfolio',   'nav-portfolio'],
-      ['nav-contact',     'nav-contact'],
-      ['t-agitate', 'agitate'],
-      ['t-solve',   'solve'],
-      ['t-cta',     'cta'],
-      ['t-ct-ey',   'ct-ey'],
-      ['t-ct-h2',   'ct-h2'],
-      ['t-ct-lead', 'ct-lead'],
-      ['t-btn',     'btn'],
-      ['t-footer',  'footer']
-    ];
+  var copy = {
+    en: {
+      btn:     'Send me the details',
+      sending: 'Sending...',
+      error:   'Something went wrong. Please try again.',
+      nospam:  'No spam. Ever.',
+      invalid: 'Please enter a valid email.'
+    },
+    es: {
+      btn:     'Envíame los detalles',
+      sending: 'Enviando...',
+      error:   'Algo salió mal. Intenta de nuevo.',
+      nospam:  'Sin spam. Nunca.',
+      invalid: 'Introduce un correo válido.'
+    }
+  };
 
-    function renderProblem() {
-      if (!probEl) return;
-      probEl.innerHTML = problems[lang][probIdx].split('\n').join('<br>');
+  function setLang(l) {
+    lang = l;
+    document.body.classList.remove('lang-en', 'lang-es');
+    document.body.classList.add('lang-' + l);
+    document.documentElement.lang = l;
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.textContent === l.toUpperCase());
+    });
+  }
+
+  function toggleTheme() {
+    var b = document.body;
+    var dark = b.classList.toggle('theme-dark');
+    b.classList.toggle('theme-light', !dark);
+    document.getElementById('theme-icon').textContent = dark ? '☀' : '☾';
+  }
+
+  function setNote(text, isError) {
+    var note = document.getElementById('form-note');
+    note.innerHTML = '<span>' + text + '</span>';
+    note.classList.toggle('error', !!isError);
+  }
+
+  function handleSubmit() {
+    var inp = document.getElementById('email');
+    var email = inp.value.trim();
+    if (!email || !email.includes('@')) {
+      inp.style.borderColor = '#ff6b6b';
+      inp.focus();
+      setNote(copy[lang].invalid, true);
+      setTimeout(function() { inp.style.borderColor = ''; }, 1200);
+      return;
     }
 
-    function cycleProblem() {
-      probEl.style.opacity = '0';
-      setTimeout(function() {
-        probIdx = (probIdx + 1) % problems[lang].length;
-        renderProblem();
-        probEl.style.opacity = '1';
-      }, 350);
-    }
+    var btn = document.getElementById('cta-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span>' + copy[lang].sending + '</span>';
 
-    function setLang(l) {
-      lang = l;
-      var c = copy[l];
-      idMap.forEach(function(pair) {
-        var el = document.getElementById(pair[0]);
-        if (el) el.textContent = c[pair[1]];
-      });
-      renderProblem();
-      document.getElementById('f-name').placeholder    = c.ph_name;
-      document.getElementById('f-email').placeholder   = c.ph_email;
-      document.getElementById('f-phone').placeholder   = c.ph_phone;
-      document.getElementById('f-message').placeholder = c.ph_msg;
-      document.getElementById('flag').textContent       = l === 'es' ? '🇬🇧' : '🇪🇸';
-      document.getElementById('lang-label').textContent = l === 'es' ? 'EN' : 'ES';
-      document.documentElement.lang = l;
-    }
+    var data = new FormData();
+    data.append('email', email);
+    data.append('message', 'Landing page lead — requested the details.');
 
-    function toggleLang() { setLang(lang === 'es' ? 'en' : 'es'); }
+    fetch('https://formspree.io/f/mkoydwkl', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, j: j }; }); })
+    .then(function(res) {
+      if (!res.ok) throw new Error();
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('thankyou').style.display = 'block';
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.innerHTML = '<span data-lang="en">Send me the details</span><span data-lang="es">Envíame los detalles</span>';
+      setNote(copy[lang].error, true);
+    });
+  }
 
-    function handleSubmit() {
-      var email = document.getElementById('f-email').value.trim();
-      if (!email) { document.getElementById('f-email').focus(); return; }
+  document.getElementById('email').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleSubmit();
+  });
 
-      var btn = document.getElementById('t-btn');
-      btn.disabled = true;
-      btn.textContent = '...';
-
-      var name  = document.getElementById('f-name').value.trim();
-      var phone = document.getElementById('f-phone').value.trim();
-      var msg   = document.getElementById('f-message').value.trim();
-
-      var parts = [];
-      if (name)  parts.push('Nombre: '   + name);
-      if (phone) parts.push('Teléfono: ' + phone);
-      if (msg)   parts.push('Mensaje: '  + msg);
-
-      var data = new FormData();
-      data.append('email',   email);
-      data.append('message', parts.join('\n'));
-
-      fetch('https://formspree.io/f/mkoydwkl', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, j: j }; }); })
-      .then(function(res) {
-        if (res.ok) {
-          document.getElementById('form-wrap').classList.add('hidden');
-          var el = document.getElementById('success-msg');
-          el.textContent = copy[lang].success;
-          el.classList.remove('hidden');
-        } else { throw new Error(); }
+  // Load screenshots via Microlink (no API key needed, 50 req/day free)
+  document.querySelectorAll('.review-thumb img[data-src]').forEach(function(img) {
+    var url = img.getAttribute('data-src');
+    var apiUrl = 'https://api.microlink.io/?url=' + encodeURIComponent(url) + '&screenshot=true&meta=false&embed=screenshot.url';
+    fetch(apiUrl)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.data && data.data.screenshot && data.data.screenshot.url) {
+          img.src = data.data.screenshot.url;
+          img.style.display = 'block';
+          var loader = img.parentElement.querySelector('.thumb-loading');
+          if (loader) loader.style.display = 'none';
+        }
       })
       .catch(function() {
-        var err = document.getElementById('form-error');
-        err.textContent = copy[lang].error;
-        err.classList.remove('hidden');
-        btn.disabled = false;
-        btn.textContent = copy[lang].btn;
+        var loader = img.parentElement.querySelector('.thumb-loading');
+        if (loader) loader.textContent = 'preview unavailable';
+      });
+  });
+
+  (function() {
+    var track = document.getElementById('track');
+    var cards = track.querySelectorAll('.review-card');
+    var dotsWrap = document.getElementById('dots');
+    var current = 0;
+    var total = cards.length;
+    var startX = 0;
+
+    // Build dots
+    cards.forEach(function(_, i) {
+      var d = document.createElement('button');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Review ' + (i + 1));
+      d.onclick = function() { goTo(i); };
+      dotsWrap.appendChild(d);
+    });
+
+    function getOffset() {
+      var cardW = cards[0].offsetWidth;
+      var gap = 19; // matches 1.2rem at 16px base
+      var wrapW = track.parentElement.offsetWidth;
+      var center = (wrapW - cardW) / 2;
+      return -(current * (cardW + gap)) + center;
+    }
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      track.style.transform = 'translateX(' + getOffset() + 'px)';
+      dotsWrap.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
       });
     }
 
-    probEl = document.getElementById('problem-text');
-    setLang('es');
-    setInterval(cycleProblem, 3500);
-  </script>
+    track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+    });
+
+    goTo(0);
+    window.addEventListener('resize', function() { goTo(current); });
+    setInterval(function() { goTo(current + 1); }, 5000);
+  })();
+</script>
 </body>
 </html>
