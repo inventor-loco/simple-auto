@@ -12,7 +12,22 @@
       getTheme:  function(){ try { return localStorage.getItem('sa-theme') || 'dark'; } catch(e){ return 'dark'; } },
       getLang:   function(){ try { return localStorage.getItem('sa-lang')  || 'en';   } catch(e){ return 'en'; } },
       saveTheme: function(t){ try { localStorage.setItem('sa-theme', t); } catch(e){} },
-      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l);  } catch(e){} }
+      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l);  } catch(e){} },
+      track: function(event, extra) {
+        try {
+          var d = new FormData();
+          d.append('_subject', 'funnel: ' + event);
+          d.append('event', event);
+          d.append('lang', SA.getLang());
+          d.append('ts', new Date().toISOString());
+          d.append('page', location.pathname.split('/').pop() || 'index.html');
+          if (extra) { for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) d.append(k, extra[k]); } }
+          fetch('https://formspree.io/f/mkoydwkl', { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
+          /* Future pixel hooks — uncomment when ready:
+          // if (typeof gtag === 'function') gtag('event', event, extra || {});
+          // if (typeof fbq  === 'function') fbq('track', event, extra || {}); */
+        } catch(e) {}
+      }
     };
     /* Google Appointment Schedule booking page (the full https://calendar.google.com/calendar/appointments/... URL).
        Leave '' to show setup instructions instead of a broken iframe. */
@@ -182,6 +197,8 @@
       intake.style.display = 'block';
     }
   })();
+
+  SA.track('booking_view');
 
   // Sync controls to saved prefs.
   setLang(SA.getLang());

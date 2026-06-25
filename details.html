@@ -12,7 +12,22 @@
       getTheme:  function(){ try { return localStorage.getItem('sa-theme') || 'dark'; } catch(e){ return 'dark'; } },
       getLang:   function(){ try { return localStorage.getItem('sa-lang')  || 'en';   } catch(e){ return 'en'; } },
       saveTheme: function(t){ try { localStorage.setItem('sa-theme', t); } catch(e){} },
-      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l);  } catch(e){} }
+      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l);  } catch(e){} },
+      track: function(event, extra) {
+        try {
+          var d = new FormData();
+          d.append('_subject', 'funnel: ' + event);
+          d.append('event', event);
+          d.append('lang', SA.getLang());
+          d.append('ts', new Date().toISOString());
+          d.append('page', location.pathname.split('/').pop() || 'index.html');
+          if (extra) { for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) d.append(k, extra[k]); } }
+          fetch('https://formspree.io/f/mkoydwkl', { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
+          /* Future pixel hooks — uncomment when ready:
+          // if (typeof gtag === 'function') gtag('event', event, extra || {});
+          // if (typeof fbq  === 'function') fbq('track', event, extra || {}); */
+        } catch(e) {}
+      }
     };
     /* PayPal config — replace these placeholders.
        PAYPAL_BUSINESS: the email on your PayPal account.
@@ -245,7 +260,7 @@
         <li><span data-lang="en">You add us as a GitHub collaborator so we can fix things if needed</span><span data-lang="es">Nos agregas como colaborador en GitHub para poder arreglar si hace falta</span></li>
         <li class="muted"><span data-lang="en">You can invite friends to watch along for free</span><span data-lang="es">Puedes invitar amigos a mirar gratis</span></li>
       </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="pay-form" data-amount="50.00" data-item="simple-auto Group session">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="pay-form" data-amount="50.00" data-item="simple-auto Group session" onsubmit="SA.track('buy_click',{tier:'group',amount:'50'})">
         <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="business" value="" />
         <input type="hidden" name="item_name" value="" />
@@ -273,7 +288,7 @@
         <li><span data-lang="en">Guaranteed shipped site + full recording</span><span data-lang="es">Sitio publicado garantizado + grabación completa</span></li>
         <li class="muted"><span data-lang="en">You can invite friends to join the session</span><span data-lang="es">Puedes invitar amigos a unirse a la sesión</span></li>
       </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="pay-form" data-amount="200.00" data-item="simple-auto Private session">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="pay-form" data-amount="200.00" data-item="simple-auto Private session" onsubmit="SA.track('buy_click',{tier:'private',amount:'200'})">
         <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="business" value="" />
         <input type="hidden" name="item_name" value="" />
@@ -350,6 +365,8 @@
       f.querySelector('[name=cancel_return]').value = base + 'details.html';
     });
   })();
+
+  SA.track('details_view');
 
   // Sync controls to saved prefs.
   setLang(SA.getLang());
