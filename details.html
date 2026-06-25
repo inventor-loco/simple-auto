@@ -32,7 +32,7 @@
     /* PayPal config — replace these placeholders.
        PAYPAL_BUSINESS: the email on your PayPal account.
        SITE_BASE: the deployed site origin, e.g. https://simple-auto.example */
-    window.SA_PAYPAL_BUSINESS = 'PAYPAL_EMAIL_HERE';
+    window.SA_PAYPAL_BUSINESS = 'vicente.matus@ulgpc.es';
     window.SA_SITE_BASE = '';
   </script>
   <style>
@@ -260,7 +260,7 @@
         <li><span data-lang="en">You add us as a GitHub collaborator so we can fix things if needed</span><span data-lang="es">Nos agregas como colaborador en GitHub para poder arreglar si hace falta</span></li>
         <li class="muted"><span data-lang="en">You can invite friends to watch along for free</span><span data-lang="es">Puedes invitar amigos a mirar gratis</span></li>
       </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="pay-form" data-amount="50.00" data-item="simple-auto Group session" onsubmit="SA.track('buy_click',{tier:'group',amount:'50'})">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pay-form" data-amount="50.00" data-item="simple-auto Group session" onsubmit="return payAndGo(this,'group','50')">
         <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="business" value="" />
         <input type="hidden" name="item_name" value="" />
@@ -288,7 +288,7 @@
         <li><span data-lang="en">Guaranteed shipped site + full recording</span><span data-lang="es">Sitio publicado garantizado + grabación completa</span></li>
         <li class="muted"><span data-lang="en">You can invite friends to join the session</span><span data-lang="es">Puedes invitar amigos a unirse a la sesión</span></li>
       </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="pay-form" data-amount="200.00" data-item="simple-auto Private session" onsubmit="SA.track('buy_click',{tier:'private',amount:'200'})">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pay-form" data-amount="200.00" data-item="simple-auto Private session" onsubmit="return payAndGo(this,'private','200')">
         <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="business" value="" />
         <input type="hidden" name="item_name" value="" />
@@ -367,6 +367,14 @@
   })();
 
   SA.track('details_view');
+
+  function payAndGo(form, tier, amount) {
+    SA.track('buy_click', { tier: tier, amount: amount });
+    var base = window.SA_SITE_BASE || (location.origin + location.pathname.replace(/[^/]*$/, ''));
+    if (base.slice(-1) !== '/') base += '/';
+    setTimeout(function() { window.location.href = base + 'booking.html'; }, 250);
+    return true; // let the form POST to PayPal in the new tab
+  }
 
   // Sync controls to saved prefs.
   setLang(SA.getLang());

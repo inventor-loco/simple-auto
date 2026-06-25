@@ -13,8 +13,7 @@ Code is built; these are the values to paste once the external accounts exist.
 - [ ] **PayPal** — in `details.html` set `window.SA_PAYPAL_BUSINESS` (PayPal email)
       and `window.SA_SITE_BASE` (deployed origin). Enable **Auto Return** in PayPal
       settings so checkout returns to `booking.html`.
-- [ ] **Booking** — in `booking.html` set `window.SA_BOOKING_URL` to the Google
-      Appointment Schedule link (shows a setup placeholder until then).
+- [x] **Booking** — `window.SA_BOOKING_URL` set in `booking.html`.
 - [ ] **Intake form** — create the Google Form (idea questions + Drive upload) and set
       `window.SA_INTAKE_FORM_URL` in `booking.html`.
 - [ ] Branded sender email (replacing `vmat.icaza@gmail.com`) — TBD.
@@ -30,11 +29,8 @@ screenshot service** (Microlink, thum.io, mShots) — Vercel/their host returns 
 404 to datacenter IPs, and Damanna's animated dark hero renders as a black frame.
 They display fine in a real browser.
 
-- [ ] **Damanna** — save a screenshot as `img/reviews/damanna.png`
-      (site: https://www.damanna.co). Until then the card uses the Microlink
-      loader fallback, which currently shows "preview unavailable".
-- [ ] **Luce d'Estate** — save a screenshot as `img/reviews/lucedestate.png`
-      (site: https://luce-destate.vercel.app). Same fallback behaviour.
+- [x] **Damanna** — `img/reviews/damanna.png` done.
+- [x] **Luce d'Estate** — `img/reviews/lucedestate.png` done.
 
 Captured and bundled already: `psicologiabajocoste.png`, `excelqkd.png`.
 
