@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>simple-auto</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    /* Shared funnel preferences — theme + language persisted across pages.
+       Keep this snippet identical on every funnel page (index/details/booking). */
+    /* Google Apps Script web-app /exec URL for lead capture.
+       Leave '' until deployed — the form still works via the Formspree fallback. */
+    window.SA_LEAD_ENDPOINT = '';
+    window.SA = {
+      getTheme:  function(){ try { return localStorage.getItem('sa-theme') || 'dark'; } catch(e){ return 'dark'; } },
+      getLang:   function(){ try { return localStorage.getItem('sa-lang')  || 'en';   } catch(e){ return 'en'; } },
+      saveTheme: function(t){ try { localStorage.setItem('sa-theme', t); } catch(e){} },
+      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l);  } catch(e){} }
+    };
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -489,7 +502,8 @@
     }
   </style>
 </head>
-<body class="lang-en theme-dark">
+<body>
+<script>document.body.className = 'lang-' + SA.getLang() + ' theme-' + SA.getTheme();</script>
 
 <nav>
   <div class="nav-logo"><span class="logo-simple">simple</span><span class="logo-dash">-</span><span class="logo-auto">auto</span></div>
@@ -701,13 +715,16 @@
     document.querySelectorAll('.lang-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.textContent === l.toUpperCase());
     });
+    SA.saveLang(l);
   }
 
   function toggleTheme() {
     var b = document.body;
     var dark = b.classList.toggle('theme-dark');
     b.classList.toggle('theme-light', !dark);
-    document.getElementById('theme-icon').textContent = dark ? '☀' : '☾';
+    var icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = dark ? '☀' : '☾';
+    SA.saveTheme(dark ? 'dark' : 'light');
   }
 
   function setNote(text, isError) {
@@ -733,29 +750,42 @@
 
     var data = new FormData();
     data.append('email', email);
+    data.append('lang', lang);
     data.append('message', 'Landing page lead — requested the details.');
 
-    fetch('https://formspree.io/f/mkoydwkl', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, j: j }; }); })
-    .then(function(res) {
-      if (!res.ok) throw new Error();
-      document.getElementById('form').style.display = 'none';
-      document.getElementById('thankyou').style.display = 'block';
-    })
-    .catch(function() {
-      btn.disabled = false;
-      btn.innerHTML = '<span data-lang="en">Send me the details</span><span data-lang="es">Envíame los detalles</span>';
-      setNote(copy[lang].error, true);
+    // Primary: Google Apps Script web app (logs to Sheet + auto-replies with the
+    // details + notifies us). Apps Script can't return readable CORS responses, so
+    // this is fire-and-forget (no-cors). Fallback: Formspree, which we can read.
+    // Either way we redirect to the details page; the auto-reply email is the
+    // source of truth that the lead landed.
+    var appsScript = window.SA_LEAD_ENDPOINT; // set below; '' until deployed
+    var tasks = [];
+    if (appsScript) {
+      tasks.push(fetch(appsScript, { method: 'POST', mode: 'no-cors', body: data }).catch(function(){}));
+    }
+    tasks.push(
+      fetch('https://formspree.io/f/mkoydwkl', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).catch(function(){})
+    );
+
+    Promise.all(tasks).then(function() {
+      window.location.href = 'details.html';
     });
   }
 
   document.getElementById('email').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') handleSubmit();
   });
+
+  // Sync controls to saved prefs (body classes were already applied pre-paint).
+  setLang(SA.getLang());
+  (function() {
+    var icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = document.body.classList.contains('theme-dark') ? '☀' : '☾';
+  })();
 
   // Review thumbnails: use the bundled local screenshot first; if it's
   // missing, fall back to a live Microlink render (no API key, 50 req/day free).
