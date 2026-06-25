@@ -604,9 +604,9 @@
 
       <!-- 1: Damanna -->
       <div class="review-card">
-        <a class="review-thumb" href="https://damanna.co" target="_blank" rel="noopener">
+        <a class="review-thumb" href="https://www.damanna.co" target="_blank" rel="noopener">
           <div class="thumb-loading">loading preview...</div>
-          <img data-src="https://damanna.co" alt="damanna.co screenshot" style="display:none" />
+          <img class="thumb-img" src="img/reviews/damanna.png" data-fallback="https://www.damanna.co" alt="damanna.co screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
           <span class="thumb-visit">visit site</span>
         </a>
         <div class="review-body">
@@ -621,7 +621,7 @@
       <div class="review-card">
         <a class="review-thumb" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">
           <div class="thumb-loading">loading preview...</div>
-          <img data-src="https://psicologiabajocoste.com" alt="psicologiabajocoste.com screenshot" style="display:none" />
+          <img class="thumb-img" src="img/reviews/psicologiabajocoste.png" data-fallback="https://psicologiabajocoste.com" alt="psicologiabajocoste.com screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
           <span class="thumb-visit">visit site</span>
         </a>
         <div class="review-body">
@@ -634,13 +634,13 @@
 
       <!-- 3: Luce D'Estate -->
       <div class="review-card">
-        <a class="review-thumb" href="https://lucedestate.vercel.app" target="_blank" rel="noopener">
+        <a class="review-thumb" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">
           <div class="thumb-loading">loading preview...</div>
-          <img data-src="https://lucedestate.vercel.app" alt="lucedestate.vercel.app screenshot" style="display:none" />
+          <img class="thumb-img" src="img/reviews/lucedestate.png" data-fallback="https://luce-destate.vercel.app" alt="luce-destate.vercel.app screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
           <span class="thumb-visit">visit site</span>
         </a>
         <div class="review-body">
-          <a class="review-site" href="https://lucedestate.vercel.app" target="_blank" rel="noopener">lucedestate.vercel.app</a>
+          <a class="review-site" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">luce-destate.vercel.app</a>
           <div class="review-project">Luce d'Estate — Yoga Retreat</div>
           <div class="review-text placeholder">Review coming soon</div>
           <div class="review-author">Francesca Orietti</div>
@@ -651,7 +651,7 @@
       <div class="review-card">
         <a class="review-thumb" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">
           <div class="thumb-loading">loading preview...</div>
-          <img data-src="https://excel-qkd.vercel.app" alt="excel-qkd.vercel.app screenshot" style="display:none" />
+          <img class="thumb-img" src="img/reviews/excelqkd.png" data-fallback="https://excel-qkd.vercel.app" alt="excel-qkd.vercel.app screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
           <span class="thumb-visit">visit site</span>
         </a>
         <div class="review-body">
@@ -757,25 +757,36 @@
     if (e.key === 'Enter') handleSubmit();
   });
 
-  // Load screenshots via Microlink (no API key needed, 50 req/day free)
-  document.querySelectorAll('.review-thumb img[data-src]').forEach(function(img) {
-    var url = img.getAttribute('data-src');
+  // Review thumbnails: use the bundled local screenshot first; if it's
+  // missing, fall back to a live Microlink render (no API key, 50 req/day free).
+  function thumbLoaded(img) {
+    img.style.display = 'block';
+    var loader = img.parentElement.querySelector('.thumb-loading');
+    if (loader) loader.style.display = 'none';
+  }
+
+  function thumbFallback(img) {
+    var url = img.getAttribute('data-fallback');
+    if (!url || img.dataset.fellBack) {
+      var l = img.parentElement.querySelector('.thumb-loading');
+      if (l) l.textContent = 'preview unavailable';
+      return;
+    }
+    img.dataset.fellBack = '1';
+    var loader = img.parentElement.querySelector('.thumb-loading');
+    if (loader) loader.textContent = 'loading preview...';
     var apiUrl = 'https://api.microlink.io/?url=' + encodeURIComponent(url) + '&screenshot=true&meta=false&embed=screenshot.url';
     fetch(apiUrl)
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (data && data.data && data.data.screenshot && data.data.screenshot.url) {
           img.src = data.data.screenshot.url;
-          img.style.display = 'block';
-          var loader = img.parentElement.querySelector('.thumb-loading');
-          if (loader) loader.style.display = 'none';
-        }
+        } else { throw new Error(); }
       })
       .catch(function() {
-        var loader = img.parentElement.querySelector('.thumb-loading');
         if (loader) loader.textContent = 'preview unavailable';
       });
-  });
+  }
 
   (function() {
     var track = document.getElementById('track');
