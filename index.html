@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>simple-auto</title>
+  <title>simpleauto — consultores tecnológicos</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <script>
-    /* Shared funnel preferences — theme + language persisted across pages.
-       Keep this snippet identical on every funnel page (index/details/booking). */
-    /* Google Apps Script web-app /exec URL for lead capture.
-       Leave '' until deployed — the form still works via the Formspree fallback. */
     window.SA_LEAD_ENDPOINT = '';
     window.SA = {
-      getTheme:  function(){ try { return localStorage.getItem('sa-theme') || 'dark'; } catch(e){ return 'dark'; } },
-      getLang:   function(){ try { return localStorage.getItem('sa-lang')  || 'en';   } catch(e){ return 'en'; } },
-      saveTheme: function(t){ try { localStorage.setItem('sa-theme', t); } catch(e){} },
-      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l);  } catch(e){} },
+      getLang:   function(){ try { return localStorage.getItem('sa-lang') || 'es'; } catch(e){ return 'es'; } },
+      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l); } catch(e){} },
       track: function(event, extra) {
         try {
           var d = new FormData();
@@ -26,9 +20,6 @@
           d.append('page', location.pathname.split('/').pop() || 'index.html');
           if (extra) { for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) d.append(k, extra[k]); } }
           fetch('https://formspree.io/f/mkoydwkl', { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
-          /* Future pixel hooks — uncomment when ready:
-          // if (typeof gtag === 'function') gtag('event', event, extra || {});
-          // if (typeof fbq  === 'function') fbq('track', event, extra || {}); */
         } catch(e) {}
       }
     };
@@ -42,35 +33,15 @@
       --body:     'DM Sans', sans-serif;
       --headline: 'Bricolage Grotesque', sans-serif;
       --wordmark: 'Space Grotesk', sans-serif;
-    }
 
-    /* DARK THEME — "new" colors. simple=white, auto=blue */
-    body.theme-dark {
-      --bg:           #0A0F1E;
-      --surface:      #131929;
-      --border:       #1E2A45;
-      --text:         #F8F9FF;
-      --muted:        #7A89AA;
-      --accent:       #00D4FF;   /* blue */
-      --simple:       #F8F9FF;   /* white */
-      --auto:         #00D4FF;   /* blue */
-      --on-accent:    #0A0F1E;
-      --input-bg:     #0A0F1E;
-      --glow:         rgba(0,212,255,0.08);
-      --accent-shadow:rgba(0,212,255,0.28);
-    }
-
-    /* BRIGHT THEME — "current" colors. simple=black, auto=red.
-       red/blue and white/black are the inverted pairs of the dark theme. */
-    body.theme-light {
       --bg:           #F7F7F7;
       --surface:      #FFFFFF;
       --border:       #DDDDDD;
       --text:         #111111;
       --muted:        #888888;
-      --accent:       #D0021B;   /* red */
-      --simple:       #111111;   /* black */
-      --auto:         #D0021B;   /* red */
+      --accent:       #D0021B;
+      --simple:       #111111;
+      --auto:         #D0021B;
       --on-accent:    #FFFFFF;
       --input-bg:     #FFFFFF;
       --glow:         rgba(208,2,27,0.06);
@@ -86,7 +57,6 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* NAV */
@@ -105,25 +75,8 @@
     }
     .nav-logo .logo-simple { color: var(--simple); }
     .nav-logo .logo-auto   { color: var(--auto); }
-    .nav-logo .logo-dash   { color: var(--muted); }
 
     .nav-controls { display: flex; align-items: center; gap: 0.6rem; }
-
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 30px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      color: var(--muted);
-      font-size: 0.9rem;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
     .lang-toggle {
       display: flex;
@@ -148,7 +101,6 @@
 
     /* HERO */
     .hero {
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -167,7 +119,6 @@
       pointer-events: none;
     }
 
-    /* HEADLINE */
     .headline {
       font-family: var(--headline);
       font-size: clamp(2.4rem, 6vw, 4.8rem);
@@ -178,23 +129,42 @@
       margin-bottom: 1.8rem;
     }
     .headline .solid  { color: var(--text); }
-    .headline .hollow {
-      color: var(--accent);
-      -webkit-text-stroke: 0;
-    }
+    .headline .hollow { color: var(--accent); }
 
-    /* TAGLINE */
     .tagline {
       font-size: clamp(1rem, 2vw, 1.18rem);
       color: var(--muted);
       max-width: 460px;
       line-height: 1.75;
       font-weight: 300;
-      margin-bottom: 3rem;
+      margin-bottom: 0;
     }
-    .tagline strong {
-      color: var(--text);
-      font-weight: 500;
+    .tagline strong { color: var(--text); font-weight: 500; }
+
+    /* SCREENSHOTS CAROUSEL */
+    .screenshots {
+      width: 100%;
+      padding: 3rem 0 2.5rem;
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .screenshots-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3.5rem 1.5rem 3.5rem;
+      border-top: 1px solid var(--border);
     }
 
     /* CARD */
@@ -216,7 +186,6 @@
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
 
-    /* FEATURES */
     .features {
       list-style: none;
       margin-bottom: 2rem;
@@ -241,10 +210,7 @@
       flex-shrink: 0;
     }
 
-    /* PRICE */
-    .price-block {
-      margin-bottom: 1.6rem;
-    }
+    .price-block { margin-bottom: 1.6rem; }
     .price-from {
       font-family: var(--mono);
       font-size: 0.7rem;
@@ -271,12 +237,7 @@
       display: block;
     }
 
-    /* EMAIL FORM */
-    .email-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
+    .email-wrap { display: flex; flex-direction: column; gap: 0.7rem; }
     .email-input {
       width: 100%;
       padding: 0.85rem 1.1rem;
@@ -305,32 +266,18 @@
       font-size: 0.98rem;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-
-      /* centering — belt and suspenders */
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
     }
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px var(--accent-shadow);
-    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-shadow); }
     .cta-btn:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
 
-    .form-note {
-      font-size: 0.74rem;
-      color: var(--muted);
-      text-align: center;
-    }
+    .form-note { font-size: 0.74rem; color: var(--muted); text-align: center; }
     .form-note.error { color: #ff6b6b; }
 
-    /* THANKYOU */
-    .thankyou {
-      display: none;
-      text-align: center;
-      padding: 1.2rem 0;
-    }
+    .thankyou { display: none; text-align: center; padding: 1.2rem 0; }
     .thankyou-label {
       font-family: var(--mono);
       font-size: 0.7rem;
@@ -339,59 +286,53 @@
       text-transform: uppercase;
       margin-bottom: 0.7rem;
     }
-    .thankyou-title {
-      font-family: var(--display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-    }
+    .thankyou-title { font-family: var(--display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.35rem; }
     .thankyou-sub { font-size: 0.87rem; color: var(--muted); }
 
-    /* CAROUSEL */
-    .reviews {
-      width: 100%;
-      padding: 3.5rem 0 3rem;
-      border-top: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .reviews-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .carousel-track-wrap {
-      overflow: hidden;
-      width: 100%;
-    }
+    /* SHARED CAROUSEL */
+    .carousel-track-wrap { overflow: hidden; width: 100%; }
     .carousel-track {
       display: flex;
       gap: 1.2rem;
       transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       will-change: transform;
     }
-    .review-card {
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.8rem;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot.active { background: var(--accent); transform: scale(1.3); }
+
+    /* SCREENSHOT CARDS */
+    .shot-card {
       flex-shrink: 0;
-      width: clamp(260px, 75vw, 360px);
+      width: clamp(220px, 60vw, 300px);
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      text-align: left;
     }
-    .review-thumb {
+    .shot-thumb {
       width: 100%;
-      height: 180px;
+      height: 160px;
       background: var(--border);
       display: block;
       position: relative;
       overflow: hidden;
       text-decoration: none;
     }
-    .review-thumb img {
+    .shot-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -399,7 +340,7 @@
       display: block;
       transition: transform 0.35s ease;
     }
-    .review-thumb:hover img { transform: scale(1.03); }
+    .shot-thumb:hover img { transform: scale(1.03); }
     .thumb-loading {
       position: absolute;
       inset: 0;
@@ -423,11 +364,51 @@
       color: var(--accent);
       padding: 0.2rem 0.45rem;
       letter-spacing: 0.06em;
-      backdrop-filter: blur(4px);
     }
-    .review-body {
-      padding: 1.2rem 1.4rem 1.4rem;
+    .shot-body { padding: 0.9rem 1.1rem 1.1rem; }
+    .shot-site {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      display: inline-block;
     }
+    .shot-site:hover { text-decoration: underline; }
+    .shot-name {
+      font-family: var(--display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 0.2rem;
+    }
+
+    /* REVIEW CAROUSEL */
+    .reviews {
+      width: 100%;
+      padding: 3rem 0 3rem;
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .reviews-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .review-card {
+      flex-shrink: 0;
+      width: clamp(260px, 75vw, 380px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: left;
+    }
+    .review-body { padding: 1.4rem 1.6rem 1.6rem; }
     .review-site {
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -452,17 +433,7 @@
       font-style: italic;
       margin-bottom: 1.2rem;
     }
-    .review-text.placeholder {
-      color: var(--border);
-      font-style: normal;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-    }
-    .review-author {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--text);
-    }
+    .review-author { font-size: 0.82rem; font-weight: 500; color: var(--text); }
     .verified-link {
       font-family: var(--mono);
       font-size: 0.62rem;
@@ -471,35 +442,47 @@
       text-decoration: none;
       border-bottom: 1px solid var(--accent);
     }
-    .carousel-nav {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.8rem;
-    }
-    .carousel-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--border);
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .carousel-dot.active {
-      background: var(--accent);
-      transform: scale(1.3);
-    }
 
-    /* FOOTER */
+    /* FOOTER NAP */
     footer {
-      text-align: center;
-      padding: 2rem;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem 2rem;
       font-family: var(--mono);
       font-size: 0.72rem;
       color: var(--muted);
-      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .footer-nap { display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-brand {
+      font-family: var(--wordmark);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+    .footer-brand .logo-simple { color: var(--simple); }
+    .footer-brand .logo-auto   { color: var(--auto); }
+    .footer-nap a { color: var(--muted); text-decoration: none; }
+    .footer-nap a:hover { color: var(--accent); }
+    .footer-map {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 160px;
+    }
+    .footer-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      filter: grayscale(30%);
     }
 
     /* i18n */
@@ -510,31 +493,33 @@
     .lang-en span[data-lang="en"],
     .lang-es span[data-lang="es"]   { display: inline; }
 
-    @media (max-width: 520px) {
+    @media (max-width: 600px) {
       nav { padding: 1rem 1.2rem; }
-      .hero { padding: 3rem 1.2rem 3rem; }
+      .hero { padding: 3rem 1.2rem 2.5rem; }
       .card { padding: 1.8rem 1.2rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-map { height: 140px; }
     }
   </style>
 </head>
 <body>
-<script>document.body.className = 'lang-' + SA.getLang() + ' theme-' + SA.getTheme();</script>
+<script>
+  document.body.className = 'lang-' + SA.getLang();
+  document.documentElement.lang = SA.getLang();
+</script>
 
 <nav>
-  <div class="nav-logo"><span class="logo-simple">simple</span><span class="logo-dash">-</span><span class="logo-auto">auto</span></div>
+  <div class="nav-logo"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></div>
   <div class="nav-controls">
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark / bright mode">
-      <span id="theme-icon">☀</span>
-    </button>
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('es')">ES</button>
     </div>
   </div>
 </nav>
 
+<!-- HERO: headline + tagline only -->
 <section class="hero">
-
   <h1 class="headline">
     <span class="solid">
       <span data-lang="en">Your idea deserves<br>to exist online.</span>
@@ -551,7 +536,72 @@
     <span data-lang="en">Join the workshop or book a private session and we build your website together. Your idea will be online in less than <strong>2 hours, guaranteed.</strong></span>
     <span data-lang="es">Únete al taller o reserva una sesión privada y construimos tu sitio web juntos. Tu idea estará en internet en menos de <strong>2 horas, garantizado.</strong></span>
   </p>
+</section>
 
+<!-- SCREENSHOTS CAROUSEL -->
+<div class="screenshots">
+  <div class="screenshots-label">
+    <span data-lang="en">Websites already built</span>
+    <span data-lang="es">Sitios ya construidos</span>
+  </div>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="shots-track">
+
+      <div class="shot-card">
+        <a class="shot-thumb" href="https://www.damanna.co" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading...</div>
+          <img class="thumb-img" src="img/reviews/damanna.png" data-fallback="https://www.damanna.co" alt="damanna.co" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="shot-body">
+          <a class="shot-site" href="https://damanna.co" target="_blank" rel="noopener">damanna.co</a>
+          <div class="shot-name">Damanna: Wellness</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <a class="shot-thumb" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading...</div>
+          <img class="thumb-img" src="img/reviews/psicologiabajocoste.png" data-fallback="https://psicologiabajocoste.com" alt="psicologiabajocoste.com" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="shot-body">
+          <a class="shot-site" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">psicologiabajocoste.com</a>
+          <div class="shot-name">Psicología Bajo Coste</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <a class="shot-thumb" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading...</div>
+          <img class="thumb-img" src="img/reviews/lucedestate.png" data-fallback="https://luce-destate.vercel.app" alt="luce-destate.vercel.app" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="shot-body">
+          <a class="shot-site" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">luce-destate.vercel.app</a>
+          <div class="shot-name">Luce d'Estate: Yoga Retreat</div>
+        </div>
+      </div>
+
+      <div class="shot-card">
+        <a class="shot-thumb" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">
+          <div class="thumb-loading">loading...</div>
+          <img class="thumb-img" src="img/reviews/excelqkd.png" data-fallback="https://excel-qkd.vercel.app" alt="excel-qkd.vercel.app" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
+          <span class="thumb-visit">visit site</span>
+        </a>
+        <div class="shot-body">
+          <a class="shot-site" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">excel-qkd.vercel.app</a>
+          <div class="shot-name">EXCEL-QKD: Research Project</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="carousel-nav" id="shots-dots"></div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
   <div class="card">
 
     <ul class="features">
@@ -591,7 +641,7 @@
         type="email"
         id="email"
         autocomplete="email"
-        placeholder="your@email.com"
+        placeholder="tu@correo.com"
       />
       <button class="cta-btn" id="cta-btn" onclick="handleSubmit()">
         <span data-lang="en">Send me the details</span>
@@ -600,7 +650,7 @@
     </div>
 
     <div class="thankyou" id="thankyou">
-      <div class="thankyou-label">sent</div>
+      <div class="thankyou-label">enviado</div>
       <div class="thankyou-title">
         <span data-lang="en">Check your inbox.</span>
         <span data-lang="es">Revisa tu correo.</span>
@@ -612,90 +662,54 @@
     </div>
 
   </div>
-
 </section>
 
+<!-- REVIEWS CAROUSEL (Natalia only for now) -->
 <div class="reviews">
   <div class="reviews-label">
-    <span data-lang="en">Websites already built</span>
-    <span data-lang="es">Sitios ya construidos</span>
+    <span data-lang="en">What clients say</span>
+    <span data-lang="es">Lo que dicen los clientes</span>
   </div>
   <div class="carousel-track-wrap">
-    <div class="carousel-track" id="track">
+    <div class="carousel-track" id="reviews-track">
 
-      <!-- 1: Damanna -->
       <div class="review-card">
-        <a class="review-thumb" href="https://www.damanna.co" target="_blank" rel="noopener">
-          <div class="thumb-loading">loading preview...</div>
-          <img class="thumb-img" src="img/reviews/damanna.png" data-fallback="https://www.damanna.co" alt="damanna.co screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
-          <span class="thumb-visit">visit site</span>
-        </a>
-        <div class="review-body">
-          <a class="review-site" href="https://damanna.co" target="_blank" rel="noopener">damanna.co</a>
-          <div class="review-project">Damanna: Wellness for businesses and individuals</div>
-          <div class="review-text placeholder">Review coming soon</div>
-          <div class="review-author">Matias O.</div>
-        </div>
-      </div>
-
-      <!-- 2: Psicologia Bajo Coste -->
-      <div class="review-card">
-        <a class="review-thumb" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">
-          <div class="thumb-loading">loading preview...</div>
-          <img class="thumb-img" src="img/reviews/psicologiabajocoste.png" data-fallback="https://psicologiabajocoste.com" alt="psicologiabajocoste.com screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
-          <span class="thumb-visit">visit site</span>
-        </a>
         <div class="review-body">
           <a class="review-site" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">psicologiabajocoste.com</a>
-          <div class="review-project">Psicologia Bajo Coste: Online Psychology</div>
-          <div class="review-text">"Increible servicio. Muy eficaz y muy cercano y agradable, se adelantaba a las demandas y necesidades que tenia y aportó incontables soluciones novedosas y creativas. Volvere a acudir a el sin duda."</div>
-          <div class="review-author">Natalia Sierra &nbsp;<a class="verified-link" href="https://maps.app.goo.gl/hv4825F8jdd6TdKe6" target="_blank" rel="noopener">verified</a></div>
-        </div>
-      </div>
-
-      <!-- 3: Luce D'Estate -->
-      <div class="review-card">
-        <a class="review-thumb" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">
-          <div class="thumb-loading">loading preview...</div>
-          <img class="thumb-img" src="img/reviews/lucedestate.png" data-fallback="https://luce-destate.vercel.app" alt="luce-destate.vercel.app screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
-          <span class="thumb-visit">visit site</span>
-        </a>
-        <div class="review-body">
-          <a class="review-site" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">luce-destate.vercel.app</a>
-          <div class="review-project">Luce d'Estate: Yoga Retreat</div>
-          <div class="review-text placeholder">Review coming soon</div>
-          <div class="review-author">Francesca Orietti</div>
-        </div>
-      </div>
-
-      <!-- 4: Excel QKD -->
-      <div class="review-card">
-        <a class="review-thumb" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">
-          <div class="thumb-loading">loading preview...</div>
-          <img class="thumb-img" src="img/reviews/excelqkd.png" data-fallback="https://excel-qkd.vercel.app" alt="excel-qkd.vercel.app screenshot" onload="thumbLoaded(this)" onerror="thumbFallback(this)" />
-          <span class="thumb-visit">visit site</span>
-        </a>
-        <div class="review-body">
-          <a class="review-site" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">excel-qkd.vercel.app</a>
-          <div class="review-project">EXCEL-QKD: Publicly Funded Research Project</div>
-          <div class="review-text placeholder">Review coming soon</div>
-          <div class="review-author">Rafael Perez</div>
+          <div class="review-project">Psicología Bajo Coste: Online Psychology</div>
+          <div class="review-text">"Increíble servicio. Muy eficaz y muy cercano y agradable, se adelantaba a las demandas y necesidades que tenía y aportó incontables soluciones novedosas y creativas. Volveré a acudir a él sin duda."</div>
+          <div class="review-author">Natalia Sierra &nbsp;<a class="verified-link" href="https://maps.app.goo.gl/hv4825F8jdd6TdKe6" target="_blank" rel="noopener">verificado</a></div>
         </div>
       </div>
 
     </div>
   </div>
-  <div class="carousel-nav" id="dots"></div>
+  <div class="carousel-nav" id="reviews-dots"></div>
 </div>
 
+<!-- FOOTER NAP -->
 <footer>
-  simple-auto &nbsp;&middot;&nbsp;
-  <span data-lang="en">Your website, done today.</span>
-  <span data-lang="es">Tu sitio web, listo hoy.</span>
+  <div class="footer-inner">
+    <div class="footer-nap">
+      <div class="footer-brand"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></div>
+      <div>consultores tecnológicos desde 2015.</div>
+      <div><a href="tel:+34677028042">+34 677 028 042</a></div>
+      <div>C. Practicante Ignacio Rodríguez, Edificio Polivalente II,<br>Oficina 209, 35017 Las Palmas de Gran Canaria, Las Palmas</div>
+      <div><a href="https://share.google/Ad9i2wlXYO2VP8jZi" target="_blank" rel="noopener">Google Business Profile</a></div>
+    </div>
+    <div class="footer-map">
+      <iframe
+        title="Ubicación simpleauto"
+        loading="lazy"
+        src="https://maps.google.com/maps?q=C.+Practicante+Ignacio+Rodr%C3%ADguez,+Edificio+Polivalente+II,+Oficina+209,+35017+Las+Palmas+de+Gran+Canaria&output=embed&hl=es&z=15"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
 </footer>
 
 <script>
-  var lang = 'en';
+  var lang = 'es';
 
   var copy = {
     en: {
@@ -725,17 +739,9 @@
     SA.saveLang(l);
   }
 
-  function toggleTheme() {
-    var b = document.body;
-    var dark = b.classList.toggle('theme-dark');
-    b.classList.toggle('theme-light', !dark);
-    var icon = document.getElementById('theme-icon');
-    if (icon) icon.textContent = dark ? '☀' : '☾';
-    SA.saveTheme(dark ? 'dark' : 'light');
-  }
-
   function setNote(text, isError) {
     var note = document.getElementById('form-note');
+    if (!note) return;
     note.innerHTML = '<span>' + text + '</span>';
     note.classList.toggle('error', !!isError);
   }
@@ -746,7 +752,6 @@
     if (!email || !email.includes('@')) {
       inp.style.borderColor = '#ff6b6b';
       inp.focus();
-      setNote(copy[lang].invalid, true);
       setTimeout(function() { inp.style.borderColor = ''; }, 1200);
       return;
     }
@@ -760,12 +765,7 @@
     data.append('lang', lang);
     data.append('message', 'Landing page lead — requested the details.');
 
-    // Primary: Google Apps Script web app (logs to Sheet + auto-replies with the
-    // details + notifies us). Apps Script can't return readable CORS responses, so
-    // this is fire-and-forget (no-cors). Fallback: Formspree, which we can read.
-    // Either way we redirect to the details page; the auto-reply email is the
-    // source of truth that the lead landed.
-    var appsScript = window.SA_LEAD_ENDPOINT; // set below; '' until deployed
+    var appsScript = window.SA_LEAD_ENDPOINT;
     var tasks = [];
     if (appsScript) {
       tasks.push(fetch(appsScript, { method: 'POST', mode: 'no-cors', body: data }).catch(function(){}));
@@ -788,15 +788,9 @@
     if (e.key === 'Enter') handleSubmit();
   });
 
-  // Sync controls to saved prefs (body classes were already applied pre-paint).
   setLang(SA.getLang());
-  (function() {
-    var icon = document.getElementById('theme-icon');
-    if (icon) icon.textContent = document.body.classList.contains('theme-dark') ? '☀' : '☾';
-  })();
 
-  // Review thumbnails: use the bundled local screenshot first; if it's
-  // missing, fall back to a live Microlink render (no API key, 50 req/day free).
+  // Thumbnail helpers
   function thumbLoaded(img) {
     img.style.display = 'block';
     var loader = img.parentElement.querySelector('.thumb-loading');
@@ -811,8 +805,6 @@
       return;
     }
     img.dataset.fellBack = '1';
-    var loader = img.parentElement.querySelector('.thumb-loading');
-    if (loader) loader.textContent = 'loading preview...';
     var apiUrl = 'https://api.microlink.io/?url=' + encodeURIComponent(url) + '&screenshot=true&meta=false&embed=screenshot.url';
     fetch(apiUrl)
       .then(function(r) { return r.json(); })
@@ -822,30 +814,32 @@
         } else { throw new Error(); }
       })
       .catch(function() {
-        if (loader) loader.textContent = 'preview unavailable';
+        var l = img.parentElement.querySelector('.thumb-loading');
+        if (l) l.textContent = 'preview unavailable';
       });
   }
 
-  (function() {
-    var track = document.getElementById('track');
-    var cards = track.querySelectorAll('.review-card');
-    var dotsWrap = document.getElementById('dots');
+  function initCarousel(trackId, dotsId, autoInterval) {
+    var track = document.getElementById(trackId);
+    var cards = track.children;
+    var dotsWrap = document.getElementById(dotsId);
     var current = 0;
     var total = cards.length;
     var startX = 0;
 
-    // Build dots
-    cards.forEach(function(_, i) {
-      var d = document.createElement('button');
-      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', 'Review ' + (i + 1));
-      d.onclick = function() { goTo(i); };
-      dotsWrap.appendChild(d);
-    });
+    for (var i = 0; i < total; i++) {
+      (function(idx) {
+        var d = document.createElement('button');
+        d.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (idx + 1));
+        d.onclick = function() { goTo(idx); };
+        dotsWrap.appendChild(d);
+      })(i);
+    }
 
     function getOffset() {
       var cardW = cards[0].offsetWidth;
-      var gap = 19; // matches 1.2rem at 16px base
+      var gap = 19;
       var wrapW = track.parentElement.offsetWidth;
       var center = (wrapW - cardW) / 2;
       return -(current * (cardW + gap)) + center;
@@ -867,8 +861,11 @@
 
     goTo(0);
     window.addEventListener('resize', function() { goTo(current); });
-    setInterval(function() { goTo(current + 1); }, 5000);
-  })();
+    if (total > 1) setInterval(function() { goTo(current + 1); }, autoInterval);
+  }
+
+  initCarousel('shots-track', 'shots-dots', 2500);
+  initCarousel('reviews-track', 'reviews-dots', 2500);
 </script>
 </body>
 </html>
