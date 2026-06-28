@@ -1,0 +1,7 @@
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#F7F7F7"/>
+  <!-- "s" in black -->
+  <text x="55" y="180" font-family="Space Grotesk, sans-serif" font-size="140" font-weight="700" fill="#111111" letter-spacing="-0.05em">s</text>
+  <!-- "a" in red -->
+  <text x="130" y="180" font-family="Space Grotesk, sans-serif" font-size="140" font-weight="700" fill="#D0021B" letter-spacing="-0.05em">a</text>
+</svg>
