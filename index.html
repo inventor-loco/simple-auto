@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>simpleauto — consultores tecnológicos</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <script>
     window.SA_LEAD_ENDPOINT = '';
@@ -195,19 +199,22 @@
     }
     .features li {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
       gap: 0.6rem;
       font-size: 0.9rem;
       color: var(--text);
     }
     .features li::before {
       content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--accent);
+      border-top: none;
+      border-left: none;
+      transform: rotate(-45deg);
       flex-shrink: 0;
+      margin-top: 0.2rem;
+      margin-right: 0.2rem;
     }
 
     .price-block { margin-bottom: 1.6rem; }
