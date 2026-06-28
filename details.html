@@ -63,9 +63,20 @@
     .deliverable:first-child { border-top: none; padding-top: 0; }
     .deliverable .tick {
       flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
-      background: var(--accent); color: var(--on-accent);
+      background: var(--accent);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 700; margin-top: 0.1rem;
+      margin-top: 0.1rem;
+      position: relative;
+    }
+    .deliverable .tick::after {
+      content: '';
+      width: 10px;
+      height: 6px;
+      border: 2px solid var(--on-accent);
+      border-top: none;
+      border-left: none;
+      transform: rotate(-45deg);
+      position: absolute;
     }
     .d-title { font-family: var(--display); font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 0.3rem; }
     .d-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
@@ -88,10 +99,21 @@
     .tier-price small { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); font-weight: 400; letter-spacing: 0.05em; }
     .tier-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.3rem; }
     .tier ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.6rem; flex: 1; }
-    .tier li { display: flex; gap: 0.55rem; font-size: 0.9rem; line-height: 1.5; }
-    .tier li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 0.5rem; }
+    .tier li { display: flex; gap: 0.55rem; font-size: 0.9rem; line-height: 1.5; align-items: flex-start; }
+    .tier li::before {
+      content: '';
+      width: 14px;
+      height: 10px;
+      border: 2px solid var(--accent);
+      border-top: none;
+      border-left: none;
+      transform: rotate(-45deg);
+      flex-shrink: 0;
+      margin-top: 0.25rem;
+      margin-right: -0.1rem;
+    }
     .tier li.muted { color: var(--muted); }
-    .tier li.muted::before { background: var(--muted); }
+    .tier li.muted::before { border-color: var(--muted); }
 
     .cta-btn {
       width: 100%; padding: 0.95rem 1rem; background: var(--accent); color: var(--on-accent);
@@ -213,7 +235,7 @@
     <ul class="deliverables">
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">A published website</span><span data-lang="es">Un sitio web publicado</span></div>
           <div class="d-desc"><span data-lang="en">A working website published at a real web address, online and visitable by the end of the session.</span><span data-lang="es">Un sitio web funcional publicado en una dirección web real, en línea y visitable al terminar la sesión.</span></div>
@@ -221,7 +243,7 @@
       </li>
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">Text written with you</span><span data-lang="es">Textos redactados contigo</span></div>
           <div class="d-desc"><span data-lang="en">The headline, the sections, and the contact call to action, written with you during the session.</span><span data-lang="es">El titular, las secciones y la llamada a la acción de contacto, redactados contigo durante la sesión.</span></div>
@@ -229,7 +251,7 @@
       </li>
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">Your own domain (yourname.com)</span><span data-lang="es">Tu propio dominio (tunombre.com)</span></div>
           <div class="d-desc"><span data-lang="en">We set up your domain name. The domain costs about 20 EUR per year, paid to the registrar, not to us.</span><span data-lang="es">Configuramos tu nombre de dominio. El dominio cuesta unos 20 EUR al año, pagados al registrador, no a nosotros.</span></div>
@@ -237,7 +259,7 @@
       </li>
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">A contact form that emails you</span><span data-lang="es">Un formulario de contacto que te envía correos</span></div>
           <div class="d-desc"><span data-lang="en">Visitors who fill the contact form send a message directly to your email. No extra platform or monthly fee.</span><span data-lang="es">Los visitantes que rellenan el formulario de contacto envían un mensaje directo a tu correo. Sin plataforma extra ni cuota mensual.</span></div>
@@ -245,7 +267,7 @@
       </li>
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">Mobile ready and indexable by Google</span><span data-lang="es">Adaptado a móvil e indexable por Google</span></div>
           <div class="d-desc"><span data-lang="en">The site adapts to phone, tablet, and desktop screens, and is configured so search engines can index it.</span><span data-lang="es">El sitio se adapta a pantallas de móvil, tablet y escritorio, y queda configurado para que los buscadores puedan indexarlo.</span></div>
@@ -253,7 +275,7 @@
       </li>
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">A tool to edit the site yourself</span><span data-lang="es">Una herramienta para editar el sitio tú mismo</span></div>
           <div class="d-desc"><span data-lang="en">Installed on your computer so you can change text, images, and sections after the session at no extra cost.</span><span data-lang="es">Instalada en tu computador para que cambies textos, imágenes y secciones después de la sesión sin coste adicional.</span></div>
@@ -261,7 +283,7 @@
       </li>
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">A recording of the session</span><span data-lang="es">Una grabación de la sesión</span></div>
           <div class="d-desc"><span data-lang="en">The full session is recorded and given to you so you can repeat any step later.</span><span data-lang="es">La sesión completa se graba y se te entrega para que repitas cualquier paso después.</span></div>
@@ -269,7 +291,7 @@
       </li>
 
       <li class="deliverable">
-        <span class="tick">✓</span>
+        <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">Guidance until the site is published</span><span data-lang="es">Acompañamiento hasta publicar el sitio</span></div>
           <div class="d-desc"><span data-lang="en">We work with you through every step until the site is online. If it is not published, you get a full refund.</span><span data-lang="es">Trabajamos contigo en cada paso hasta que el sitio esté en línea. Si no se publica, te devolvemos el dinero.</span></div>
