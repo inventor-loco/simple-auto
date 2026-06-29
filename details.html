@@ -14,19 +14,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="sa-shared.css" />
   <script>
+    window.SA_LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz_M9z-28pFauBVz43rA_w0xviHI95TKggHR16plL7xVQbp-7Z8BegrCaNcx_s6g7r5qw/exec';
     window.SA = {
       getLang:   function(){ try { return localStorage.getItem('sa-lang') || 'es'; } catch(e){ return 'es'; } },
       saveLang:  function(l){ try { localStorage.setItem('sa-lang', l); } catch(e){} },
+      saveLead:  function(email){ try { sessionStorage.setItem('sa-lead', email); } catch(e){} },
+      getLead:   function(){ try { return sessionStorage.getItem('sa-lead') || ''; } catch(e){ return ''; } },
       track: function(event, extra) {
         try {
           var d = new FormData();
           d.append('_subject', 'funnel: ' + event);
           d.append('event', event);
+          d.append('email', SA.getLead());
           d.append('lang', SA.getLang());
           d.append('ts', new Date().toISOString());
           d.append('page', location.pathname.split('/').pop() || 'index.html');
           if (extra) { for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) d.append(k, extra[k]); } }
-          fetch('https://script.google.com/macros/s/AKfycbz_M9z-28pFauBVz43rA_w0xviHI95TKggHR16plL7xVQbp-7Z8BegrCaNcx_s6g7r5qw/exec', { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
+          fetch(window.SA_LEAD_ENDPOINT, { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
         } catch(e) {}
       }
     };
@@ -536,7 +540,6 @@
     });
   })();
 
-  SA.track('details_view');
 
   function payAndGo(form, tier, amount) {
     SA.track('buy_click', { tier: tier, amount: amount });

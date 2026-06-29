@@ -18,11 +18,14 @@
     window.SA = {
       getLang:   function(){ try { return localStorage.getItem('sa-lang') || 'es'; } catch(e){ return 'es'; } },
       saveLang:  function(l){ try { localStorage.setItem('sa-lang', l); } catch(e){} },
+      saveLead:  function(email){ try { sessionStorage.setItem('sa-lead', email); } catch(e){} },
+      getLead:   function(){ try { return sessionStorage.getItem('sa-lead') || ''; } catch(e){ return ''; } },
       track: function(event, extra) {
         try {
           var d = new FormData();
           d.append('_subject', 'funnel: ' + event);
           d.append('event', event);
+          d.append('email', SA.getLead());
           d.append('lang', SA.getLang());
           d.append('ts', new Date().toISOString());
           d.append('page', location.pathname.split('/').pop() || 'index.html');
@@ -932,6 +935,7 @@
   function handleSubmit() {
     var inp = document.getElementById('email');
     var email = inp.value.trim();
+    SA.saveLead(email);
     if (!email || !email.includes('@')) {
       inp.style.borderColor = '#ff6b6b';
       inp.focus();
