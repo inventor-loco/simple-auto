@@ -29,7 +29,12 @@ var CONFIG = {
   SHEET_NAME:  'Leads',
   NOTIFY_TO:   'vmat.icaza@gmail.com',          // internal notification
   REPLY_FROM:  'simple-auto',                    // display name on the auto-reply
-  DETAILS_URL: 'https://REPLACE_WITH_SITE/details.html'
+  DETAILS_URL: 'https://REPLACE_WITH_SITE/details.html',
+  // Drive file ID of the compiled precontract PDF (legal/precontrato.pdf).
+  // Upload the PDF to Drive once, then paste its ID here. Leave '' to skip the
+  // attachment and fall back to a link-only auto-reply.
+  PRECONTRACT_FILE_ID: 'PASTE_PRECONTRACT_PDF_DRIVE_ID_HERE',
+  PRECONTRACT_NAME:    'simple-auto-precontrato.pdf'  // filename shown to the lead
 };
 
 function doPost(e) {
@@ -68,29 +73,44 @@ function _appendLead(email, lang) {
 
 function _sendAutoReply(email, lang) {
   var subject = (lang === 'es')
-    ? 'simple-auto — los detalles de tu sitio web'
-    : 'simple-auto — the details for your website';
+    ? 'simple-auto — tu precontrato y los detalles de tu sesión'
+    : 'simple-auto — your pre-contract and session details';
 
   var body = (lang === 'es')
     ? 'Gracias por tu interés en simple-auto.\n\n' +
-      'Construimos tu sitio web contigo en una sesión, y queda publicado el mismo día. ' +
-      'Un solo pago, sin suscripciones obligatorias.\n\n' +
-      'Aquí tienes todos los detalles y cómo reservar tu plaza:\n' +
+      'En una sesión privada lanzamos tu sitio web contigo y queda publicado el ' +
+      'mismo día. Un solo pago de 99 EUR (precio de lanzamiento 49,50 EUR, 50% de ' +
+      'descuento hasta el 1 de agosto de 2026). Sin suscripciones obligatorias.\n\n' +
+      'Adjuntamos el precontrato con todas las condiciones del servicio para que lo ' +
+      'revises con calma.\n\n' +
+      'Todos los detalles y cómo reservar tu sesión:\n' +
       CONFIG.DETAILS_URL + '\n\n' +
       '— simple-auto'
     : 'Thanks for your interest in simple-auto.\n\n' +
-      'We build your website together in one session, and it goes live the same day. ' +
-      'One payment, no mandatory subscriptions.\n\n' +
-      'Here are all the details and how to book your spot:\n' +
+      'In one private session we launch your website together and it goes live the ' +
+      'same day. A single payment of 99 EUR (launch price 49.50 EUR, 50% off until ' +
+      '1 August 2026). No mandatory subscriptions.\n\n' +
+      'Attached is the pre-contract with the full service terms so you can review ' +
+      'them at your own pace.\n\n' +
+      'All the details and how to book your session:\n' +
       CONFIG.DETAILS_URL + '\n\n' +
       '— simple-auto';
 
-  MailApp.sendEmail({
-    to: email,
-    subject: subject,
-    body: body,
-    name: CONFIG.REPLY_FROM
-  });
+  var options = { name: CONFIG.REPLY_FROM };
+
+  // Attach the precontract PDF from Drive, if configured.
+  var fileId = CONFIG.PRECONTRACT_FILE_ID;
+  if (fileId && fileId.indexOf('PASTE_') === -1) {
+    try {
+      var blob = DriveApp.getFileById(fileId).getBlob().copyBlob();
+      blob.setName(CONFIG.PRECONTRACT_NAME);
+      options.attachments = [blob];
+    } catch (err) {
+      // If the file can't be read, fall back to a link-only reply rather than failing.
+    }
+  }
+
+  MailApp.sendEmail(email, subject, body, options);
 }
 
 function _notify(email, lang) {

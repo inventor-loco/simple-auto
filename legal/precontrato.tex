@@ -1,0 +1,255 @@
+%==============================================================================
+%  simple-auto — Precontrato de Servicio (Sesión Privada)
+%------------------------------------------------------------------------------
+%  Documento PRECONTRACTUAL vinculante. Versión en español (versión que rige).
+%  Compilar con pdflatex / xelatex / lualatex.
+%
+%  CÓMO RELLENARLO
+%  ---------------
+%  Edita ÚNICAMENTE los \newcommand del bloque "DATOS RELLENABLES" de abajo.
+%  El resto del documento toma esos valores automáticamente. Para generarlo por
+%  lead desde un script, sustituye los valores entre llaves antes de compilar.
+%
+%  Los campos del PROVEEDOR están MOCKEADOS — reemplázalos por tus datos reales
+%  (nombre fiscal, NIF, domicilio fiscal) cuando los tengas.
+%==============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+
+\definecolor{accent}{HTML}{D0021B}
+
+%==============================================================================
+%  DATOS RELLENABLES  (lo único que debes editar)
+%==============================================================================
+
+% --- Proveedor (MOCK — sustituir por tus datos fiscales reales) -------------
+\newcommand{\provNombre}{[NOMBRE FISCAL DEL PROVEEDOR]}
+\newcommand{\provNif}{[NIF/DNI DEL PROVEEDOR]}
+\newcommand{\provDomicilio}{[DOMICILIO FISCAL], Las Palmas de Gran Canaria}
+\newcommand{\provEmail}{vmat.icaza@gmail.com}
+\newcommand{\provMarca}{simple-auto}
+
+% --- Cliente (se rellena por lead) ------------------------------------------
+\newcommand{\cliNombre}{[NOMBRE Y APELLIDOS DEL CLIENTE]}
+\newcommand{\cliNif}{[DNI/NIF DEL CLIENTE]}
+\newcommand{\cliDomicilio}{[DOMICILIO DEL CLIENTE]}
+\newcommand{\cliEmail}{[CORREO DEL CLIENTE]}
+
+% --- Condiciones económicas y fechas ----------------------------------------
+\newcommand{\precioBase}{99~\euro}              % precio ordinario
+\newcommand{\precioLanz}{49,50~\euro}           % precio de lanzamiento (50\%)
+\newcommand{\lanzHasta}{1 de agosto de 2026}    % vigencia del descuento
+\newcommand{\fechaContrato}{[FECHA]}            % fecha de aceptación
+\newcommand{\fechaSesion}{[FECHA DE LA SESIÓN]} % a concretar tras la reserva
+
+\usepackage{eurosym}
+
+%==============================================================================
+%  Estilo
+%==============================================================================
+\titleformat{\section}{\large\bfseries\color{black}}{\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.4em}{0.5em}
+\setlist[enumerate]{itemsep=2pt,topsep=3pt}
+\setlist[itemize]{itemsep=2pt,topsep=3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\lhead{\small\textbf{\textcolor{accent}{simple}}\textbf{auto} — Precontrato de servicio}
+\rhead{\small\thepage\,/\,\pageref{LastPage}}
+\cfoot{\scriptsize\itshape Documento precontractual. Versión en español, que rige a todos los efectos.}
+
+\newcommand{\fieldrule}{\rule{5cm}{0.4pt}}
+
+\begin{document}
+
+%------------------------------------------------------------------------------
+\begin{center}
+  {\LARGE\bfseries Precontrato de prestación de servicios}\\[2pt]
+  {\large Sesión privada de creación y publicación de sitio web}\\[6pt]
+  {\small\color{accent}\textbf{simple}\color{black}\textbf{auto}}
+\end{center}
+
+\vspace{0.6em}
+\noindent En Las Palmas de Gran Canaria, a \fechaContrato.
+
+%------------------------------------------------------------------------------
+\section{Partes}
+
+\noindent\textbf{El Proveedor:} \provNombre, con NIF \provNif, domicilio en
+\provDomicilio, correo electrónico \href{mailto:\provEmail}{\provEmail}, que opera
+bajo la marca «\provMarca».
+
+\smallskip
+\noindent\textbf{El Cliente:} \cliNombre, con DNI/NIF \cliNif, domicilio en
+\cliDomicilio, correo electrónico \cliEmail.
+
+\smallskip
+\noindent Ambas partes se reconocen capacidad legal suficiente para contratar y
+acuerdan lo siguiente.
+
+%------------------------------------------------------------------------------
+\section{Objeto del contrato}
+
+El Proveedor prestará al Cliente \textbf{una (1) sesión privada guiada}, en remoto
+o presencial según se acuerde, cuyo objeto es \textbf{crear y dejar publicado en
+internet un sitio web} para el Cliente, y \textbf{enseñar al Cliente a mantenerlo y
+mejorarlo por sí mismo} con herramientas gratuitas. La sesión tiene una duración
+estimada de hasta dos (2) horas.
+
+%------------------------------------------------------------------------------
+\section{Alcance: qué incluye la sesión}
+
+Durante la sesión, el Proveedor realizará junto con el Cliente, como mínimo:
+\begin{enumerate}[label=\alph*)]
+  \item Publicación de un sitio web funcional en una dirección de internet real,
+        en línea y visitable al finalizar la sesión, mediante una plataforma de
+        alojamiento gratuita de terceros (Vercel).
+  \item Configuración de un repositorio de código (GitHub) y su conexión con la
+        plataforma de alojamiento, de modo que cada cambio se publique
+        automáticamente.
+  \item Ayuda en la adquisición y conexión de un \textbf{nombre de dominio propio}
+        del Cliente (p.\,ej. tunombre.com). El coste del dominio (orientativo, unos
+        20~\euro/año) lo abona el Cliente directamente al registrador, \textbf{no al
+        Proveedor}.
+  \item Redacción conjunta de los textos del sitio (titular, secciones y llamada a
+        la acción) durante la sesión.
+  \item Un formulario de contacto que envía los mensajes al correo del Cliente.
+  \item Configuración del sitio para que sea adaptable a móvil, tablet y escritorio
+        e indexable por buscadores.
+  \item Instalación en el equipo del Cliente de herramientas gratuitas de edición
+        asistida por IA (p.\,ej. GitHub Desktop y editores con IA gratuitos), y
+        formación práctica para que el Cliente modifique y mejore el sitio por sí
+        mismo tras la sesión.
+  \item Entrega de una grabación de la sesión.
+  \item Acompañamiento durante la sesión hasta dejar el sitio publicado.
+\end{enumerate}
+
+%------------------------------------------------------------------------------
+\section{Límites del servicio: qué NO incluye}
+
+Para evitar equívocos, el servicio \textbf{no} comprende:
+\begin{itemize}
+  \item Aplicaciones web complejas, áreas privadas, inicios de sesión, comercio
+        electrónico, bases de datos ni automatizaciones a medida. El entregable es
+        una página de presentación («landing») sencilla, limpia y rápida.
+  \item El coste del nombre de dominio ni de servicios de pago de terceros que el
+        Cliente decida contratar.
+  \item Garantía de posicionamiento, número de visitas, ventas o resultados
+        comerciales. El Proveedor deja el sitio \emph{indexable}, pero no garantiza
+        posiciones en buscadores.
+  \item Mantenimiento, alojamiento de pago, copias de seguridad, soporte continuo
+        ni nuevas funcionalidades posteriores, salvo contratación aparte.
+  \item La disponibilidad, precios o condiciones de las herramientas gratuitas de
+        terceros (Vercel, GitHub, registradores de dominios, editores con IA), que
+        se rigen por sus propios términos y pueden cambiar al margen del Proveedor.
+  \item Producción de logotipo, fotografía o redacción de contenidos más allá de lo
+        elaborado conjuntamente durante la sesión.
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\section{Precio y forma de pago}
+
+El precio del servicio es de \precioBase. \textbf{Precio de lanzamiento:} hasta el
+\lanzHasta\ se aplica un descuento del 50\,\%, quedando el precio en
+\precioLanz. El pago se realiza por adelantado mediante la pasarela indicada por el
+Proveedor (PayPal) en el momento de la reserva. La sesión se agenda una vez
+confirmado el pago.
+
+%------------------------------------------------------------------------------
+\section{Garantía de publicación y reembolso}
+
+El Proveedor garantiza que, al finalizar la sesión, el sitio web quedará
+\textbf{publicado y accesible en internet}. \textbf{Si por causa imputable al
+Proveedor el sitio no quedara publicado, el Cliente tendrá derecho al reembolso
+íntegro} de la cantidad abonada.
+
+\smallskip
+La garantía no será de aplicación cuando la imposibilidad de publicar derive de
+causas ajenas al Proveedor, en particular: falta de colaboración o de los
+materiales necesarios por parte del Cliente, ausencia o incidencias en el equipo o
+la conexión del Cliente, falta de pago del dominio o de servicios de terceros, o
+caídas o cambios de las plataformas gratuitas de terceros.
+
+%------------------------------------------------------------------------------
+\section{Obligaciones del Cliente}
+
+El Cliente se compromete a: aportar los textos, imágenes y materiales con la
+antelación solicitada; disponer durante la sesión de un equipo con conexión a
+internet y permisos de instalación; crear o facilitar las cuentas gratuitas que se
+requieran (correo, GitHub, Vercel, registrador de dominio); y agregar al Proveedor
+como colaborador del repositorio si fuera necesario para asistencia. El Cliente es
+responsable de la veracidad y legalidad de los contenidos que aporte y publique.
+
+%------------------------------------------------------------------------------
+\section{Titularidad}
+
+El sitio web, su código, el dominio y las cuentas de terceros quedan en propiedad y
+bajo control \textbf{exclusivo del Cliente}. El Proveedor no retiene titularidad ni
+exige suscripción obligatoria alguna para que el Cliente conserve y use su sitio.
+
+%------------------------------------------------------------------------------
+\section{Cancelación y reprogramación}
+
+El Cliente podrá reprogramar la sesión con al menos 24~horas de antelación. La
+cancelación con menos de 24~horas de antelación, o la incomparecencia, podrá
+conllevar la pérdida del importe o su aplicación a una nueva fecha, a criterio
+razonable del Proveedor.
+
+%------------------------------------------------------------------------------
+\section{Protección de datos}
+
+Los datos personales del Cliente se tratarán por el Proveedor con la única finalidad
+de gestionar la relación contractual y la prestación del servicio, conforme al
+Reglamento (UE) 2016/679 (RGPD) y a la normativa española aplicable. El Cliente
+podrá ejercer sus derechos de acceso, rectificación, supresión y oposición
+escribiendo a \href{mailto:\provEmail}{\provEmail}.
+
+%------------------------------------------------------------------------------
+\section{Naturaleza precontractual y perfeccionamiento}
+
+El presente documento recoge las condiciones del servicio y tiene carácter
+\textbf{vinculante} entre las partes. El contrato se perfecciona con la aceptación
+de estas condiciones por el Cliente y la confirmación del pago, momento a partir del
+cual ambas partes quedan obligadas en sus términos.
+
+%------------------------------------------------------------------------------
+\section{Legislación y fuero}
+
+Este precontrato se rige por la legislación española. Para cualquier controversia,
+las partes se someten a los Juzgados y Tribunales de Las Palmas de Gran Canaria,
+salvo que por la condición de consumidor del Cliente corresponda otro fuero por
+imperativo legal.
+
+%------------------------------------------------------------------------------
+\vspace{1.2em}
+\section*{Aceptación y firmas}
+\addcontentsline{toc}{section}{Aceptación y firmas}
+
+\noindent Las partes aceptan el contenido íntegro de este precontrato.
+
+\vspace{2.2em}
+\noindent
+\begin{tabular}{p{0.46\textwidth} p{0.46\textwidth}}
+\fieldrule & \fieldrule \\[2pt]
+\textbf{El Proveedor} & \textbf{El Cliente} \\
+\provNombre & \cliNombre \\
+NIF: \provNif & DNI/NIF: \cliNif \\
+\end{tabular}
+
+\vspace{1.4em}
+\noindent Fecha de la sesión acordada: \fechaSesion
+
+\end{document}

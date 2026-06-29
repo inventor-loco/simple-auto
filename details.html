@@ -92,6 +92,8 @@
     /* PRICING */
     .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-bottom: 3rem; }
     @media (max-width: 720px) { .tiers { grid-template-columns: 1fr; } }
+    .tiers.single { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+    .price-was { color: var(--muted); text-decoration: line-through; font-size: 1.5rem; font-weight: 600; margin-right: 0.15rem; }
     .tier {
       background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
       padding: 2rem 1.8rem; display: flex; flex-direction: column; position: relative; overflow: hidden;
@@ -236,8 +238,8 @@
       <span data-lang="es">Todo con lo que te quedas</span>
     </h2>
     <p class="get-intro">
-      <span data-lang="en">Everything included. No surprises. Included in every session, group or private.</span>
-      <span data-lang="es">Todo incluido. Sin sorpresas. Incluido en cada sesión, en grupo o privada.</span>
+      <span data-lang="en">Everything included. No surprises. One private session, one payment.</span>
+      <span data-lang="es">Todo incluido. Sin sorpresas. Una sesión privada, un pago.</span>
     </p>
     <ul class="deliverables">
 
@@ -261,7 +263,7 @@
         <span class="tick"></span>
         <div>
           <div class="d-title"><span data-lang="en">Your own domain (yourname.com)</span><span data-lang="es">Tu propio dominio (tunombre.com)</span></div>
-          <div class="d-desc"><span data-lang="en">We set up your domain name. The domain costs about 20 EUR per year, paid to the registrar, not to us.</span><span data-lang="es">Configuramos tu nombre de dominio. El dominio cuesta unos 20 EUR al año, pagados al registrador, no a nosotros.</span></div>
+          <div class="d-desc"><span data-lang="en">We set up your domain name. The domain costs about 20€ per year, paid to the registrar, not to us.</span><span data-lang="es">Configuramos tu nombre de dominio. El dominio cuesta unos 20€ al año, pagados al registrador, no a nosotros.</span></div>
         </div>
       </li>
 
@@ -314,69 +316,42 @@
 
   <!-- PRICING -->
   <h2 class="section-h" style="text-align:center">
-    <span data-lang="en">Choose how you want to build</span>
-    <span data-lang="es">Elige cómo quieres construir</span>
+    <span data-lang="en">One private session, one payment</span>
+    <span data-lang="es">Una sesión privada, un pago</span>
   </h2>
 
-  <section class="tiers" id="pricing">
+  <section class="tiers single" id="pricing">
 
-    <!-- GROUP -->
+    <!-- PRIVATE SESSION -->
     <div class="tier featured">
       <div class="scarcity">
-        <span data-lang="en">Limited spots per session</span>
-        <span data-lang="es">Plazas limitadas por sesión</span>
+        <span data-lang="en">Launch price · 50% off until Aug 1</span>
+        <span data-lang="es">Precio de lanzamiento · 50% hasta el 1 ago</span>
       </div>
-      <div class="tier-name"><span data-lang="en">Group session</span><span data-lang="es">Sesión en grupo</span></div>
-      <div class="tier-price">50&nbsp;EUR <small>/ <span data-lang="en">person</span><span data-lang="es">persona</span></small></div>
-      <div class="tier-sub"><span data-lang="en">You build on your own computer, guided live.</span><span data-lang="es">Construyes en tu propio computador, guiado en vivo.</span></div>
+      <div class="tier-name"><span data-lang="en">Private session</span><span data-lang="es">Sesión privada</span></div>
+      <div class="tier-price"><span class="price-was">99€</span>&nbsp;49,50€</div>
+      <div class="tier-sub"><span data-lang="en">One-on-one. We launch your website live, together.</span><span data-lang="es">Uno a uno. Lanzamos tu sitio web en vivo, juntos.</span></div>
       <ul>
-        <li><span data-lang="en">We walk the whole group through each step until your site ships</span><span data-lang="es">Guiamos al grupo paso a paso hasta que tu sitio queda publicado</span></li>
-        <li><span data-lang="en"><b>Guaranteed shipped site</b> for every paid sign-up</span><span data-lang="es"><b>Sitio publicado garantizado</b> para cada inscripción pagada</span></li>
-        <li><span data-lang="en">Ask questions any time during the session</span><span data-lang="es">Haz preguntas en cualquier momento de la sesión</span></li>
-        <li><span data-lang="en">You add us as a GitHub collaborator so we can fix things if needed</span><span data-lang="es">Nos agregas como colaborador en GitHub para poder arreglar si hace falta</span></li>
+        <li><span data-lang="en">We launch your site the same day on free hosting and connect your own domain</span><span data-lang="es">Lanzamos tu sitio el mismo día en alojamiento gratuito y conectamos tu propio dominio</span></li>
+        <li><span data-lang="en">We set up the tools on your computer so you can keep improving it with free AI</span><span data-lang="es">Dejamos las herramientas listas en tu computador para que sigas mejorándolo con IA gratuita</span></li>
+        <li><span data-lang="en"><b>Guaranteed shipped site</b> + full recording, at your own pace</span><span data-lang="es"><b>Sitio publicado garantizado</b> + grabación completa, a tu propio ritmo</span></li>
+        <li><span data-lang="en">One payment. No mandatory subscriptions, ever</span><span data-lang="es">Un solo pago. Sin suscripciones obligatorias, nunca</span></li>
       </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pay-form" data-amount="50.00" data-item="simpleauto Group session" onsubmit="return payAndGo(this,'group','50')">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pay-form" data-amount="49.50" data-item="simpleauto Private session" onsubmit="return payAndGo(this,'private','49.50')">
         <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="business" value="" />
         <input type="hidden" name="item_name" value="" />
         <input type="hidden" name="currency_code" value="EUR" />
-        <input type="hidden" name="amount" value="50.00" />
+        <input type="hidden" name="amount" value="49.50" />
         <input type="hidden" name="no_shipping" value="1" />
         <input type="hidden" name="return" value="" />
         <input type="hidden" name="cancel_return" value="" />
         <button class="cta-btn" type="submit">
-          <span data-lang="en">Reserve my spot · 50 EUR</span>
-          <span data-lang="es">Reservar mi plaza · 50 EUR</span>
+          <span data-lang="en">Book my session · 49,50€</span>
+          <span data-lang="es">Reservar mi sesión · 49,50€</span>
         </button>
       </form>
-      <p class="pay-note"><span data-lang="en">Secure payment via PayPal</span><span data-lang="es">Pago seguro con PayPal</span></p>
-    </div>
-
-    <!-- PRIVATE -->
-    <div class="tier">
-      <div class="tier-name"><span data-lang="en">Private session</span><span data-lang="es">Sesión privada</span></div>
-      <div class="tier-price">200&nbsp;EUR</div>
-      <div class="tier-sub"><span data-lang="en">We drive your computer and show you in place.</span><span data-lang="es">Manejamos tu computador y te mostramos en vivo.</span></div>
-      <ul>
-        <li><span data-lang="en">One-on-one over remote desktop: we take each step on your screen</span><span data-lang="es">Uno a uno por escritorio remoto: damos cada paso en tu pantalla</span></li>
-        <li><span data-lang="en">Everything in the group session, at your own pace</span><span data-lang="es">Todo lo de la sesión en grupo, a tu propio ritmo</span></li>
-        <li><span data-lang="en">Guaranteed shipped site + full recording</span><span data-lang="es">Sitio publicado garantizado + grabación completa</span></li>
-      </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pay-form" data-amount="200.00" data-item="simpleauto Private session" onsubmit="return payAndGo(this,'private','200')">
-        <input type="hidden" name="cmd" value="_xclick" />
-        <input type="hidden" name="business" value="" />
-        <input type="hidden" name="item_name" value="" />
-        <input type="hidden" name="currency_code" value="EUR" />
-        <input type="hidden" name="amount" value="200.00" />
-        <input type="hidden" name="no_shipping" value="1" />
-        <input type="hidden" name="return" value="" />
-        <input type="hidden" name="cancel_return" value="" />
-        <button class="cta-btn ghost" type="submit">
-          <span data-lang="en">Book a private session · 200 EUR</span>
-          <span data-lang="es">Reservar sesión privada · 200 EUR</span>
-        </button>
-      </form>
-      <p class="pay-note"><span data-lang="en">Secure payment via PayPal</span><span data-lang="es">Pago seguro con PayPal</span></p>
+      <p class="pay-note"><span data-lang="en">Secure payment via PayPal · then pick your date</span><span data-lang="es">Pago seguro con PayPal · luego eliges tu fecha</span></p>
     </div>
 
   </section>
@@ -450,8 +425,8 @@
         <span><span data-lang="en">Is the domain included?</span><span data-lang="es">¿El dominio está incluido?</span></span>
       </button>
       <div class="faq-a"><div class="faq-a-inner">
-        <span data-lang="en">The build is a one-time payment. Your own domain (yourname.com) costs about 20 EUR/year, paid directly to the registrar — never to us.</span>
-        <span data-lang="es">La construcción es un pago único. Tu propio dominio (tunombre.com) cuesta unos 20 EUR/año, que pagas directamente al registrador, nunca a nosotros.</span>
+        <span data-lang="en">The build is a one-time payment. Your own domain (yourname.com) costs about 20€/year, paid directly to the registrar — never to us.</span>
+        <span data-lang="es">La construcción es un pago único. Tu propio dominio (tunombre.com) cuesta unos 20€/año, que pagas directamente al registrador, nunca a nosotros.</span>
       </div></div>
     </div>
 
@@ -525,7 +500,6 @@
 
 
   function payAndGo(form, tier, amount) {
-    SA.track('buy_click', { tier: tier, amount: amount });
     var base = window.SA_SITE_BASE || (location.origin + location.pathname.replace(/[^/]*$/, ''));
     if (base.slice(-1) !== '/') base += '/';
     setTimeout(function() { window.location.href = base + 'booking.html'; }, 250);

@@ -4,8 +4,9 @@
     {
       "name": "simple-auto",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "3333", "."],
-      "port": 3333
+      "runtimeArgs": ["serve", "."],
+      "port": 3333,
+      "autoPort": true
     }
   ]
 }
