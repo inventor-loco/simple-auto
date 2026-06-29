@@ -12,8 +12,9 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="sa-shared.css" />
   <script>
-    window.SA_LEAD_ENDPOINT = '';
+    window.SA_LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz_M9z-28pFauBVz43rA_w0xviHI95TKggHR16plL7xVQbp-7Z8BegrCaNcx_s6g7r5qw/exec';
     window.SA = {
       getLang:   function(){ try { return localStorage.getItem('sa-lang') || 'es'; } catch(e){ return 'es'; } },
       saveLang:  function(l){ try { localStorage.setItem('sa-lang', l); } catch(e){} },
@@ -26,86 +27,12 @@
           d.append('ts', new Date().toISOString());
           d.append('page', location.pathname.split('/').pop() || 'index.html');
           if (extra) { for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) d.append(k, extra[k]); } }
-          fetch('https://formspree.io/f/mkoydwkl', { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
+          fetch(window.SA_LEAD_ENDPOINT, { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
         } catch(e) {}
       }
     };
   </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --mono:     'Fira Code', monospace;
-      --display:  'Syne', sans-serif;
-      --body:     'DM Sans', sans-serif;
-      --headline: 'Bricolage Grotesque', sans-serif;
-      --wordmark: 'Space Grotesk', sans-serif;
-
-      --bg:           #F7F7F7;
-      --surface:      #FFFFFF;
-      --border:       #DDDDDD;
-      --text:         #111111;
-      --muted:        #888888;
-      --accent:       #D0021B;
-      --simple:       #111111;
-      --auto:         #D0021B;
-      --on-accent:    #FFFFFF;
-      --input-bg:     #FFFFFF;
-      --glow:         rgba(208,2,27,0.06);
-      --accent-shadow:rgba(208,2,27,0.22);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--body);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* NAV */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.4rem 2.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: var(--wordmark);
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-    }
-    .nav-logo .logo-simple { color: var(--simple); }
-    .nav-logo .logo-auto   { color: var(--auto); }
-
-    .nav-controls { display: flex; align-items: center; gap: 0.6rem; }
-
-    .lang-toggle {
-      display: flex;
-      gap: 0.25rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 3px;
-    }
-    .lang-btn {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      padding: 0.28rem 0.65rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      color: var(--muted);
-      background: transparent;
-      transition: all 0.2s;
-    }
-    .lang-btn.active { background: var(--accent); color: var(--on-accent); font-weight: 600; }
-
     /* HERO */
     .hero {
       display: flex;
@@ -220,7 +147,7 @@
       margin-right: 0.2rem;
     }
 
-    .price-block { margin-bottom: 1.6rem; }
+    .price-block { margin-bottom: 1.6rem; text-align: center; }
     .price-from {
       font-family: var(--mono);
       font-size: 0.7rem;
@@ -453,62 +380,206 @@
       border-bottom: 1px solid var(--accent);
     }
 
-    /* FOOTER NAP */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem 2rem;
+    /* HERO CTAS */
+    .trust-line {
       font-family: var(--mono);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+    }
+    .subheadline {
+      font-size: clamp(1rem, 2vw, 1.18rem);
       color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
     }
-    .footer-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: start;
+    .supporting-text {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 440px;
+      line-height: 1.65;
+      margin-bottom: 2.2rem;
     }
-    .footer-nap { display: flex; flex-direction: column; gap: 0.55rem; }
-    .footer-brand {
-      font-family: var(--wordmark);
-      font-size: 1rem;
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      background: var(--accent);
+      color: var(--on-accent);
+      border-radius: 8px;
+      font-family: var(--display);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.2rem;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .footer-brand .logo-simple { color: var(--simple); }
-    .footer-brand .logo-auto   { color: var(--auto); }
-    .footer-nap a { color: var(--muted); text-decoration: none; }
-    .footer-nap a:hover { color: var(--accent); }
-    .footer-map {
-      border-radius: 10px;
-      overflow: hidden;
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-shadow); }
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      background: transparent;
+      color: var(--text);
       border: 1px solid var(--border);
-      height: 160px;
+      border-radius: 8px;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
     }
-    .footer-map iframe {
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* AUDIENCE SECTION */
+    .audience-section {
       width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-      filter: grayscale(30%);
+      padding: 3.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .section-heading {
+      font-family: var(--headline);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      max-width: 600px;
+      margin: 0 auto 1.8rem;
+    }
+    .chip {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 0.9rem;
+    }
+    .audience-note {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.65;
     }
 
-    /* i18n */
-    [data-lang]      { display: none; }
-    span[data-lang]  { display: none; }
-    .lang-en [data-lang="en"],
-    .lang-es [data-lang="es"]       { display: block; }
-    .lang-en span[data-lang="en"],
-    .lang-es span[data-lang="es"]   { display: inline; }
+    /* BENEFITS SECTION */
+    .benefits-section {
+      width: 100%;
+      padding: 3.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .benefits-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 460px;
+      width: 100%;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .benefits-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .benefits-list li::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--accent);
+      border-top: none;
+      border-left: none;
+      transform: rotate(-45deg);
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+      margin-right: 0.2rem;
+    }
+
+    /* PROCESS SECTION */
+    .process-section {
+      width: 100%;
+      padding: 3.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .process-steps {
+      display: flex;
+      gap: 1.5rem;
+      margin: 2.5rem 0 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 700px;
+    }
+    .process-step {
+      flex: 1;
+      min-width: 160px;
+      max-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .step-num {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .step-label {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* SHOT CAPTION */
+    .shot-caption {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      line-height: 1.5;
+    }
+
+    /* FORM TAGLINE */
+    .form-tagline {
+      font-size: 0.95rem;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 1.8rem;
+      line-height: 1.6;
+    }
 
     @media (max-width: 600px) {
-      nav { padding: 1rem 1.2rem; }
       .hero { padding: 3rem 1.2rem 2.5rem; }
       .card { padding: 1.8rem 1.2rem; }
-      .footer-inner { grid-template-columns: 1fr; }
-      .footer-map { height: 140px; }
     }
   </style>
 </head>
@@ -528,28 +599,99 @@
   </div>
 </nav>
 
-<!-- HERO: headline + tagline only -->
+<!-- HERO -->
 <section class="hero">
   <h1 class="headline">
     <span class="solid">
-      <span data-lang="en">Your idea deserves<br>to exist online.</span>
-      <span data-lang="es">Tu idea merece<br>existir en internet.</span>
+      <span data-lang="en">Get Your Business Online</span>
+      <span data-lang="es">Pon tu negocio en internet</span>
     </span>
     <br>
     <span class="hollow">
-      <span data-lang="en">Let's build it today.</span>
-      <span data-lang="es">La construimos hoy.</span>
+      <span data-lang="en">in Less Than 2 Hours.</span>
+      <span data-lang="es">en menos de 2 horas.</span>
     </span>
   </h1>
 
-  <p class="tagline">
-    <span data-lang="en">Join the workshop or book a private session and we build your website together. Your idea will be online in less than <strong>2 hours, guaranteed.</strong></span>
-    <span data-lang="es">Únete al taller o reserva una sesión privada y construimos tu sitio web juntos. Tu idea estará en internet en menos de <strong>2 horas, garantizado.</strong></span>
+  <p class="subheadline">
+    <span data-lang="en">Professional websites for local businesses, without the cost, delays, or complexity of a traditional agency.</span>
+    <span data-lang="es">Sitios web profesionales para negocios locales, sin el coste, los retrasos ni la complejidad de una agencia tradicional.</span>
+  </p>
+
+  <p class="supporting-text">
+    <span data-lang="en">Work directly with experienced technology consultants to create and launch your website the same day.</span>
+    <span data-lang="es">Trabaja directamente con consultores tecnológicos con experiencia para crear y publicar tu sitio web el mismo día.</span>
+  </p>
+
+  <div class="hero-ctas">
+    <a class="btn-primary" href="details.html">
+      <span data-lang="en">See How It Works</span>
+      <span data-lang="es">Ver cómo funciona</span>
+    </a>
+    <a class="btn-secondary" href="#portfolio">
+      <span data-lang="en">View Example Websites</span>
+      <span data-lang="es">Ver sitios de ejemplo</span>
+    </a>
+  </div>
+</section>
+
+<!-- AUDIENCE SECTION -->
+<section class="audience-section">
+  <h2 class="section-heading">
+    <span data-lang="en">Built for Local Businesses</span>
+    <span data-lang="es">Diseñado para Negocios Locales</span>
+  </h2>
+  <div class="chips">
+    <span class="chip"><span data-lang="en">Therapists</span><span data-lang="es">Terapeutas</span></span>
+    <span class="chip"><span data-lang="en">Consultants</span><span data-lang="es">Consultores</span></span>
+    <span class="chip"><span data-lang="en">Tradespeople</span><span data-lang="es">Autónomos y oficios</span></span>
+    <span class="chip"><span data-lang="en">Restaurants &amp; cafés</span><span data-lang="es">Restaurantes y cafeterías</span></span>
+    <span class="chip"><span data-lang="en">Beauty businesses</span><span data-lang="es">Estética y belleza</span></span>
+    <span class="chip">Freelancers</span>
+    <span class="chip">Coaches</span>
+  </div>
+  <p class="audience-note">
+    <span data-lang="en">If you need a professional online presence quickly, this service is for you.</span>
+    <span data-lang="es">Si necesitas una presencia profesional en internet rápidamente, este servicio es para ti.</span>
   </p>
 </section>
 
+<!-- BENEFITS SECTION -->
+<section class="benefits-section">
+  <h2 class="section-heading">
+    <span data-lang="en">Why Businesses Choose SimpleAuto</span>
+    <span data-lang="es">Por qué los negocios eligen SimpleAuto</span>
+  </h2>
+  <ul class="benefits-list">
+    <li>
+      <span data-lang="en">Launch your website fast. Same day, under 2 hours.</span>
+      <span data-lang="es">Lanza tu sitio web rápido. El mismo día, en menos de 2 horas.</span>
+    </li>
+    <li>
+      <span data-lang="en">No technical experience required.</span>
+      <span data-lang="es">No necesitas experiencia técnica.</span>
+    </li>
+    <li>
+      <span data-lang="en">Work directly with an expert.</span>
+      <span data-lang="es">Trabajas directamente con un experto.</span>
+    </li>
+    <li>
+      <span data-lang="en">Avoid expensive agency fees.</span>
+      <span data-lang="es">Sin los costes de una agencia tradicional.</span>
+    </li>
+    <li>
+      <span data-lang="en">Keep full ownership of your website.</span>
+      <span data-lang="es">El sitio web es tuyo, completamente.</span>
+    </li>
+    <li>
+      <span data-lang="en">Get online and start building credibility immediately.</span>
+      <span data-lang="es">Empieza a construir credibilidad en internet hoy mismo.</span>
+    </li>
+  </ul>
+</section>
+
 <!-- SCREENSHOTS CAROUSEL -->
-<div class="screenshots">
+<div class="screenshots" id="portfolio">
   <div class="screenshots-label">
     <span data-lang="en">Websites already built</span>
     <span data-lang="es">Sitios ya construidos</span>
@@ -566,6 +708,10 @@
         <div class="shot-body">
           <a class="shot-site" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">psicologiabajocoste.com</a>
           <div class="shot-name">Psicología Bajo Coste</div>
+          <div class="shot-caption">
+            <span data-lang="en">Online psychology practice · attract clients via search</span>
+            <span data-lang="es">Consulta de psicología online · captar clientes por búsqueda</span>
+          </div>
         </div>
       </div>
 
@@ -578,6 +724,10 @@
         <div class="shot-body">
           <a class="shot-site" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">luce-destate.vercel.app</a>
           <div class="shot-name">Luce d'Estate: Yoga Retreat</div>
+          <div class="shot-caption">
+            <span data-lang="en">Yoga retreat · promote seasonal events</span>
+            <span data-lang="es">Retiro de yoga · promocionar eventos de temporada</span>
+          </div>
         </div>
       </div>
 
@@ -590,6 +740,10 @@
         <div class="shot-body">
           <a class="shot-site" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">excel-qkd.vercel.app</a>
           <div class="shot-name">EXCEL-QKD: Research Project</div>
+          <div class="shot-caption">
+            <span data-lang="en">Research project · professional presence for grant visibility</span>
+            <span data-lang="es">Proyecto de investigación · presencia profesional para visibilidad académica</span>
+          </div>
         </div>
       </div>
 
@@ -602,24 +756,10 @@
 <section class="cta-section">
   <div class="card">
 
-    <ul class="features">
-      <li>
-        <span data-lang="en">Website live on the internet</span>
-        <span data-lang="es">Sitio web publicado en internet</span>
-      </li>
-      <li>
-        <span data-lang="en">Your own address (yourname.com)<br><span style="color:var(--muted);font-size:0.82em;">domain approx. 20 EUR/year</span></span>
-        <span data-lang="es">Tu propia dirección (tunombre.com)<br><span style="color:var(--muted);font-size:0.82em;">dominio aprox. 20 EUR/año</span></span>
-      </li>
-      <li>
-        <span data-lang="en">AI tool on your computer to edit it yourself</span>
-        <span data-lang="es">Herramienta de IA en tu computador para editarlo</span>
-      </li>
-      <li>
-        <span data-lang="en">One payment. Optional subscription for site maintenance and improvement.</span>
-        <span data-lang="es">Un solo pago. Suscripción opcional para mantenimiento y mejora del sitio.</span>
-      </li>
-    </ul>
+    <p class="form-tagline">
+      <span data-lang="en">One session. One payment. Your website goes live the same day.</span>
+      <span data-lang="es">Una sesión. Un pago. Tu sitio web queda publicado el mismo día.</span>
+    </p>
 
     <div class="price-block">
       <span class="price-from">
@@ -662,7 +802,42 @@
   </div>
 </section>
 
-<!-- REVIEWS CAROUSEL (Natalia only for now) -->
+<!-- PROCESS SECTION -->
+<section class="process-section">
+  <h2 class="section-heading">
+    <span data-lang="en">Simple Process. Fast Results.</span>
+    <span data-lang="es">Proceso simple. Resultados automáticos.</span>
+  </h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <div class="step-label">
+        <span data-lang="en">Tell us about your business.</span>
+        <span data-lang="es">Cuéntanos sobre tu negocio.</span>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <div class="step-label">
+        <span data-lang="en">We build your website together.</span>
+        <span data-lang="es">Construimos tu sitio web juntos.</span>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <div class="step-label">
+        <span data-lang="en">Launch your new website.</span>
+        <span data-lang="es">Publicamos tu nuevo sitio.</span>
+      </div>
+    </div>
+  </div>
+  <a class="btn-primary" href="details.html">
+    <span data-lang="en">See the full process</span>
+    <span data-lang="es">Ver el proceso completo</span>
+  </a>
+</section>
+
+<!-- REVIEWS CAROUSEL -->
 <div class="reviews">
   <div class="reviews-label">
     <span data-lang="en">What clients say</span>
@@ -697,10 +872,9 @@
   <div class="footer-inner">
     <div class="footer-nap">
       <div class="footer-brand"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></div>
-      <div>consultores tecnológicos desde 2015.</div>
+      <div><span data-lang="en">Trusted technology consultants helping businesses since 2015.</span><span data-lang="es">Consultores tecnológicos de confianza ayudando a negocios desde 2015.</span></div>
       <div><a href="tel:+34677028042">+34 677 028 042</a></div>
       <div>C. Practicante Ignacio Rodríguez, Edificio Polivalente II,<br>Oficina 209, 35017 Las Palmas de Gran Canaria, Las Palmas</div>
-      <div><a href="https://share.google/Ad9i2wlXYO2VP8jZi" target="_blank" rel="noopener">Google Business Profile</a></div>
     </div>
     <div class="footer-map">
       <a href="https://maps.app.goo.gl/UGoYU6PrfWXQBvTcA" target="_blank" rel="noopener" style="display:block;position:relative;">
@@ -774,23 +948,12 @@
     data.append('lang', lang);
     data.append('message', 'Landing page lead — requested the details.');
 
-    var appsScript = window.SA_LEAD_ENDPOINT;
-    var tasks = [];
-    if (appsScript) {
-      tasks.push(fetch(appsScript, { method: 'POST', mode: 'no-cors', body: data }).catch(function(){}));
-    }
-    tasks.push(
-      fetch('https://formspree.io/f/mkoydwkl', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).catch(function(){})
-    );
-
     SA.track('lead_submitted');
-    Promise.all(tasks).then(function() {
-      window.location.href = 'details.html';
-    });
+    fetch(window.SA_LEAD_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+      .catch(function(){})
+      .then(function() {
+        window.location.href = 'details.html';
+      });
   }
 
   document.getElementById('email').addEventListener('keydown', function(e) {
