@@ -59,6 +59,19 @@
 
     .section-h { font-family: var(--display); font-weight: 700; font-size: 1.4rem; letter-spacing: -0.02em; margin: 0 0 1.2rem; }
 
+    /* TRUST BADGES */
+    .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; max-width: 640px; margin: 0 auto 3rem; }
+    .badge {
+      font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text); background: var(--surface); border: 1px solid var(--border);
+      border-radius: 999px; padding: 0.5rem 0.9rem; display: inline-flex; align-items: center; gap: 0.45rem;
+    }
+    .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* GUARANTEE LINE UNDER PRICE */
+    .price-assurance { font-size: 0.85rem; text-align: center; color: var(--text); margin-top: 0.9rem; line-height: 1.5; }
+    .price-assurance b { color: var(--accent); }
+
     /* WHAT YOU GET */
     .get {
       background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
@@ -231,6 +244,16 @@
     <span data-lang="es">Tú traes la idea. Nos sentamos juntos y tu sitio web queda publicado el mismo día, en menos de <strong>2 horas</strong>. Un solo pago, sin suscripciones obligatorias.</span>
   </p>
 
+  <!-- TRUST BADGES -->
+  <div class="badges">
+    <span class="badge"><span data-lang="en">Live the same day</span><span data-lang="es">En línea el mismo día</span></span>
+    <span class="badge"><span data-lang="en">Under 2 hours</span><span data-lang="es">En menos de 2 horas</span></span>
+    <span class="badge"><span data-lang="en">One payment</span><span data-lang="es">Un solo pago</span></span>
+    <span class="badge"><span data-lang="en">You own it fully</span><span data-lang="es">Es 100% tuyo</span></span>
+    <span class="badge"><span data-lang="en">Bilingual EN / ES</span><span data-lang="es">Bilingüe ES / EN</span></span>
+    <span class="badge"><span data-lang="en">Las Palmas de GC</span><span data-lang="es">Las Palmas de GC</span></span>
+  </div>
+
   <!-- WHAT YOU GET -->
   <section class="get">
     <h2 class="section-h">
@@ -352,6 +375,10 @@
         </button>
       </form>
       <p class="pay-note"><span data-lang="en">Secure payment via PayPal · then pick your date</span><span data-lang="es">Pago seguro con PayPal · luego eliges tu fecha</span></p>
+      <p class="price-assurance">
+        <span data-lang="en"><b>If your site isn't live by the end of the session, you pay nothing.</b> Full refund, no fine print.</span>
+        <span data-lang="es"><b>Si tu sitio no está en línea al terminar la sesión, no pagas nada.</b> Reembolso completo, sin letra pequeña.</span>
+      </p>
     </div>
 
   </section>
@@ -383,6 +410,39 @@
     <div class="step"><div class="step-text"><span data-lang="en"><b>We build it together.</b> Same day, your website is live.</span><span data-lang="es"><b>Lo construimos juntos.</b> El mismo día, tu sitio web queda en línea.</span></div></div>
   </section>
 
+  <!-- SOCIAL PROOF -->
+  <h2 class="section-h" style="text-align:center">
+    <span data-lang="en">Why people book</span>
+    <span data-lang="es">Por qué la gente reserva</span>
+  </h2>
+  <section class="proof">
+    <div class="proof-grid">
+      <div class="quote-card">
+        <!-- TODO: needs real client testimonial (name, business, ideally a concrete result — leads/calls/time saved) -->
+        <p class="quote-text">
+          <span data-lang="en">“No agency, no waiting weeks, no monthly bill. We sat down and my website was online the same afternoon — and I can edit it myself.”</span>
+          <span data-lang="es">«Sin agencia, sin esperar semanas, sin cuota mensual. Nos sentamos y mi web estaba en línea esa misma tarde, y puedo editarla yo mismo.»</span>
+        </p>
+        <div class="quote-author">
+          <span data-lang="en">TODO — real client name &amp; business</span>
+          <span data-lang="es">TODO — nombre y negocio real del cliente</span>
+        </div>
+      </div>
+      <div class="built">
+        <div class="built-label">
+          <span data-lang="en">What you're paying for</span>
+          <span data-lang="es">Por qué pagas</span>
+        </div>
+        <div class="built-list">
+          <a href="#pricing"><span data-lang="en">Same-day launch, no agency markup</span><span data-lang="es">Lanzamiento el mismo día, sin sobrecoste de agencia</span></a>
+          <a href="#pricing"><span data-lang="en">No coding skill needed — built with you</span><span data-lang="es">Sin saber programar — construido contigo</span></a>
+          <a href="#pricing"><span data-lang="en">You keep the site, the domain and the tools</span><span data-lang="es">Te quedas el sitio, el dominio y las herramientas</span></a>
+          <a href="#pricing"><span data-lang="en">Direct access to the person who builds it</span><span data-lang="es">Acceso directo a quien lo construye</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <h2 class="section-h" style="text-align:center">
     <span data-lang="en">Questions, answered</span>
@@ -392,11 +452,51 @@
 
     <div class="faq-item">
       <button class="faq-q" type="button">
-        <span><span data-lang="en">Do I need to know how to code?</span><span data-lang="es">¿Necesito saber programar?</span></span>
+        <span><span data-lang="en">What if I don't like the design?</span><span data-lang="es">¿Y si no me gusta el diseño?</span></span>
       </button>
       <div class="faq-a"><div class="faq-a-inner">
-        <span data-lang="en">No. That's the whole point — we sit down together and you leave with a site you understand and can edit on your own.</span>
-        <span data-lang="es">No. Ese es justamente el punto: nos sentamos juntos y te vas con un sitio que entiendes y puedes editar por tu cuenta.</span>
+        <span data-lang="en">You're in the room the whole time. We change colors, text and layout live, together, until it looks right to you — before it goes live. And if the site isn't published by the end, you get a full refund.</span>
+        <span data-lang="es">Estás presente todo el tiempo. Cambiamos colores, textos y estructura en vivo, juntos, hasta que te guste, antes de publicarlo. Y si el sitio no queda publicado al terminar, te devolvemos el 100%.</span>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" type="button">
+        <span><span data-lang="en">Do I need any technical knowledge?</span><span data-lang="es">¿Necesito conocimientos técnicos?</span></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <span data-lang="en">None. That's the whole point. We sit down together and you leave with a site you understand — plus a tool on your computer to edit it yourself, no coding required.</span>
+        <span data-lang="es">Ninguno. Ese es justamente el punto. Nos sentamos juntos y te vas con un sitio que entiendes, y con una herramienta en tu computador para editarlo tú mismo, sin programar.</span>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" type="button">
+        <span><span data-lang="en">After launch — do I own the site and domain outright?</span><span data-lang="es">Tras publicar, ¿el sitio y el dominio son míos del todo?</span></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <span data-lang="en">Yes. The site, the domain and the editing tool are yours to keep. There's no lock-in and no mandatory subscription — one payment and you own everything. Maintenance is optional, only if you want it.</span>
+        <span data-lang="es">Sí. El sitio, el dominio y la herramienta de edición son tuyos para siempre. Sin ataduras ni suscripción obligatoria: un pago y todo es tuyo. El mantenimiento es opcional, solo si lo quieres.</span>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" type="button">
+        <span><span data-lang="en">How long does it actually take, start to finish?</span><span data-lang="es">¿Cuánto tarda de verdad, de principio a fin?</span></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <span data-lang="en">One session, under 2 hours, and your site is live the same day. No waiting weeks for an agency to come back to you.</span>
+        <span data-lang="es">Una sesión, en menos de 2 horas, y tu sitio queda en línea el mismo día. Sin esperar semanas a que una agencia te responda.</span>
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" type="button">
+        <span><span data-lang="en">What's included in the price, and what costs extra?</span><span data-lang="es">¿Qué incluye el precio y qué cuesta aparte?</span></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <span data-lang="en"><b>Included in one payment:</b> the session, the published site, the copy written with you, the contact form, the editing tool and the recording. <b>The only extra</b> is your own domain (yourname.com), about 20€/year paid directly to the registrar — never to us. Hosting is free.</span>
+        <span data-lang="es"><b>Incluido en un pago:</b> la sesión, el sitio publicado, los textos redactados contigo, el formulario de contacto, la herramienta de edición y la grabación. <b>Lo único aparte</b> es tu propio dominio (tunombre.com), unos 20€/año pagados directamente al registrador, nunca a nosotros. El alojamiento es gratuito.</span>
       </div></div>
     </div>
 
@@ -407,46 +507,6 @@
       <div class="faq-a"><div class="faq-a-inner">
         <span data-lang="en">Bring whatever you have. We write the copy with you during the session and help you make the most of your material.</span>
         <span data-lang="es">Trae lo que tengas. Escribimos los textos contigo durante la sesión y te ayudamos a aprovechar tu material.</span>
-      </div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span><span data-lang="en">Can I change it myself later?</span><span data-lang="es">¿Puedo cambiarlo yo después?</span></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-inner">
-        <span data-lang="en">Yes. You leave with a tool on your computer to keep editing the site whenever you want, no extra cost.</span>
-        <span data-lang="es">Sí. Te vas con una herramienta en tu computador para seguir editando el sitio cuando quieras, sin coste adicional.</span>
-      </div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span><span data-lang="en">Is the domain included?</span><span data-lang="es">¿El dominio está incluido?</span></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-inner">
-        <span data-lang="en">The build is a one-time payment. Your own domain (yourname.com) costs about 20€/year, paid directly to the registrar — never to us.</span>
-        <span data-lang="es">La construcción es un pago único. Tu propio dominio (tunombre.com) cuesta unos 20€/año, que pagas directamente al registrador, nunca a nosotros.</span>
-      </div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span><span data-lang="en">Is there a mandatory subscription?</span><span data-lang="es">¿Hay alguna suscripción obligatoria?</span></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-inner">
-        <span data-lang="en">No. One payment and the site is yours. Maintenance and improvements are an optional subscription, only if you want it.</span>
-        <span data-lang="es">No. Un pago y el sitio es tuyo. El mantenimiento y las mejoras son una suscripción opcional, solo si la quieres.</span>
-      </div></div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-q" type="button">
-        <span><span data-lang="en">How long does it take?</span><span data-lang="es">¿Cuánto tarda?</span></span>
-      </button>
-      <div class="faq-a"><div class="faq-a-inner">
-        <span data-lang="en">Under 2 hours. Your site is live the same day.</span>
-        <span data-lang="es">Menos de 2 horas. Tu sitio queda publicado el mismo día.</span>
       </div></div>
     </div>
 
