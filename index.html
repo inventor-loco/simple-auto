@@ -230,40 +230,7 @@
     .thankyou-title { font-family: var(--display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.35rem; }
     .thankyou-sub { font-size: 0.87rem; color: var(--muted); }
 
-    /* SHARED CAROUSEL */
-    .carousel-track-wrap {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
-    }
-    .carousel-track-wrap::before,
-    .carousel-track-wrap::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 120px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .carousel-track-wrap::before {
-      left: 0;
-      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
-    }
-    .carousel-track-wrap::after {
-      right: 0;
-      background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
-    }
-    .carousel-track {
-      display: flex;
-      gap: 1.2rem;
-      width: max-content;
-      animation: sa-scroll linear infinite;
-    }
-    .carousel-track:hover { animation-play-state: paused; }
-    @keyframes sa-scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
+    /* Shared carousel + reviews CSS live in sa-shared.css */
 
     /* SCREENSHOT CARDS */
     .shot-card {
@@ -332,67 +299,6 @@
       font-weight: 600;
       color: var(--text);
       margin-top: 0.2rem;
-    }
-
-    /* REVIEW CAROUSEL */
-    .reviews {
-      width: 100%;
-      padding: 3rem 0 3rem;
-      border-top: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .reviews-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .review-card {
-      flex-shrink: 0;
-      width: clamp(260px, 75vw, 380px);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      text-align: left;
-    }
-    .review-body { padding: 1.4rem 1.6rem 1.6rem; }
-    .review-site {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.4rem;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .review-site:hover { text-decoration: underline; }
-    .review-project {
-      font-family: var(--display);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-    .review-text {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
-      font-style: italic;
-      margin-bottom: 1.2rem;
-    }
-    .review-stars { color: var(--accent); font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-    .review-author { font-size: 0.82rem; font-weight: 500; color: var(--text); }
-    .verified-link {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--accent);
-      letter-spacing: 0.06em;
-      text-decoration: none;
-      border-bottom: 1px solid var(--accent);
     }
 
     /* HERO CTAS */
@@ -848,34 +754,8 @@
   </a>
 </section>
 
-<!-- REVIEWS CAROUSEL -->
-<div class="reviews">
-  <div class="reviews-label">
-    <span data-lang="en">What clients say</span>
-    <span data-lang="es">Lo que dicen los clientes</span>
-  </div>
-  <div class="carousel-track-wrap">
-    <div class="carousel-track" id="reviews-track">
-
-      <div class="review-card">
-        <div class="review-body">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">"Increíble servicio. Muy eficaz y muy cercano y agradable, se adelantaba a las demandas y necesidades que tenía y aportó incontables soluciones novedosas y creativas. Volveré a acudir a él sin duda."</div>
-          <div class="review-author">Natalia Sierra &nbsp;<a class="verified-link" href="https://maps.app.goo.gl/hv4825F8jdd6TdKe6" target="_blank" rel="noopener">verificado</a></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-body">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">"Vicente is a great web designer and professional. I highly recommend working with him. He helped with my website and I am really happy with the results."</div>
-          <div class="review-author">Matías Obando Ruiz &nbsp;<a class="verified-link" href="https://maps.app.goo.gl/Xt7aHorCtVC6YFfu5" target="_blank" rel="noopener">verified</a></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
+<!-- REVIEWS CAROUSEL (centralized in sa-reviews.js) -->
+<script src="sa-reviews.js"></script>
 
 <script src="sa-footer.js"></script>
 
@@ -966,7 +846,6 @@
   }
 
   initBanner('shots-track', 24);
-  initBanner('reviews-track', 20);
 </script>
 </body>
 </html>
