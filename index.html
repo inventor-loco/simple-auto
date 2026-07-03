@@ -557,7 +557,30 @@
 </script>
 
 <nav>
-  <div class="nav-logo"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></div>
+  <a class="nav-logo" href="index.html"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></a>
+  <div class="nav-center">
+    <a href="index.html">
+      <span data-lang="en">Home</span>
+      <span data-lang="es">Inicio</span>
+    </a>
+    <a href="details.html">
+      <span data-lang="en">How it works</span>
+      <span data-lang="es">Cómo funciona</span>
+    </a>
+    <a href="#portfolio">
+      <span data-lang="en">Portfolio</span>
+      <span data-lang="es">Portafolio</span>
+    </a>
+    <a href="#contact">
+      <span data-lang="en">Contact</span>
+      <span data-lang="es">Contacto</span>
+    </a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <div class="nav-controls">
     <div class="lang-toggle">
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -980,6 +1003,21 @@
     });
     SA.saveLang(l);
   }
+
+  function toggleMobileNav() {
+    var nav = document.querySelector('.nav-center');
+    var hamburger = document.querySelector('.hamburger');
+    nav.classList.toggle('mobile-open');
+    hamburger.classList.toggle('active');
+  }
+
+  // Close mobile nav when clicking a link
+  document.querySelectorAll('.nav-center a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.querySelector('.nav-center').classList.remove('mobile-open');
+      document.querySelector('.hamburger').classList.remove('active');
+    });
+  });
 
   function setNote(text, isError) {
     var note = document.getElementById('form-note');

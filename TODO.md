@@ -34,4 +34,26 @@ They display fine in a real browser.
 
 Captured and bundled already: `psicologiabajocoste.png`, `excelqkd.png`.
 
+## CTA — Email & Privacy Policy
+
+Lead capture flow that emails details on privacy policy acceptance.
+
+- [ ] **Privacy policy acceptance** — users must accept privacy policy in form before
+      receiving details. Add checkbox validation to lead form.
+- [ ] **Zoho email integration** — configure Zoho-hosted email account (app key
+      stored in Apps Script env) as primary sender for details email. Handle rate
+      limits gracefully.
+- [ ] **Gmail fallback** — if Zoho hits rate limit, fall back to sending via Gmail
+      account (`vmat.icaza@gmail.com`).
+- [ ] **Details email template** — create email formatter in `apps-script/Code.gs`
+      that:
+  - Extracts details content from website HTML (`details.html`), so email
+        automatically updates when page changes
+  - Respects user's language selection from form (format in ES or EN)
+  - Includes thank-you message + "here are your details" messaging
+  - Links to booking page (`booking.html`)
+  - Matches the visual design/layout of details page
+- [ ] **Email trigger** — Apps Script sends details email immediately after form
+      submission + privacy policy acceptance.
+
 Suggested size: ~800×480, PNG. The thumbnail crops to the top of the image.

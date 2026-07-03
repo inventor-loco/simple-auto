@@ -77,6 +77,29 @@
 
 <nav>
   <a class="nav-logo" href="index.html"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></a>
+  <div class="nav-center">
+    <a href="index.html">
+      <span data-lang="en">Home</span>
+      <span data-lang="es">Inicio</span>
+    </a>
+    <a href="details.html">
+      <span data-lang="en">How it works</span>
+      <span data-lang="es">Cómo funciona</span>
+    </a>
+    <a href="index.html#portfolio">
+      <span data-lang="en">Portfolio</span>
+      <span data-lang="es">Portafolio</span>
+    </a>
+    <a href="index.html#contact">
+      <span data-lang="en">Contact</span>
+      <span data-lang="es">Contacto</span>
+    </a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <div class="nav-controls">
     <div class="lang-toggle">
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -87,16 +110,16 @@
 
 <main>
   <div class="eyebrow">
-    <span data-lang="en">Payment received</span>
-    <span data-lang="es">Pago recibido</span>
+    <span data-lang="en">Book your session</span>
+    <span data-lang="es">Reserva tu sesión</span>
   </div>
   <h1 class="page-title">
-    <span data-lang="en">You're in. <span class="accent">Lock your date.</span></span>
-    <span data-lang="es">Ya estás dentro. <span class="accent">Reserva tu fecha.</span></span>
+    <span data-lang="en"><span class="accent">Pick your date.</span> Let's build.</span>
+    <span data-lang="es"><span class="accent">Elige tu fecha.</span> A construir.</span>
   </h1>
   <p class="lede">
-    <span data-lang="en">Pick a session below. Please book with the <strong>same email you paid with</strong> so we can match your spot.</span>
-    <span data-lang="es">Elige una sesión abajo. Reserva con el <strong>mismo correo con el que pagaste</strong> para poder asignar tu plaza.</span>
+    <span data-lang="en">Choose a time that works for you. After booking, we'll send you the invoice and next steps.</span>
+    <span data-lang="es">Elige una hora que te venga bien. Tras reservar, te enviaremos la factura y los siguientes pasos.</span>
   </p>
 
   <div id="booking-mount"></div>
@@ -128,6 +151,21 @@
     });
     SA.saveLang(l);
   }
+
+  function toggleMobileNav() {
+    var nav = document.querySelector('.nav-center');
+    var hamburger = document.querySelector('.hamburger');
+    nav.classList.toggle('mobile-open');
+    hamburger.classList.toggle('active');
+  }
+
+  // Close mobile nav when clicking a link
+  document.querySelectorAll('.nav-center a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.querySelector('.nav-center').classList.remove('mobile-open');
+      document.querySelector('.hamburger').classList.remove('active');
+    });
+  });
 
   (function() {
     var mount = document.getElementById('booking-mount');

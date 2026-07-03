@@ -41,6 +41,7 @@ nav {
   justify-content: space-between;
   padding: 1.4rem 2.5rem;
   border-bottom: 1px solid var(--border);
+  position: relative;
 }
 .nav-logo {
   font-family: var(--wordmark);
@@ -48,11 +49,55 @@ nav {
   font-size: 1.05rem;
   letter-spacing: -0.02em;
   text-decoration: none;
+  z-index: 1001;
 }
 .nav-logo .logo-simple { color: var(--simple); }
 .nav-logo .logo-auto   { color: var(--auto); }
 
-.nav-controls { display: flex; align-items: center; gap: 0.6rem; }
+.nav-center {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: center;
+}
+.nav-center a {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-center a:hover { color: var(--accent); }
+
+.nav-controls { display: flex; align-items: center; gap: 0.6rem; z-index: 1001; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: all 0.3s;
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
 
 .lang-toggle {
   display: flex;
@@ -130,8 +175,31 @@ a[data-lang]     { display: none; }
 .lang-en li[data-lang="en"],
 .lang-es li[data-lang="es"]     { display: flex; }
 
+@media (max-width: 768px) {
+  .nav-center { display: none; flex-direction: column; gap: 0; }
+  .nav-center.mobile-open {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    width: 100%;
+  }
+  .nav-center.mobile-open a {
+    display: block;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-center.mobile-open a:last-child { border-bottom: none; }
+  .hamburger { display: flex; }
+}
+
 @media (max-width: 600px) {
   nav { padding: 1rem 1.2rem; }
+  .nav-center { gap: 1.2rem; }
   .footer-inner { grid-template-columns: 1fr; }
   .footer-map { height: 140px; }
 }

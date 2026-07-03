@@ -34,7 +34,6 @@
         } catch(e) {}
       }
     };
-    window.SA_PAYPAL_BUSINESS = 'vicente.matus@ulgpc.es';
     window.SA_SITE_BASE = '';
   </script>
   <style>
@@ -219,6 +218,29 @@
 
 <nav>
   <a class="nav-logo" href="index.html"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></a>
+  <div class="nav-center">
+    <a href="index.html">
+      <span data-lang="en">Home</span>
+      <span data-lang="es">Inicio</span>
+    </a>
+    <a href="details.html">
+      <span data-lang="en">How it works</span>
+      <span data-lang="es">Cómo funciona</span>
+    </a>
+    <a href="index.html#portfolio">
+      <span data-lang="en">Portfolio</span>
+      <span data-lang="es">Portafolio</span>
+    </a>
+    <a href="index.html#contact">
+      <span data-lang="en">Contact</span>
+      <span data-lang="es">Contacto</span>
+    </a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <div class="nav-controls">
     <div class="lang-toggle">
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -368,21 +390,11 @@
         <li><span data-lang="en"><b>Guaranteed launch</b> + full recording</span><span data-lang="es"><b>Publicación garantizada</b> + grabación completa</span></li>
         <li><span data-lang="en">One payment. No subscriptions, ever</span><span data-lang="es">Un pago. Sin suscripciones, nunca</span></li>
       </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pay-form" data-amount="49.50" data-item="simpleauto Private session" onsubmit="return payAndGo(this,'private','49.50')">
-        <input type="hidden" name="cmd" value="_xclick" />
-        <input type="hidden" name="business" value="" />
-        <input type="hidden" name="item_name" value="" />
-        <input type="hidden" name="currency_code" value="EUR" />
-        <input type="hidden" name="amount" value="49.50" />
-        <input type="hidden" name="no_shipping" value="1" />
-        <input type="hidden" name="return" value="" />
-        <input type="hidden" name="cancel_return" value="" />
-        <button class="cta-btn" type="submit">
-          <span data-lang="en">Book my session · 49,50€</span>
-          <span data-lang="es">Reservar mi sesión · 49,50€</span>
-        </button>
-      </form>
-      <p class="pay-note"><span data-lang="en">Secure payment via PayPal · then pick your date</span><span data-lang="es">Pago seguro con PayPal · luego eliges tu fecha</span></p>
+      <a href="booking.html" class="cta-btn">
+        <span data-lang="en">Book my session · 49,50€</span>
+        <span data-lang="es">Reservar mi sesión · 49,50€</span>
+      </a>
+      <p class="pay-note"><span data-lang="en">Pick your date · we'll send the invoice</span><span data-lang="es">Elige tu fecha · te enviaremos la factura</span></p>
       <p class="price-assurance">
         <span data-lang="en"><b>If your site isn't live by the end of the day, you pay nothing.</b> Full refund, no fine print.</span>
         <span data-lang="es"><b>Si tu sitio no está en línea al final del día, no pagas nada.</b> Reembolso completo, sin letra pequeña.</span>
@@ -535,24 +547,20 @@
     SA.saveLang(l);
   }
 
-  (function() {
-    var base = window.SA_SITE_BASE || (location.origin + location.pathname.replace(/[^/]*$/, ''));
-    if (base && base.slice(-1) !== '/') base += '/';
-    document.querySelectorAll('.pay-form').forEach(function(f) {
-      f.querySelector('[name=business]').value      = window.SA_PAYPAL_BUSINESS || '';
-      f.querySelector('[name=item_name]').value     = f.getAttribute('data-item');
-      f.querySelector('[name=return]').value        = base + 'booking.html';
-      f.querySelector('[name=cancel_return]').value = base + 'details.html';
-    });
-  })();
-
-
-  function payAndGo(form, tier, amount) {
-    var base = window.SA_SITE_BASE || (location.origin + location.pathname.replace(/[^/]*$/, ''));
-    if (base.slice(-1) !== '/') base += '/';
-    setTimeout(function() { window.location.href = base + 'booking.html'; }, 250);
-    return true;
+  function toggleMobileNav() {
+    var nav = document.querySelector('.nav-center');
+    var hamburger = document.querySelector('.hamburger');
+    nav.classList.toggle('mobile-open');
+    hamburger.classList.toggle('active');
   }
+
+  // Close mobile nav when clicking a link
+  document.querySelectorAll('.nav-center a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.querySelector('.nav-center').classList.remove('mobile-open');
+      document.querySelector('.hamburger').classList.remove('active');
+    });
+  });
 
   setLang(SA.getLang());
 
