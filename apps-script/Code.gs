@@ -73,8 +73,8 @@ function _appendLead(email, lang) {
 
 function _sendAutoReply(email, lang) {
   var subject = (lang === 'es')
-    ? 'simple-auto — tu precontrato y los detalles de tu sesión'
-    : 'simple-auto — your pre-contract and session details';
+    ? 'simple-auto · tu precontrato y los detalles de tu sesión'
+    : 'simple-auto · your pre-contract and session details';
 
   var body = (lang === 'es')
     ? 'Gracias por tu interés en simple-auto.\n\n' +
@@ -85,7 +85,7 @@ function _sendAutoReply(email, lang) {
       'revises con calma.\n\n' +
       'Todos los detalles y cómo reservar tu sesión:\n' +
       CONFIG.DETAILS_URL + '\n\n' +
-      '— simple-auto'
+      'El equipo de simple-auto'
     : 'Thanks for your interest in simple-auto.\n\n' +
       'In one private session we launch your website together and it goes live the ' +
       'same day. A single payment of 99 EUR (launch price 49.50 EUR, 50% off until ' +
@@ -94,7 +94,7 @@ function _sendAutoReply(email, lang) {
       'them at your own pace.\n\n' +
       'All the details and how to book your session:\n' +
       CONFIG.DETAILS_URL + '\n\n' +
-      '— simple-auto';
+      'The simple-auto team';
 
   var options = { name: CONFIG.REPLY_FROM };
 
