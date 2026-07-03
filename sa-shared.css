@@ -9,18 +9,18 @@
   --headline: 'Sora', sans-serif;
   --wordmark: 'Space Grotesk', sans-serif;
 
-  --bg:            #F7F7F7;
+  --bg:            #F0F4F9;
   --surface:       #FFFFFF;
-  --border:        #DDDDDD;
-  --text:          #111111;
-  --muted:         #888888;
-  --accent:        #D0021B;
-  --simple:        #111111;
-  --auto:          #D0021B;
+  --border:        #CBD5E1;
+  --text:          #0F172A;
+  --muted:         #64748B;
+  --accent:        #1E40AF;
+  --simple:        #0F172A;
+  --auto:          #1E40AF;
   --on-accent:     #FFFFFF;
   --input-bg:      #FFFFFF;
-  --glow:          rgba(208,2,27,0.06);
-  --accent-shadow: rgba(208,2,27,0.22);
+  --glow:          rgba(30,64,175,0.06);
+  --accent-shadow: rgba(30,64,175,0.22);
 }
 
 html { scroll-behavior: smooth; }
