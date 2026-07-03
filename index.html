@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="sa-shared.css" />
   <script>
     window.SA_LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz_M9z-28pFauBVz43rA_w0xviHI95TKggHR16plL7xVQbp-7Z8BegrCaNcx_s6g7r5qw/exec';
@@ -36,13 +36,57 @@
     };
   </script>
   <style>
+    /* REVEAL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* SECTION SCAFFOLDING */
+    section { width: 100%; }
+    .sec-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+    .sec-label {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .section-heading {
+      font-family: var(--headline);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+      max-width: 640px;
+    }
+    .section-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+    .bordered { border-top: 1px solid var(--border); }
+
     /* HERO */
     .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 5rem 1.5rem 4rem;
+      padding: 5.5rem 1.5rem 4.5rem;
       position: relative;
       overflow: hidden;
     }
@@ -55,275 +99,33 @@
       background: radial-gradient(ellipse at top, var(--glow) 0%, transparent 65%);
       pointer-events: none;
     }
-
+    .hero-kicker {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+    }
     .headline {
       font-family: var(--headline);
-      font-size: clamp(2.4rem, 6vw, 4.8rem);
-      font-weight: 800;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-weight: 700;
       line-height: 1.08;
       letter-spacing: -0.03em;
-      max-width: 780px;
+      max-width: 820px;
       margin-bottom: 1.8rem;
     }
     .headline .solid  { color: var(--text); }
     .headline .hollow { color: var(--accent); }
 
-    .tagline {
-      font-size: clamp(1rem, 2vw, 1.18rem);
+    .subheadline {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
       color: var(--muted);
-      max-width: 460px;
+      max-width: 540px;
       line-height: 1.75;
       font-weight: 300;
-      margin-bottom: 0;
-    }
-    .tagline strong { color: var(--text); font-weight: 500; }
-
-    /* SCREENSHOTS CAROUSEL */
-    .screenshots {
-      width: 100%;
-      padding: 3rem 0 2.5rem;
-      border-top: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .screenshots-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 1.8rem;
-    }
-
-    /* CTA SECTION */
-    .cta-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 3.5rem 1.5rem 3.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    /* CARD */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.4rem;
-      width: 100%;
-      max-width: 420px;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
-
-    .features {
-      list-style: none;
-      margin-bottom: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
-    .features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-    .features li::before {
-      content: '';
-      width: 16px;
-      height: 16px;
-      border: 2px solid var(--accent);
-      border-top: none;
-      border-left: none;
-      transform: rotate(-45deg);
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-      margin-right: 0.2rem;
-    }
-
-    .price-block { margin-bottom: 1.6rem; text-align: center; }
-    .price-from {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-    .price-main {
-      font-family: var(--display);
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      display: block;
-    }
-    .price-alt {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
-      display: block;
-    }
-    .price-was { color: var(--muted); text-decoration: line-through; font-size: 1.7rem; font-weight: 600; margin-right: 0.1rem; }
-
-    .email-wrap { display: flex; flex-direction: column; gap: 0.7rem; }
-    .email-input {
-      width: 100%;
-      padding: 0.85rem 1.1rem;
-      background: var(--input-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: var(--body);
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s;
-      text-align: center;
-    }
-    .email-input::placeholder { color: var(--muted); }
-    .email-input:focus { border-color: var(--accent); }
-
-    .cta-btn {
-      width: 100%;
-      padding: 0.95rem 1rem;
-      background: var(--accent);
-      color: var(--on-accent);
-      border: none;
-      border-radius: 8px;
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 0.98rem;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-shadow); }
-    .cta-btn:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
-
-    .form-note { font-size: 0.74rem; color: var(--muted); text-align: center; }
-    .form-note.error { color: #ff6b6b; }
-
-    .thankyou { display: none; text-align: center; padding: 1.2rem 0; }
-    .thankyou-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.7rem;
-    }
-    .thankyou-title { font-family: var(--display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.35rem; }
-    .thankyou-sub { font-size: 0.87rem; color: var(--muted); }
-
-    /* Shared carousel + reviews CSS live in sa-shared.css */
-
-    /* SCREENSHOT CARDS */
-    .shot-card {
-      flex-shrink: 0;
-      width: clamp(220px, 60vw, 300px);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .shot-thumb {
-      width: 100%;
-      height: 160px;
-      background: var(--border);
-      display: block;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
-    }
-    .shot-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      transition: transform 0.35s ease;
-    }
-    .shot-thumb:hover img { transform: scale(1.03); }
-    .thumb-loading {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-    .thumb-visit {
-      position: absolute;
-      bottom: 0.6rem;
-      right: 0.7rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--accent);
-      padding: 0.2rem 0.45rem;
-      letter-spacing: 0.06em;
-    }
-    .shot-body { padding: 0.9rem 1.1rem 1.1rem; }
-    .shot-site {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .shot-site:hover { text-decoration: underline; }
-    .shot-name {
-      font-family: var(--display);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-top: 0.2rem;
-    }
-
-    /* HERO CTAS */
-    .trust-line {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.6rem;
-    }
-    .subheadline {
-      font-size: clamp(1rem, 2vw, 1.18rem);
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.7;
-      font-weight: 300;
-      margin-bottom: 0.8rem;
-    }
-    .supporting-text {
-      font-size: 0.92rem;
-      color: var(--muted);
-      max-width: 440px;
-      line-height: 1.65;
-      margin-bottom: 2.2rem;
+      margin-bottom: 2.4rem;
     }
     .hero-ctas {
       display: flex;
@@ -338,8 +140,8 @@
       color: var(--on-accent);
       border-radius: 8px;
       font-family: var(--display);
-      font-weight: 700;
-      font-size: 0.95rem;
+      font-weight: 600;
+      font-size: 1.08rem;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
     }
@@ -352,108 +154,217 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       font-family: var(--display);
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-weight: 500;
+      font-size: 1.08rem;
       text-decoration: none;
       transition: border-color 0.2s, color 0.2s;
     }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* AUDIENCE SECTION */
-    .audience-section {
-      width: 100%;
-      padding: 3.5rem 1.5rem;
-      border-top: 1px solid var(--border);
-      text-align: center;
+    /* PROBLEM */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin: 2.6rem 0 2.8rem;
     }
-    .section-heading {
-      font-family: var(--headline);
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-    }
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-      max-width: 600px;
-      margin: 0 auto 1.8rem;
-    }
-    .chip {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-      color: var(--text);
+    .problem-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 0.35rem 0.9rem;
-    }
-    .audience-note {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 400px;
-      margin: 0 auto;
-      line-height: 1.65;
-    }
-
-    /* BENEFITS SECTION */
-    .benefits-section {
-      width: 100%;
-      padding: 3.5rem 1.5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .benefits-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      max-width: 460px;
-      width: 100%;
-      margin-top: 2rem;
+      border-radius: 14px;
+      padding: 1.8rem 1.6rem;
       text-align: left;
     }
-    .benefits-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.65rem;
-      font-size: 0.95rem;
-      color: var(--text);
-      line-height: 1.5;
+    .problem-num {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      display: block;
+      margin-bottom: 1rem;
     }
-    .benefits-list li::before {
+    .problem-title {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      color: var(--text);
+    }
+    .problem-text {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .problem-insight {
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0 0.4rem 1.4rem;
+      max-width: 640px;
+    }
+    .problem-insight p {
+      font-family: var(--display);
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      font-weight: 500;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .problem-insight strong { color: var(--accent); font-weight: 600; }
+
+    /* CREDIBILITY */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .cred-points { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+    .cred-points li { display: flex; gap: 1rem; align-items: flex-start; }
+    .cred-points li::before {
       content: '';
-      width: 16px;
-      height: 16px;
+      width: 16px; height: 16px;
       border: 2px solid var(--accent);
-      border-top: none;
-      border-left: none;
+      border-top: none; border-left: none;
       transform: rotate(-45deg);
       flex-shrink: 0;
-      margin-top: 0.15rem;
-      margin-right: 0.2rem;
+      margin-top: 0.3rem;
+    }
+    .cred-point-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+    .cred-point-text { font-size: 1.05rem; color: var(--muted); line-height: 1.65; }
+    .cred-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3rem 1rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.98rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.5;
     }
 
-    /* PROCESS SECTION */
-    .process-section {
+    /* STORY */
+    .story-section { background: var(--surface); }
+    .story-body {
+      max-width: 620px;
+    }
+    .story-body p {
+      font-size: 1.2rem;
+      color: var(--text);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 1.4rem;
+    }
+    .story-body p:last-child { margin-bottom: 0; }
+    .story-body em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* PORTFOLIO (PROOF) */
+    .folio-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5rem;
+      margin-top: 3.2rem;
+    }
+    .folio-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .folio-row.flip .folio-shot { order: 2; }
+    .folio-shot {
+      display: block;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.09);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+      background: var(--surface);
+    }
+    .folio-shot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 32px 72px rgba(0, 0, 0, 0.13);
+    }
+    .folio-shot img {
       width: 100%;
-      padding: 3.5rem 1.5rem;
-      border-top: 1px solid var(--border);
+      display: block;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top;
+    }
+    .folio-type {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+    .folio-name {
+      font-family: var(--headline);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+    .folio-desc {
+      font-size: 1.08rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.3rem;
+    }
+    .folio-visit {
+      font-family: var(--mono);
+      font-size: 1.08rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.1rem;
+    }
+    .folio-visit:hover { opacity: 0.75; }
+
+    /* OFFER */
+    .offer-section {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      padding: 5rem 1.5rem;
     }
+    .offer-section .sec-label,
+    .offer-section .section-heading { margin-left: auto; margin-right: auto; }
     .process-steps {
       display: flex;
       gap: 1.5rem;
-      margin: 2.5rem 0 2.5rem;
+      margin: 2.4rem 0 3rem;
       flex-wrap: wrap;
       justify-content: center;
       max-width: 700px;
@@ -475,32 +386,167 @@
       line-height: 1;
     }
     .step-label {
-      font-size: 0.92rem;
+      font-size: 1.08rem;
       color: var(--text);
       line-height: 1.5;
       font-weight: 500;
     }
 
-    /* SHOT CAPTION */
-    .shot-caption {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
-      line-height: 1.5;
+    /* CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.4rem;
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
     }
-
-    /* FORM TAGLINE */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
     .form-tagline {
-      font-size: 0.95rem;
+      font-size: 1.1rem;
       color: var(--text);
       text-align: center;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.6rem;
       line-height: 1.6;
     }
+    .offer-includes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+    }
+    .offer-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .offer-includes li::before {
+      content: '';
+      width: 14px; height: 14px;
+      border: 2px solid var(--accent);
+      border-top: none; border-left: none;
+      transform: rotate(-45deg);
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+      margin-right: 0.2rem;
+    }
 
+    .price-block { margin-bottom: 1.6rem; text-align: center; }
+    .price-from {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .price-main {
+      font-family: var(--display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      display: block;
+    }
+    .price-alt {
+      font-family: var(--mono);
+      font-size: 1.08rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      display: block;
+    }
+    .price-was { color: var(--muted); text-decoration: line-through; font-size: 1.7rem; font-weight: 600; margin-right: 0.1rem; }
+
+    .email-wrap { display: flex; flex-direction: column; gap: 0.7rem; }
+    .email-input {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 1.08rem;
+      outline: none;
+      transition: border-color 0.2s;
+      text-align: center;
+    }
+    .email-input::placeholder { color: var(--muted); }
+    .email-input:focus { border-color: var(--accent); }
+
+    .cta-btn {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      background: var(--accent);
+      color: var(--on-accent);
+      border: none;
+      border-radius: 8px;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.12rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-shadow); }
+    .cta-btn:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
+
+    .form-note { font-size: 1.08rem; color: var(--muted); text-align: center; }
+    .form-note.error { color: #ff6b6b; }
+
+    .thankyou { display: none; text-align: center; padding: 1.2rem 0; }
+    .thankyou-label {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+    .thankyou-title { font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .thankyou-sub { font-size: 1.05rem; color: var(--muted); }
+
+    .audience-note {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 2rem auto 0;
+      line-height: 1.65;
+    }
+
+    /* Shared carousel + reviews CSS live in sa-shared.css */
+
+    @media (max-width: 800px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .cred-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .folio-row { grid-template-columns: 1fr; gap: 1.4rem; }
+      .folio-row.flip .folio-shot { order: 0; }
+      .sec-inner { padding: 3.5rem 1.2rem; }
+    }
     @media (max-width: 600px) {
-      .hero { padding: 3rem 1.2rem 2.5rem; }
+      .hero { padding: 3.5rem 1.2rem 3rem; }
       .card { padding: 1.8rem 1.2rem; }
+      .cred-stats { grid-template-columns: 1fr 1fr 1fr; gap: 0.6rem; }
+      .stat { padding: 1rem 0.5rem; }
+      .stat-value { font-size: 1.25rem; }
     }
   </style>
 </head>
@@ -520,163 +566,341 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- 1 · HOOK -->
 <section class="hero">
-  <h1 class="headline">
+  <div class="hero-kicker reveal">
+    <span data-lang="en">one 1-hour call · everything delivered</span>
+    <span data-lang="es">una llamada de 1 hora · todo entregado</span>
+  </div>
+  <h1 class="headline reveal">
     <span class="solid">
-      <span data-lang="en">Get Your Business Online</span>
+      <span data-lang="en">Get your business online</span>
       <span data-lang="es">Pon tu negocio en internet</span>
     </span>
     <br>
     <span class="hollow">
-      <span data-lang="en">in Less Than 2 Hours.</span>
-      <span data-lang="es">en menos de 2 horas.</span>
+      <span data-lang="en">with 1 hour of your time.</span>
+      <span data-lang="es">con 1 hora de tu tiempo.</span>
     </span>
   </h1>
 
-  <p class="subheadline">
-    <span data-lang="en">Professional websites for local businesses, without the cost, delays, or complexity of a traditional agency.</span>
-    <span data-lang="es">Sitios web profesionales para negocios locales, sin el coste, los retrasos ni la complejidad de una agencia tradicional.</span>
+  <p class="subheadline reveal">
+    <span data-lang="en">One call: you approve the demo and get your passwords.</span>
+    <span data-lang="es">Una llamada: apruebas la demo y recibes tus contraseñas.</span>
   </p>
 
-  <p class="supporting-text">
-    <span data-lang="en">Work directly with experienced technology consultants to create and launch your website the same day.</span>
-    <span data-lang="es">Trabaja directamente con consultores tecnológicos con experiencia para crear y publicar tu sitio web el mismo día.</span>
-  </p>
-
-  <div class="hero-ctas">
+  <div class="hero-ctas reveal">
     <a class="btn-primary" href="details.html">
-      <span data-lang="en">See How It Works</span>
+      <span data-lang="en">See how it works</span>
       <span data-lang="es">Ver cómo funciona</span>
     </a>
     <a class="btn-secondary" href="#portfolio">
-      <span data-lang="en">View Example Websites</span>
-      <span data-lang="es">Ver sitios de ejemplo</span>
+      <span data-lang="en">See real work</span>
+      <span data-lang="es">Ver trabajo real</span>
     </a>
   </div>
 </section>
 
-<!-- AUDIENCE SECTION -->
-<section class="audience-section">
-  <h2 class="section-heading">
-    <span data-lang="en">Built for Local Businesses</span>
-    <span data-lang="es">Diseñado para Negocios Locales</span>
-  </h2>
-  <div class="chips">
-    <span class="chip"><span data-lang="en">Therapists</span><span data-lang="es">Terapeutas</span></span>
-    <span class="chip"><span data-lang="en">Consultants</span><span data-lang="es">Consultores</span></span>
-    <span class="chip"><span data-lang="en">Tradespeople</span><span data-lang="es">Autónomos y oficios</span></span>
-    <span class="chip"><span data-lang="en">Restaurants &amp; cafés</span><span data-lang="es">Restaurantes y cafeterías</span></span>
-    <span class="chip"><span data-lang="en">Beauty businesses</span><span data-lang="es">Estética y belleza</span></span>
-    <span class="chip">Freelancers</span>
-    <span class="chip">Coaches</span>
+<!-- 2 · PROBLEM -->
+<section class="bordered">
+  <div class="sec-inner">
+    <div class="sec-label reveal">
+      <span data-lang="en">01 · the problem</span>
+      <span data-lang="es">01 · el problema</span>
+    </div>
+    <h2 class="section-heading reveal">
+      <span data-lang="en">The problem is how websites are sold.</span>
+      <span data-lang="es">El problema es cómo se venden las webs.</span>
+    </h2>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="problem-num">/01</span>
+        <div class="problem-title">
+          <span data-lang="en">The agency quote</span>
+          <span data-lang="es">El presupuesto de agencia</span>
+        </div>
+        <p class="problem-text">
+          <span data-lang="en">€1,500, six weeks — and they keep the keys.</span>
+          <span data-lang="es">1.500€, seis semanas — y las llaves se las quedan.</span>
+        </p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-num">/02</span>
+        <div class="problem-title">
+          <span data-lang="en">The lost weekend</span>
+          <span data-lang="es">El fin de semana perdido</span>
+        </div>
+        <p class="problem-text">
+          <span data-lang="en">Lost weekends, plus a monthly fee forever.</span>
+          <span data-lang="es">Fines de semana perdidos, y cuota para siempre.</span>
+        </p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-num">/03</span>
+        <div class="problem-title">
+          <span data-lang="en">The cost of waiting</span>
+          <span data-lang="es">El coste de esperar</span>
+        </div>
+        <p class="problem-text">
+          <span data-lang="en">They Google you, find nothing — and call the next name.</span>
+          <span data-lang="es">Te buscan en Google, no hay nada — y llaman al siguiente.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="problem-insight reveal">
+      <p>
+        <span data-lang="en">You need one page that answers: <strong>who you are, what you do, how to reach you.</strong></span>
+        <span data-lang="es">Necesitas una página que responda: <strong>quién eres, qué haces, cómo contactarte.</strong></span>
+      </p>
+    </div>
   </div>
-  <p class="audience-note">
-    <span data-lang="en">If you need a professional online presence quickly, this service is for you.</span>
-    <span data-lang="es">Si necesitas una presencia profesional en internet rápidamente, este servicio es para ti.</span>
-  </p>
 </section>
 
-<!-- BENEFITS SECTION -->
-<section class="benefits-section">
-  <h2 class="section-heading">
-    <span data-lang="en">Why Businesses Choose SimpleAuto</span>
-    <span data-lang="es">Por qué los negocios eligen SimpleAuto</span>
-  </h2>
-  <ul class="benefits-list">
-    <li>
-      <span data-lang="en">Launch your website fast. Same day, under 2 hours.</span>
-      <span data-lang="es">Lanza tu sitio web rápido. El mismo día, en menos de 2 horas.</span>
-    </li>
-    <li>
-      <span data-lang="en">No technical experience required.</span>
-      <span data-lang="es">No necesitas experiencia técnica.</span>
-    </li>
-    <li>
-      <span data-lang="en">Work directly with an expert.</span>
-      <span data-lang="es">Trabajas directamente con un experto.</span>
-    </li>
-    <li>
-      <span data-lang="en">Avoid expensive agency fees.</span>
-      <span data-lang="es">Sin los costes de una agencia tradicional.</span>
-    </li>
-    <li>
-      <span data-lang="en">Keep full ownership of your website.</span>
-      <span data-lang="es">El sitio web es tuyo, completamente.</span>
-    </li>
-    <li>
-      <span data-lang="en">Get online and start building credibility immediately.</span>
-      <span data-lang="es">Empieza a construir credibilidad en internet hoy mismo.</span>
-    </li>
-  </ul>
-</section>
+<!-- 3 · CREDIBILITY -->
+<section class="bordered">
+  <div class="sec-inner">
+    <div class="sec-label reveal">
+      <span data-lang="en">02 · who we are</span>
+      <span data-lang="es">02 · quiénes somos</span>
+    </div>
+    <h2 class="section-heading reveal">
+      <span data-lang="en">Engineers. Not a marketing agency.</span>
+      <span data-lang="es">Ingenieros. No una agencia de marketing.</span>
+    </h2>
 
-<!-- SCREENSHOTS CAROUSEL -->
-<div class="screenshots" id="portfolio">
-  <div class="screenshots-label">
-    <span data-lang="en">Websites already built</span>
-    <span data-lang="es">Sitios ya construidos</span>
-  </div>
-  <div class="carousel-track-wrap">
-    <div class="carousel-track" id="shots-track">
+    <div class="cred-grid">
+      <ul class="cred-points">
+        <li class="reveal">
+          <div>
+            <div class="cred-point-title">
+              <span data-lang="en">No middlemen</span>
+              <span data-lang="es">Sin intermediarios</span>
+            </div>
+            <div class="cred-point-text">
+              <span data-lang="en">You talk to the person who builds your website.</span>
+              <span data-lang="es">Hablas con la persona que construye tu web.</span>
+            </div>
+          </div>
+        </li>
+        <li class="reveal">
+          <div>
+            <div class="cred-point-title">
+              <span data-lang="en">Systems, not campaigns</span>
+              <span data-lang="es">Sistemas, no campañas</span>
+            </div>
+            <div class="cred-point-text">
+              <span data-lang="en">We build things that keep working after we leave.</span>
+              <span data-lang="es">Construimos cosas que siguen funcionando cuando nos vamos.</span>
+            </div>
+          </div>
+        </li>
+        <li class="reveal">
+          <div>
+            <div class="cred-point-title">
+              <span data-lang="en">You own everything</span>
+              <span data-lang="es">Todo es tuyo</span>
+            </div>
+            <div class="cred-point-text">
+              <span data-lang="en">Your domain, your website, your passwords. No lock-in.</span>
+              <span data-lang="es">Tu dominio, tu web, tus contraseñas. Sin ataduras.</span>
+            </div>
+          </div>
+        </li>
+      </ul>
 
-      <div class="shot-card">
-        <a class="shot-thumb" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">
-          <div class="thumb-loading">loading...</div>
-          <img class="thumb-img" src="img/reviews/psicologiabajocoste.png" alt="Psicología Bajo Coste" onload="thumbLoaded(this)" />
-          <span class="thumb-visit">visit site</span>
-        </a>
-        <div class="shot-body">
-          <div class="shot-name">Psicología Bajo Coste</div>
-          <div class="shot-caption">
-            <span data-lang="en">Online psychology practice · attract clients via search</span>
-            <span data-lang="es">Consulta de psicología online · captar clientes por búsqueda</span>
+      <div>
+        <div class="cred-stats">
+          <div class="stat reveal">
+            <span class="stat-value">4</span>
+            <span class="stat-label">
+              <span data-lang="en">sites in production</span>
+              <span data-lang="es">webs en producción</span>
+            </span>
+          </div>
+          <div class="stat reveal">
+            <span class="stat-value">5,0★</span>
+            <span class="stat-label">
+              <span data-lang="en">verified on Google</span>
+              <span data-lang="es">verificado en Google</span>
+            </span>
+          </div>
+          <div class="stat reveal">
+            <span class="stat-value">1h</span>
+            <span class="stat-label">
+              <span data-lang="en">of your time</span>
+              <span data-lang="es">de tu tiempo</span>
+            </span>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="shot-card">
-        <a class="shot-thumb" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">
-          <div class="thumb-loading">loading...</div>
-          <img class="thumb-img" src="img/reviews/lucedestate.png" alt="Luce d'Estate" onload="thumbLoaded(this)" />
-          <span class="thumb-visit">visit site</span>
+<!-- 4 · STORY -->
+<section class="bordered story-section">
+  <div class="sec-inner">
+    <div class="sec-label reveal">
+      <span data-lang="en">03 · why this exists</span>
+      <span data-lang="es">03 · por qué existe esto</span>
+    </div>
+    <h2 class="section-heading reveal">
+      <span data-lang="en">Everyone told us the same story.</span>
+      <span data-lang="es">Todos nos contaban la misma historia.</span>
+    </h2>
+    <div class="story-body">
+      <p class="reveal">
+        <span data-lang="en">Impossible agency quotes, or months lost fighting templates.</span>
+        <span data-lang="es">Presupuestos imposibles, o meses perdidos peleando con plantillas.</span>
+      </p>
+      <p class="reveal">
+        <span data-lang="en">We tried something else: one call, one demo, your keys. <em>It worked.</em></span>
+        <span data-lang="es">Probamos otra cosa: una llamada, una demo, tus llaves. <em>Funcionó.</em></span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · PROOF: PORTFOLIO -->
+<section class="bordered" id="portfolio">
+  <div class="sec-inner">
+    <div class="sec-label reveal">
+      <span data-lang="en">04 · proof</span>
+      <span data-lang="es">04 · pruebas</span>
+    </div>
+    <h2 class="section-heading reveal">
+      <span data-lang="en">Real websites, in production today.</span>
+      <span data-lang="es">Webs reales, en producción hoy.</span>
+    </h2>
+    <p class="section-sub reveal">
+      <span data-lang="en">All live, all working.</span>
+      <span data-lang="es">Todas publicadas, todas trabajando.</span>
+    </p>
+
+    <div class="folio-rows">
+
+      <div class="folio-row reveal">
+        <a class="folio-shot" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">
+          <img src="img/reviews/psicologiabajocoste.png" alt="Psicología Bajo Coste" loading="lazy" />
         </a>
-        <div class="shot-body">
-          <div class="shot-name">Luce d'Estate: Yoga Retreat</div>
-          <div class="shot-caption">
-            <span data-lang="en">Yoga retreat · promote seasonal events</span>
-            <span data-lang="es">Retiro de yoga · promocionar eventos de temporada</span>
+        <div class="folio-info">
+          <div class="folio-type">
+            <span data-lang="en">online psychology practice</span>
+            <span data-lang="es">consulta de psicología online</span>
           </div>
+          <h3 class="folio-name">Psicología Bajo Coste</h3>
+          <p class="folio-desc">
+            <span data-lang="en">Earns trust before the first call. Brings in clients from Google.</span>
+            <span data-lang="es">Genera confianza antes de la primera llamada. Trae clientes desde Google.</span>
+          </p>
+          <a class="folio-visit" href="https://psicologiabajocoste.com" target="_blank" rel="noopener">
+            <span data-lang="en">visit site ↗</span>
+            <span data-lang="es">visitar sitio ↗</span>
+          </a>
         </div>
       </div>
 
-      <div class="shot-card">
-        <a class="shot-thumb" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">
-          <div class="thumb-loading">loading...</div>
-          <img class="thumb-img" src="img/reviews/excelqkd.png" alt="EXCEL-QKD" onload="thumbLoaded(this)" />
-          <span class="thumb-visit">visit site</span>
+      <div class="folio-row flip reveal">
+        <a class="folio-shot" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">
+          <img src="img/reviews/lucedestate.png" alt="Luce d'Estate" loading="lazy" />
         </a>
-        <div class="shot-body">
-          <div class="shot-name">EXCEL-QKD: Research Project</div>
-          <div class="shot-caption">
-            <span data-lang="en">Research project · professional presence for grant visibility</span>
-            <span data-lang="es">Proyecto de investigación · presencia profesional para visibilidad académica</span>
+        <div class="folio-info">
+          <div class="folio-type">
+            <span data-lang="en">yoga retreat</span>
+            <span data-lang="es">retiro de yoga</span>
           </div>
+          <h3 class="folio-name">Luce d'Estate</h3>
+          <p class="folio-desc">
+            <span data-lang="en">Turns social media interest into real bookings.</span>
+            <span data-lang="es">Convierte el interés de redes sociales en reservas reales.</span>
+          </p>
+          <a class="folio-visit" href="https://luce-destate.vercel.app" target="_blank" rel="noopener">
+            <span data-lang="en">visit site ↗</span>
+            <span data-lang="es">visitar sitio ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="folio-row reveal">
+        <a class="folio-shot" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">
+          <img src="img/reviews/excelqkd.png" alt="EXCEL-QKD" loading="lazy" />
+        </a>
+        <div class="folio-info">
+          <div class="folio-type">
+            <span data-lang="en">research project</span>
+            <span data-lang="es">proyecto de investigación</span>
+          </div>
+          <h3 class="folio-name">EXCEL-QKD</h3>
+          <p class="folio-desc">
+            <span data-lang="en">The whole project in one citable place.</span>
+            <span data-lang="es">Todo el proyecto en un único lugar citable.</span>
+          </p>
+          <a class="folio-visit" href="https://excel-qkd.vercel.app" target="_blank" rel="noopener">
+            <span data-lang="en">visit site ↗</span>
+            <span data-lang="es">visitar sitio ↗</span>
+          </a>
         </div>
       </div>
 
     </div>
   </div>
-</div>
+</section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="card">
+<!-- 5b · PROOF: REVIEWS (centralized in sa-reviews.js) -->
+<script src="sa-reviews.js"></script>
 
-    <p class="form-tagline">
-      <span data-lang="en">One session. One payment. Your website goes live the same day.</span>
-      <span data-lang="es">Una sesión. Un pago. Tu sitio web queda publicado el mismo día.</span>
-    </p>
+<!-- 6 · OFFER -->
+<section class="offer-section bordered" id="contact">
+  <div class="sec-label reveal">
+    <span data-lang="en">05 · the offer</span>
+    <span data-lang="es">05 · la oferta</span>
+  </div>
+  <h2 class="section-heading reveal">
+    <span data-lang="en">One session. One payment. Your website live.</span>
+    <span data-lang="es">Una sesión. Un pago. Tu web publicada.</span>
+  </h2>
+
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">1</div>
+      <div class="step-label">
+        <span data-lang="en">Tell us about your business.</span>
+        <span data-lang="es">Cuéntanos sobre tu negocio.</span>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">2</div>
+      <div class="step-label">
+        <span data-lang="en">One call: demo and passwords.</span>
+        <span data-lang="es">Una llamada: demo y contraseñas.</span>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">3</div>
+      <div class="step-label">
+        <span data-lang="en">We finish the rest. Without you.</span>
+        <span data-lang="es">El resto lo rematamos. Sin ti.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card reveal">
+
+    <ul class="offer-includes">
+      <li>
+        <span data-lang="en">1-hour call with the engineer</span>
+        <span data-lang="es">Llamada de 1 hora con el ingeniero</span>
+      </li>
+      <li>
+        <span data-lang="en">Demo approved, passwords in your hand</span>
+        <span data-lang="es">Demo aprobada, contraseñas en tu mano</span>
+      </li>
+      <li>
+        <span data-lang="en">We finish the rest without you</span>
+        <span data-lang="es">El resto lo rematamos sin ti</span>
+      </li>
+    </ul>
 
     <div class="price-block">
       <span class="price-from">
@@ -717,45 +941,12 @@
     </div>
 
   </div>
-</section>
 
-<!-- PROCESS SECTION -->
-<section class="process-section">
-  <h2 class="section-heading">
-    <span data-lang="en">Simple Process. Fast Results.</span>
-    <span data-lang="es">Proceso simple. Resultados automáticos.</span>
-  </h2>
-  <div class="process-steps">
-    <div class="process-step">
-      <div class="step-num">1</div>
-      <div class="step-label">
-        <span data-lang="en">Tell us about your business.</span>
-        <span data-lang="es">Cuéntanos sobre tu negocio.</span>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">2</div>
-      <div class="step-label">
-        <span data-lang="en">We build your website together.</span>
-        <span data-lang="es">Construimos tu sitio web juntos.</span>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">3</div>
-      <div class="step-label">
-        <span data-lang="en">Launch your new website.</span>
-        <span data-lang="es">Publicamos tu nuevo sitio.</span>
-      </div>
-    </div>
-  </div>
-  <a class="btn-primary" href="details.html">
-    <span data-lang="en">See the full process</span>
-    <span data-lang="es">Ver el proceso completo</span>
-  </a>
+  <p class="audience-note reveal">
+    <span data-lang="en">Trapped with an agency? We recover your keys.</span>
+    <span data-lang="es">¿Atrapado con una agencia? Recuperamos tus llaves.</span>
+  </p>
 </section>
-
-<!-- REVIEWS CAROUSEL (centralized in sa-reviews.js) -->
-<script src="sa-reviews.js"></script>
 
 <script src="sa-footer.js"></script>
 
@@ -830,22 +1021,37 @@
 
   setLang(SA.getLang());
 
-  // Thumbnail helpers
-  function thumbLoaded(img) {
-    img.style.display = 'block';
-    var loader = img.parentElement.querySelector('.thumb-loading');
-    if (loader) loader.style.display = 'none';
-  }
-
-  function initBanner(trackId, duration) {
-    var track = document.getElementById(trackId);
-    Array.from(track.children).forEach(function(item) {
-      track.appendChild(item.cloneNode(true));
-    });
-    track.style.animationDuration = duration + 's';
-  }
-
-  initBanner('shots-track', 24);
+  // Scroll-reveal: staggers siblings that enter the viewport in the same frame.
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var pending = [];
+    var flushScheduled = false;
+    function flush() {
+      pending.forEach(function (el, i) {
+        el.style.transitionDelay = (i * 90) + 'ms';
+        el.classList.add('in');
+      });
+      pending = [];
+      flushScheduled = false;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          pending.push(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+      if (pending.length && !flushScheduled) {
+        flushScheduled = true;
+        requestAnimationFrame(flush);
+      }
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
 </script>
 </body>
 </html>
