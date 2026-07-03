@@ -6,6 +6,7 @@
         '<div><span data-lang="en">Trusted technology consultants helping businesses since 2015.</span><span data-lang="es">Consultores tecnológicos de confianza ayudando a negocios desde 2015.</span></div>' +
         '<div><a href="tel:+34677028042">+34 677 028 042</a></div>' +
         '<div>C. Practicante Ignacio Rodríguez, Edificio Polivalente II,<br>Oficina 209, 35017 Las Palmas de Gran Canaria, Las Palmas</div>' +
+        '<div style="margin-top:1rem;font-size:0.95rem;"><a href="privacy.html" style="color:var(--muted);text-decoration:none;border-bottom:1px solid var(--muted);" onmouseover="this.style.opacity=\'0.75\'" onmouseout="this.style.opacity=\'1\'"><span data-lang="en">Privacy Policy</span><span data-lang="es">Política de Privacidad</span></a></div>' +
       '</div>' +
       '<div class="footer-map">' +
         '<a href="https://maps.app.goo.gl/UGoYU6PrfWXQBvTcA" target="_blank" rel="noopener" style="display:block;position:relative;">' +

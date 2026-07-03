@@ -479,6 +479,33 @@
     .price-was { color: var(--muted); text-decoration: line-through; font-size: 1.7rem; font-weight: 600; margin-right: 0.1rem; }
 
     .email-wrap { display: flex; flex-direction: column; gap: 0.7rem; }
+    .privacy-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin: 0.7rem 0;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .privacy-checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+    .privacy-checkbox label {
+      cursor: pointer;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .privacy-checkbox a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+    }
+    .privacy-checkbox a:hover { opacity: 0.75; }
     .email-input {
       width: 100%;
       padding: 0.85rem 1.1rem;
@@ -928,6 +955,13 @@
         autocomplete="email"
         placeholder="tu@correo.com"
       />
+      <div class="privacy-checkbox">
+        <input type="checkbox" id="privacy-consent" />
+        <label for="privacy-consent">
+          <span data-lang="en">I agree to the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a></span>
+          <span data-lang="es">Acepto la <a href="privacy.html" target="_blank" rel="noopener">política de privacidad</a></span>
+        </label>
+      </div>
       <button class="cta-btn" id="cta-btn" onclick="handleSubmit()">
         <span data-lang="en">Send me the details</span>
         <span data-lang="es">Envíame los detalles</span>
@@ -995,6 +1029,14 @@
   }
 
   function handleSubmit() {
+    var checkbox = document.getElementById('privacy-consent');
+    if (!checkbox.checked) {
+      checkbox.style.borderColor = '#ff6b6b';
+      checkbox.focus();
+      setTimeout(function() { checkbox.style.borderColor = ''; }, 1200);
+      return;
+    }
+
     var inp = document.getElementById('email');
     var email = inp.value.trim();
     SA.saveLead(email);
