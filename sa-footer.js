@@ -3,7 +3,7 @@
     '<div class="footer-inner">' +
       '<div class="footer-nap">' +
         '<div class="footer-brand"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></div>' +
-        '<div><span data-lang="en">Web engineering for businesses in Las Palmas de Gran Canaria since 2015.</span><span data-lang="es">Ingeniería web para negocios en Las Palmas de Gran Canaria desde 2015.</span></div>' +
+        '<div><span data-lang="en">Automation consultancy for solar panel installers. Engineering since 2015, from Las Palmas de Gran Canaria.</span><span data-lang="es">Consultoría de automatización para instaladores de placas solares. Ingeniería desde 2015, desde Las Palmas de Gran Canaria.</span></div>' +
         '<div><a href="tel:+34677028042">+34 677 028 042</a></div>' +
         '<div>C. Practicante Ignacio Rodríguez, Edificio Polivalente II,<br>Oficina 209, 35017 Las Palmas de Gran Canaria, Las Palmas</div>' +
         '<div style="margin-top:1rem;font-size:0.95rem;"><a href="privacy.html" style="color:var(--muted);text-decoration:none;border-bottom:1px solid var(--muted);" onmouseover="this.style.opacity=\'0.75\'" onmouseout="this.style.opacity=\'1\'"><span data-lang="en">Privacy Policy</span><span data-lang="es">Política de Privacidad</span></a></div>' +
