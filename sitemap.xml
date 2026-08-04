@@ -6,13 +6,33 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://simpleauto.tech/details.html</loc>
+    <loc>https://simpleauto.tech/catalog.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://simpleauto.tech/booking.html</loc>
+    <loc>https://simpleauto.tech/crm.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simpleauto.tech/erp.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simpleauto.tech/solar.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simpleauto.tech/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simpleauto.tech/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

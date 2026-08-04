@@ -94,15 +94,7 @@
   document.documentElement.lang = SA.getLang();
 </script>
 
-<nav>
-  <div class="nav-logo"><span class="logo-simple">simple</span><span class="logo-auto">auto</span></div>
-  <div class="nav-controls">
-    <div class="lang-toggle">
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
-    </div>
-  </div>
-</nav>
+<script src="sa-nav.js"></script>
 
 <section class="bordered">
   <div class="sec-inner">
@@ -234,20 +226,6 @@
 </section>
 
 <script src="sa-footer.js"></script>
-
-<script>
-  function setLang(l) {
-    document.body.classList.remove('lang-en', 'lang-es');
-    document.body.classList.add('lang-' + l);
-    document.documentElement.lang = l;
-    document.querySelectorAll('.lang-btn').forEach(function(btn) {
-      btn.classList.toggle('active', btn.textContent === l.toUpperCase());
-    });
-    SA.saveLang(l);
-  }
-
-  setLang(SA.getLang());
-</script>
 
 </body>
 </html>

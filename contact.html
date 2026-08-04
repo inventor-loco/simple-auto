@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto · Escríbenos o reserva una llamada gratuita | simpleauto</title>
+  <meta name="description" content="Escríbenos o elige tu fecha y reserva una llamada gratuita de 30 minutos. Te decimos con honestidad qué automatizaríamos en tu negocio, y qué no. Sin compromiso." />
+  <meta name="keywords" content="contacto consultoría IT, reservar llamada, consultoría gratuita automatización, Las Palmas de Gran Canaria" />
+  <meta name="author" content="simpleauto" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://simpleauto.tech/contact.html" />
+  <meta name="geo.region" content="ES-GC" />
+  <meta name="geo.placename" content="Las Palmas de Gran Canaria" />
+  <meta property="og:title" content="Contacto · Escríbenos o reserva una llamada gratuita | simpleauto" />
+  <meta property="og:description" content="Una llamada gratuita de 30 minutos sobre tus procesos. Sin compromiso, sin tecnicismos." />
+  <meta property="og:image" content="https://simpleauto.tech/og-preview.png" />
+  <meta property="og:url" content="https://simpleauto.tech/contact.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="simpleauto" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contacto · Escríbenos o reserva una llamada gratuita | simpleauto" />
+  <meta name="twitter:description" content="Una llamada gratuita de 30 minutos sobre tus procesos. Sin compromiso." />
+  <meta name="twitter:image" content="https://simpleauto.tech/og-preview.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon-512x512.png" />
+  <link rel="icon" type="image/png" sizes="256x256" href="favicon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="sa-shared.css" />
+  <script>
+    window.SA_LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz_M9z-28pFauBVz43rA_w0xviHI95TKggHR16plL7xVQbp-7Z8BegrCaNcx_s6g7r5qw/exec';
+    window.SA = {
+      getLang:   function(){ try { return localStorage.getItem('sa-lang') || 'es'; } catch(e){ return 'es'; } },
+      saveLang:  function(l){ try { localStorage.setItem('sa-lang', l); } catch(e){} },
+      saveLead:  function(email){ try { sessionStorage.setItem('sa-lead', email); } catch(e){} },
+      getLead:   function(){ try { return sessionStorage.getItem('sa-lead') || ''; } catch(e){ return ''; } },
+      track: function(event, extra) {
+        try {
+          var d = new FormData();
+          d.append('_subject', 'funnel: ' + event);
+          d.append('event', event);
+          d.append('email', SA.getLead());
+          d.append('lang', SA.getLang());
+          d.append('ts', new Date().toISOString());
+          d.append('page', location.pathname.split('/').pop() || 'index.html');
+          if (extra) { for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) d.append(k, extra[k]); } }
+          fetch(window.SA_LEAD_ENDPOINT, { method: 'POST', body: d, mode: 'no-cors' }).catch(function(){});
+        } catch(e) {}
+      }
+    };
+    window.SA_BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1HU7YmGO1Tv4S7hDl1kOD65QqZT5tVdNMERIxggJvpIpFFlailQ-Q-C2iB6vzgFKj0HIZdQU2a?gv=true';
+    window.SA_INTAKE_FORM_URL = '';
+  </script>
+  <style>
+    main { max-width: 880px; }
+
+    /* The contact card is part of the page flow here, not a trailing band. */
+    .sa-contact { padding: 0 0 3.5rem; }
+
+    .divider {
+      display: flex; align-items: center; gap: 1rem;
+      max-width: 520px; margin: 0 auto 2.5rem;
+      font-family: var(--mono); font-size: 1rem; color: var(--muted);
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .booking-frame { width: 100%; height: 720px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+
+    .placeholder {
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 16px;
+      padding: 2.5rem 2rem; text-align: center;
+    }
+    .placeholder h3 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin-bottom: 0.8rem; }
+    .placeholder p { font-size: 1.02rem; color: var(--muted); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+    .placeholder code { font-family: var(--mono); font-size: 0.95rem; color: var(--accent); }
+
+    .intake { text-align: center; margin-top: 2.2rem; }
+    .intake a {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.85rem 1.6rem; background: var(--accent); color: var(--on-accent);
+      border-radius: 8px; font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .intake a:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-shadow); }
+    .intake small { display: block; color: var(--muted); font-size: 0.95rem; margin-top: 0.7rem; }
+
+    .reach {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1.4rem;
+      font-family: var(--mono); font-size: 1.05rem; color: var(--muted);
+      margin: 2.5rem 0 0; text-align: center;
+    }
+    .reach a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
+    .reach a:hover { opacity: 0.75; }
+
+    @media (max-width: 520px) { .booking-frame { height: 620px; } }
+  </style>
+</head>
+<body>
+<script>
+  document.body.className = 'lang-' + SA.getLang();
+  document.documentElement.lang = SA.getLang();
+</script>
+
+<script src="sa-nav.js"></script>
+
+<main>
+  <div class="eyebrow">
+    <span data-lang="en">Contact</span>
+    <span data-lang="es">Contacto</span>
+  </div>
+  <h1 class="page-title">
+    <span data-lang="en"><span class="accent">Let's talk.</span> No commitment.</span>
+    <span data-lang="es"><span class="accent">Hablemos.</span> Sin compromiso.</span>
+  </h1>
+  <p class="lede">
+    <span data-lang="en">Write to us, or pick a slot in the calendar. A free 30-minute call. We tell you what we would automate, <strong>and what we wouldn't</strong>.</span>
+    <span data-lang="es">Escríbenos o elige hueco en el calendario. Una llamada gratuita de 30 minutos. Te decimos qué automatizaríamos <strong>y qué no</strong>.</span>
+  </p>
+
+  <script src="sa-contact.js"
+          data-page="contact.html · form"
+          data-msg="Contact form on the contact page"
+          data-title-en="Write to us"
+          data-title-es="Escríbenos"
+          data-sub-en="Leave your email and a line about your business. We reply within one working day."
+          data-sub-es="Déjanos tu correo y una línea sobre tu negocio. Respondemos en un día laborable."
+          data-textarea="on"></script>
+
+  <div class="divider">
+    <span data-lang="en">or book directly</span>
+    <span data-lang="es">o reserva directamente</span>
+  </div>
+
+  <div id="booking-mount"></div>
+
+  <div class="intake" id="intake" style="display:none">
+    <a id="intake-link" href="#" target="_blank" rel="noopener">
+      <span data-lang="en">Fill the pre-session form</span>
+      <span data-lang="es">Rellena el formulario previo</span>
+    </a>
+    <small>
+      <span data-lang="en">A few questions about your case + a place to upload your files. Do it before the session (or at the very start).</span>
+      <span data-lang="es">Unas preguntas sobre tu caso + un lugar para subir tus archivos. Hazlo antes de la sesión (o justo al empezar).</span>
+    </small>
+  </div>
+
+  <div class="reach">
+    <span><a href="tel:+34677028042">+34 677 028 042</a></span>
+    <span>
+      <span data-lang="en">Las Palmas de Gran Canaria, Spain</span>
+      <span data-lang="es">Las Palmas de Gran Canaria, España</span>
+    </span>
+  </div>
+</main>
+
+<script src="sa-footer.js"></script>
+
+<script>
+  (function() {
+    var mount = document.getElementById('booking-mount');
+    if (window.SA_BOOKING_URL) {
+      var f = document.createElement('iframe');
+      f.className = 'booking-frame';
+      f.src = window.SA_BOOKING_URL;
+      f.setAttribute('frameborder', '0');
+      f.setAttribute('title', 'Book a session');
+      mount.appendChild(f);
+    } else {
+      mount.innerHTML =
+        '<div class="placeholder"><h3>Booking calendar not connected yet</h3>' +
+        '<p>Set <code>window.SA_BOOKING_URL</code> in this page to your Google Appointment ' +
+        'Schedule booking link, and visitors will see the live calendar here.</p></div>';
+    }
+
+    if (window.SA_INTAKE_FORM_URL) {
+      document.getElementById('intake-link').href = window.SA_INTAKE_FORM_URL;
+      document.getElementById('intake').style.display = 'block';
+    }
+  })();
+
+  SA.track('booking_view');
+</script>
+</body>
+</html>
