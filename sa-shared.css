@@ -1,13 +1,33 @@
 /* sa-shared.css — nav, footer, theme vars, i18n — shared across all funnel pages */
 
+/* Inter — self-hosted, SIL Open Font License 1.1 (see fonts/OFL.txt).
+   Variable files: one axis (wght 100–900), no external requests. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/inter-latin-wght-normal.woff2') format('woff2-variations'),
+       url('fonts/inter-latin-wght-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/inter-latin-wght-italic.woff2') format('woff2-variations'),
+       url('fonts/inter-latin-wght-italic.woff2') format('woff2');
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --mono:     'Manrope', sans-serif;
-  --display:  'Sora', sans-serif;
-  --body:     'Manrope', sans-serif;
-  --headline: 'Sora', sans-serif;
-  --wordmark: 'Space Grotesk', sans-serif;
+  --font-stack: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:     var(--font-stack);
+  --display:  var(--font-stack);
+  --body:     var(--font-stack);
+  --headline: var(--font-stack);
+  --wordmark: var(--font-stack);
 
   --bg:            #F0F4F9;
   --surface:       #FFFFFF;

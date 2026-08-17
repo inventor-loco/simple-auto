@@ -74,7 +74,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="sa-shared.css" />
   <script>
     window.SA_LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz_M9z-28pFauBVz43rA_w0xviHI95TKggHR16plL7xVQbp-7Z8BegrCaNcx_s6g7r5qw/exec';
@@ -99,31 +99,7 @@
     };
   </script>
   <style>
-    /* SECTION SCAFFOLDING */
     section { width: 100%; }
-    .sec-inner { max-width: 1000px; margin: 0 auto; padding: 5rem 1.5rem; }
-    .sec-label {
-      font-family: var(--mono); font-size: 1.05rem; color: var(--accent);
-      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.2rem;
-    }
-    .section-heading {
-      font-family: var(--headline); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700;
-      letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.4rem; max-width: 680px;
-    }
-    .section-sub {
-      font-size: 1.15rem; color: var(--muted); max-width: 620px;
-      line-height: 1.75; font-weight: 300;
-    }
-    .section-sub strong { color: var(--text); font-weight: 600; }
-    .section-sub + .section-sub { margin-top: 1.1rem; }
-    .bordered { border-top: 1px solid var(--border); }
-
-    .text-link {
-      display: inline-block; margin-top: 2rem; font-family: var(--mono); font-size: 1.08rem;
-      color: var(--accent); letter-spacing: 0.08em; text-decoration: none;
-      border-bottom: 1px solid var(--accent); padding-bottom: 0.1rem;
-    }
-    .text-link:hover { opacity: 0.75; }
 
     /* HERO */
     .hero {
@@ -141,36 +117,6 @@
     }
     .headline .hollow { color: #BFDBFE; }
 
-    /* PULL-QUOTE */
-    .problem-insight {
-      border-left: 3px solid var(--accent); padding: 0.4rem 0 0.4rem 1.4rem;
-      max-width: 640px; margin-top: 2.6rem;
-    }
-    .problem-insight p {
-      font-family: var(--display); font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-      font-weight: 500; line-height: 1.55; color: var(--text);
-    }
-    .problem-insight strong { color: var(--accent); font-weight: 600; }
-
-    /* VALUE PROPS */
-    .props { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; margin-top: 2.6rem; }
-    @media (max-width: 860px) { .props { grid-template-columns: 1fr; } }
-
-    /* CTA BAND */
-    .cta-band { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 5rem 1.5rem; }
-    .cta-band .sec-label, .cta-band .section-heading { margin-left: auto; margin-right: auto; }
-    .cta-band .section-sub { margin: 0 auto 2.2rem; }
-    .btn-primary {
-      display: inline-block; padding: 0.95rem 2rem; background: var(--accent); color: var(--on-accent);
-      border-radius: 8px; font-family: var(--display); font-weight: 600; font-size: 1.12rem;
-      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-shadow); }
-    .cta-note { font-family: var(--mono); font-size: 1rem; color: var(--muted); letter-spacing: 0.08em; margin-top: 1rem; }
-
-    .sa-contact { border-top: 1px solid var(--border); padding-top: 4.5rem; padding-bottom: 4.5rem; }
-
-    @media (max-width: 800px) { .sec-inner { padding: 3.5rem 1.2rem; } }
     @media (max-width: 600px) { .hero { min-height: 72vh; padding: 4rem 1.2rem; } }
   </style>
 </head>
@@ -189,141 +135,6 @@
     <span data-lang="es">¿Tu empresa necesita automatización?<br><span class="hollow">Contrata a profesionales en simpleauto.</span></span>
   </h1>
 </section>
-
-<!-- 2 · WHAT WE DO -->
-<section class="bordered">
-  <div class="sec-inner">
-    <div class="sec-label reveal">
-      <span data-lang="en">01 · what we do</span>
-      <span data-lang="es">01 · qué hacemos</span>
-    </div>
-    <h2 class="section-heading reveal">
-      <span data-lang="en">Two halves of a business. Both worth automating.</span>
-      <span data-lang="es">Dos mitades de un negocio. Las dos merecen automatizarse.</span>
-    </h2>
-    <p class="section-sub reveal">
-      <span data-lang="en"><strong>Winning clients</strong> is marketing and sales. We automate that with CRM.</span>
-      <span data-lang="es"><strong>Conseguir clientes</strong> es marketing y ventas. Eso lo automatizamos con CRM.</span>
-    </p>
-    <p class="section-sub reveal">
-      <span data-lang="en"><strong>Delivering</strong> is operations and management. We automate that with ERP.</span>
-      <span data-lang="es"><strong>Entregar tu servicio</strong> es operaciones y gestión. Eso lo automatizamos con ERP.</span>
-    </p>
-
-    <div class="problem-insight reveal">
-      <p>
-        <span data-lang="en">You don't need more software. <strong>You need the software you have to talk to itself.</strong></span>
-        <span data-lang="es">No necesitas más software. <strong>Necesitas que el tuyo se hable entre sí.</strong></span>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- 3 · HOW WE WORK -->
-<section class="bordered">
-  <div class="sec-inner">
-    <div class="sec-label reveal">
-      <span data-lang="en">02 · how we work</span>
-      <span data-lang="es">02 · cómo trabajamos</span>
-    </div>
-    <h2 class="section-heading reveal">
-      <span data-lang="en">Engineers, not an agency.</span>
-      <span data-lang="es">Ingenieros, no una agencia.</span>
-    </h2>
-    <p class="section-sub reveal">
-      <span data-lang="en">We understand the process first. Then we build.</span>
-      <span data-lang="es">Primero entendemos el proceso. Después construimos.</span>
-    </p>
-
-    <div class="props">
-      <div class="area reveal">
-        <span class="area-num">/01</span>
-        <div class="area-title">
-          <span data-lang="en">We map your process</span>
-          <span data-lang="es">Mapeamos tu proceso</span>
-        </div>
-        <p class="area-text">
-          <span data-lang="en">How you sell today, how you deliver today, and where the time goes.</span>
-          <span data-lang="es">Cómo vendes hoy, cómo entregas tu servicio hoy y dónde se va el tiempo.</span>
-        </p>
-      </div>
-      <div class="area reveal">
-        <span class="area-num">/02</span>
-        <div class="area-title">
-          <span data-lang="en">We pick or build the tool</span>
-          <span data-lang="es">Elegimos o construimos la herramienta</span>
-        </div>
-        <p class="area-text">
-          <span data-lang="en">Sometimes the right answer already exists. Sometimes we write it.</span>
-          <span data-lang="es">A veces la respuesta ya existe. A veces la escribimos nosotros.</span>
-        </p>
-      </div>
-      <div class="area reveal">
-        <span class="area-num">/03</span>
-        <div class="area-title">
-          <span data-lang="en">We leave it running</span>
-          <span data-lang="es">Lo dejamos funcionando</span>
-        </div>
-        <p class="area-text">
-          <span data-lang="en">Tested on your real cases, with your team trained to use it.</span>
-          <span data-lang="es">Probado con tus casos reales y con tu equipo formado para usarlo.</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 4 · CATALOG TEASER -->
-<section class="bordered">
-  <div class="sec-inner">
-    <div class="sec-label reveal">
-      <span data-lang="en">03 · the catalog</span>
-      <span data-lang="es">03 · el catálogo</span>
-    </div>
-    <h2 class="section-heading reveal">
-      <span data-lang="en">CRM to win. ERP to deliver.</span>
-      <span data-lang="es">CRM para ganar clientes. ERP para entregar tu servicio.</span>
-    </h2>
-    <p class="section-sub reveal">
-      <span data-lang="en">Organised with the <strong>MSOM framework</strong>: Marketing, Sales, Operations, Management.</span>
-      <span data-lang="es">Organizado con el <strong>marco MSOM</strong>: Marketing, Ventas, Operaciones y Gestión.</span>
-    </p>
-    <a class="text-link reveal" href="catalog.html">
-      <span data-lang="en">explore the catalog →</span>
-      <span data-lang="es">explorar el catálogo →</span>
-    </a>
-  </div>
-</section>
-
-<!-- 5 · CTA -->
-<section class="cta-band bordered">
-  <div class="sec-label reveal">
-    <span data-lang="en">04 · next step</span>
-    <span data-lang="es">04 · siguiente paso</span>
-  </div>
-  <h2 class="section-heading reveal">
-    <span data-lang="en">Book a free consultation call.</span>
-    <span data-lang="es">Reserva una llamada de consultoría gratuita.</span>
-  </h2>
-  <p class="section-sub reveal">
-    <span data-lang="en">30 minutes. We tell you what we would automate, and what we wouldn't.</span>
-    <span data-lang="es">30 minutos. Te decimos qué automatizaríamos y qué no.</span>
-  </p>
-  <a class="btn-primary reveal" href="contact.html">
-    <span data-lang="en">Book my free call</span>
-    <span data-lang="es">Reservar mi llamada gratuita</span>
-  </a>
-  <div class="cta-note reveal">
-    <span data-lang="en">no commitment · no jargon</span>
-    <span data-lang="es">sin compromiso · sin tecnicismos</span>
-  </div>
-</section>
-
-<!-- 6 · CONTACT -->
-<script src="sa-contact.js"
-        data-page="index.html · contact"
-        data-msg="Contact form on the home page"
-        data-textarea="on"></script>
 
 <script src="sa-footer.js"></script>
 </body>
